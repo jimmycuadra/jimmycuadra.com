@@ -26,10 +26,7 @@
 
   <section id="content">
     <div class="bucket">
-      <section id="admin-actions">
-        <strong>Admin actions:</strong>
-        <%= link_to "New post", new_post_path %>
-      </section>
+      <%= render :partial => "partials/admin_actions" %>
 
       <%= yield %>
     </div>
