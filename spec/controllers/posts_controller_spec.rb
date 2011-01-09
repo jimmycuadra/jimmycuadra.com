@@ -60,4 +60,21 @@ describe PostsController do
       end
     end
   end
+
+  describe "#destroy" do
+    before(:each) do
+      Factory(:post)
+    end
+
+    it "destroys the post" do
+      post_id = Post.first.id
+      delete :destroy, :id => post_id
+      expect { Post.find(post_id) }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it "redirects to :index" do
+      delete :destroy, :id => Post.first.id
+      response.should redirect_to posts_path
+    end
+  end
 end
