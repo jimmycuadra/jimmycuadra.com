@@ -38,28 +38,34 @@ describe Post do
       @post.video_url = "path/to/a/video"
     end
 
-    it "prepends the title with \"Screencast: \"" do
-      @post.title = "Awesome tutorial"
-      @post.save
-      @post.title.should == "Screencast: Awesome tutorial"
+    context "with a title beginning with \"Screencast: \"" do
+      before(:each) do
+        @post.title = "Screencast: Awesome tutorial"
+        @post.save
+      end
+
+      it "doesn't alter the title" do
+        @post.title.should == "Screencast: Awesome tutorial"
+      end
+
+      it "doesn't alter the slug" do
+        @post.cached_slug.should == "screencast-awesome-tutorial"
+      end
     end
 
-    it "doesn't alter the title if it's already prefixed with \"Screencast: \"" do
-      @post.title = "Screencast: Awesome tutorial"
-      @post.save
-      @post.title.should == "Screencast: Awesome tutorial"
-    end
+    context "with a title not beginning with \"Screencast: \"" do
+      before(:each) do
+        @post.title = "Awesome tutorial"
+        @post.save
+      end
 
-    it "prepends the slug with \"screencast-\"" do
-      @post.title = "Awesome tutorial"
-      @post.save
-      @post.cached_slug.should == "screencast-awesome-tutorial"
-    end
+      it "prepends the title with \"Screencast: \"" do
+        @post.title.should == "Screencast: Awesome tutorial"
+      end
 
-    it "doesn't alter the slug if it's already prefixed with \"screencast-\"" do
-      @post.title = "Screencast: Awesome tutorial"
-      @post.save
-      @post.cached_slug.should == "screencast-awesome-tutorial"
+      it "prepends the slug with \"screencast-\"" do
+        @post.cached_slug.should == "screencast-awesome-tutorial"
+      end
     end
   end
 
