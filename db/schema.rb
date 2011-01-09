@@ -10,7 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110109032306) do
+ActiveRecord::Schema.define(:version => 20110109033051) do
+
+  create_table "posts", :force => true do |t|
+    t.string   "title",       :null => false
+    t.text     "body",        :null => false
+    t.string   "video_url"
+    t.string   "cached_slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "posts", ["cached_slug"], :name => "index_posts_on_cached_slug", :unique => true
 
   create_table "slugs", :force => true do |t|
     t.string   "name"
