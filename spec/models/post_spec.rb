@@ -33,6 +33,24 @@ describe Post do
     @post.cached_slug.should == "my-resume"
   end
 
+  context "with a video" do
+    before(:each) do
+      @post.video_url = "path/to/a/video"
+    end
+
+    it "prepends the title with \"Screencast: \"" do
+      @post.title = "Awesome tutorial"
+      @post.save
+      @post.title.should == "Screencast: Awesome tutorial"
+    end
+
+    it "doesn't alter the title if it's already prefixed with \"Screencast: \"" do
+      @post.title = "Screencast: Awesome tutorial"
+      @post.save
+      @post.title.should == "Screencast: Awesome tutorial"
+    end
+  end
+
   describe "#screencast?" do
     it "returns true if the post has a video_url" do
       @post.video_url = "path/to/a/video"
