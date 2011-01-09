@@ -32,6 +32,13 @@ describe PostsController do
     end
   end
 
+  describe "#new" do
+    it "renders the new template" do
+      get :new
+      response.should render_template(:new)
+    end
+  end
+
   describe "#create" do
     context "with valid parameters" do
       it "increases the post count by 1" do
@@ -58,6 +65,21 @@ describe PostsController do
         post :create
         response.should render_template(:new)
       end
+    end
+  end
+
+  describe "#edit" do
+    before(:each) do
+      Factory(:post)
+      get :edit, :id => Post.first.id
+    end
+
+    it "renders the edit template" do
+      response.should render_template(:edit)
+    end
+
+    it "finds the post" do
+      assigns(:post).should_not be_nil
     end
   end
 
