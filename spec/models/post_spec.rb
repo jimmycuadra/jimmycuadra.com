@@ -49,6 +49,18 @@ describe Post do
       @post.save
       @post.title.should == "Screencast: Awesome tutorial"
     end
+
+    it "prepends the slug with \"screencast-\"" do
+      @post.title = "Awesome tutorial"
+      @post.save
+      @post.cached_slug.should == "screencast-awesome-tutorial"
+    end
+
+    it "doesn't alter the slug if it's already prefixed with \"screencast-\"" do
+      @post.title = "Screencast: Awesome tutorial"
+      @post.save
+      @post.cached_slug.should == "screencast-awesome-tutorial"
+    end
   end
 
   describe "#screencast?" do
