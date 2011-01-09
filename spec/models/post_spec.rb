@@ -32,4 +32,15 @@ describe Post do
     @post.save
     @post.cached_slug.should == "my-resume"
   end
+
+  describe "#screencast?" do
+    it "returns true if the post has a video_url" do
+      @post.video_url = "path/to/a/video"
+      @post.should be_a_screencast
+    end
+
+    it "returns false if the post doesn't have a video_url" do
+      @post.should_not be_a_screencast
+    end
+  end
 end
