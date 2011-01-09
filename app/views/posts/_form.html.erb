@@ -1,1 +1,9 @@
-Form goes here, yo.
+<%= semantic_form_for @post || Post.new do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :title %>
+    <%= f.input :body %>
+    <%= f.input :video_url, :label => "Video URL" %>
+  <% end %>
+
+  <%= f.buttons %>
+<% end %>
