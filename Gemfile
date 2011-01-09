@@ -1,6 +1,7 @@
 source :rubygems
 
 gem 'rails', '3.0.3'
+gem 'friendly_id', '~> 3.1.8'
 
 group :development, :test do
   gem 'sqlite3-ruby', :require => 'sqlite3'
