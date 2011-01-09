@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'spec_helper'
 
 describe Post do
@@ -24,5 +25,11 @@ describe Post do
   it "generates a slug when saved" do
     @post.save
     @post.cached_slug.should_not be_nil
+  end
+
+  it "approximates ASCII in generated slugs" do
+    @post.title = "My résumé"
+    @post.save
+    @post.cached_slug.should == "my-resume"
   end
 end
