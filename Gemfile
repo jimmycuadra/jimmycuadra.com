@@ -1,7 +1,6 @@
 source :rubygems
 
 gem 'rails', '3.0.3'
-gem 'haml-rails', '~> 0.3.4'
 
 group :development, :test do
   gem 'sqlite3-ruby', :require => 'sqlite3'
