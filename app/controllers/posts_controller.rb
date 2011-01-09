@@ -1,10 +1,11 @@
 class PostsController < ApplicationController
+  before_filter :retrieve_record, :only => [:show, :update, :destroy]
+
   def index
     @posts = Post.order('created_at desc').limit(3)
   end
 
   def show
-    @post = Post.find(params[:id])
   end
 
   def new
@@ -24,7 +25,6 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[:id])
     if @post.update_attributes(params[:post])
       redirect_to @post, :notice => "The post was updated."
     else
@@ -33,7 +33,13 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    Post.find(params[:id]).destroy
+    @post.destroy
     redirect_to posts_path
+  end
+
+  private
+
+  def retrieve_record
+    @post = Post.find(params[:id])
   end
 end
