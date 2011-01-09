@@ -16,8 +16,8 @@ body {
   background: $mediumblue;
   color: $darkblue;
   font-family: "Lucida Grande", Arial, sans-serif;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 14px;
+  line-height: 18px;
 }
 
 a, a:active, a:visited, a:hover {
@@ -61,6 +61,7 @@ a, a:active, a:visited, a:hover {
 
 nav {
   float: right;
+  font-size: 18px;
   padding: 10px 10px 0 0;
 
   li {
@@ -98,6 +99,14 @@ nav {
   .bucket {
     border-left: 2px dashed rgba(0,0,0,.6);
     padding: 20px;
+  }
+
+  #admin-actions {
+    background: $paleblue;
+    border: 1px solid #000;
+    font-size: 12px;
+    margin-bottom: 18px;
+    padding: 5px 8px;
   }
 }
 
@@ -155,15 +164,15 @@ article {
     linear,
     left top,
     left bottom,
-    color-stop(.10, $darkblue),
-    color-stop(.82, #1e4d7d),
-    color-stop(.95, $mediumblue)
+    color-stop(.15, $darkblue),
+    color-stop(.4, #1e4d7d),
+    color-stop(.7, $mediumblue)
   );
   border-top: 2px solid rgba(0,0,0,.7);
   color: $paleblue;
 
-  .bucket {
-    padding: 40px 0;
+  p {
+    margin-bottom: 9px;
   }
 
   a, a:active, a:visited, a:hover {

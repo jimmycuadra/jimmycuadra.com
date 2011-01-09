@@ -5,8 +5,8 @@ body {
   background: #405f85;
   color: #003366;
   font-family: "Lucida Grande", Arial, sans-serif;
-  font-size: 18px;
-  line-height: 24px; }
+  font-size: 14px;
+  line-height: 18px; }
 
 a, a:active, a:visited, a:hover {
   border-bottom-style: solid;
@@ -37,6 +37,7 @@ a, a:active, a:visited, a:hover {
 
 nav {
   float: right;
+  font-size: 18px;
   padding: 10px 10px 0 0; }
   nav li {
     float: left; }
@@ -64,6 +65,12 @@ nav {
   #content .bucket {
     border-left: 2px dashed rgba(0, 0, 0, 0.6);
     padding: 20px; }
+  #content #admin-actions {
+    background: #e7ebf0;
+    border: 1px solid #000;
+    font-size: 12px;
+    margin-bottom: 18px;
+    padding: 5px 8px; }
 
 p {
   margin-bottom: 18px; }
@@ -99,10 +106,10 @@ article footer {
 
 #site-footer {
   background-color: #405f85;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.1, #003366), color-stop(0.82, #1e4d7d), color-stop(0.95, #405f85));
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.15, #003366), color-stop(0.4, #1e4d7d), color-stop(0.7, #405f85));
   border-top: 2px solid rgba(0, 0, 0, 0.7);
   color: #e7ebf0; }
-  #site-footer .bucket {
-    padding: 40px 0; }
+  #site-footer p {
+    margin-bottom: 9px; }
   #site-footer a, #site-footer a:active, #site-footer a:visited, #site-footer a:hover {
     color: #e7ebf0; }

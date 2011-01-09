@@ -26,6 +26,11 @@
 
   <section id="content">
     <div class="bucket">
+      <section id="admin-actions">
+        <strong>Admin actions:</strong>
+        <%= link_to "New post", new_post_path %>
+      </section>
+
       <%= yield %>
     </div>
   </section>
