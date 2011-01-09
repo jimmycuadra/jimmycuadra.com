@@ -61,6 +61,33 @@ describe PostsController do
     end
   end
 
+  describe "#update" do
+    before(:each) do
+      @post = Factory(:post)
+    end
+
+    context "with valid parameters" do
+      before(:each) do
+        put :update, :id => @post.id, :post => { :body => "Updated body" }
+      end
+
+      it "redirects to the updated post" do
+        response.should redirect_to assigns(:post)
+      end
+
+      it "sets the flash" do
+        flash[:notice].should_not be_nil
+      end
+    end
+
+    context "with invalid parameters" do
+      it "renders :edit" do
+        put :update, :id => @post.id, :post => { :body => nil }
+        response.should render_template(:edit)
+      end
+    end
+  end
+
   describe "#destroy" do
     before(:each) do
       Factory(:post)
