@@ -1,14 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JimmycuadraCom</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
+  <title>Jimmy Cuadra</title>
+  <%= stylesheet_link_tag 'reset', 'awesome-buttons' %>
   <%= csrf_meta_tag %>
 </head>
 <body>
+  <header id="site-header">
+    <nav>
+      <ul>
+        <li class="current"><div><a href="/" class="awesome">Blog</a></div></li>
+        <li><div><a href="/projects" class="awesome">Projects</a></div></li>
+        <li><div><a href="/about" class="awesome">About</a></div></li>
+      </ul>
+    </nav>
 
-<%= yield %>
+    <div class="bucket">
+      <hgroup>
+        <h1>I'm <a href="/about">Jimmy Cuadra</a>.</h1>
+        <h2>I <a href="/">write</a> about Ruby, JavaScript, HTML, and CSS.</h2>
+        <h3>I <a href="/projects">build websites</a>, work on <a href="https://github.com/jimmycuadra">open source projects</a>, and <a href="http://twitter.com/jimmycuadra">tweet</a>.</h3>
+      </hgroup>
+    </div>
+  </header>
 
+  <section id="content">
+    <div class="bucket">
+      <%= yield %>
+    </div>
+  </section>
+
+  <footer id="site-footer">
+    <div class="bucket">
+      <p>Built on a <a href="http://www.apple.com/">Mac</a> using <a href="http://www.rubyonrails.org/">Ruby on Rails</a>. If you're not using <a href="http://webkit.org/">Webkit</a>, get on that.</p>
+      <small>&copy; 2010 Jimmy Cuadra. All rights reserved.</small>
+    </div>
+  </footer>
 </body>
 </html>
