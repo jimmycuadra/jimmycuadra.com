@@ -31,4 +31,33 @@ describe PostsController do
       assigns(:post).should == Post.first
     end
   end
+
+  describe "#create" do
+    context "with valid parameters" do
+      it "increases the post count by 1" do
+        expect {
+          post :create, { :post => Factory.attributes_for(:post) }
+        }.to change {
+          Post.count
+        }.from(0).to(1)
+      end
+
+      it "redirects to the new post" do
+        post :create, { :post => Factory.attributes_for(:post) }
+        response.should redirect_to assigns(:post)
+      end
+
+      it "sets the flash" do
+        post :create, { :post => Factory.attributes_for(:post) }
+        flash[:notice].should_not be_nil
+      end
+    end
+
+    context "with invalid parameters" do
+      it "renders :new" do
+        post :create
+        response.should render_template(:new)
+      end
+    end
+  end
 end

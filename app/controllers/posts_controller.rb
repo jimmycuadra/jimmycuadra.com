@@ -6,4 +6,13 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
   end
+
+  def create
+    @post = Post.new(params[:post])
+    if @post.save
+      redirect_to @post, :notice => "The post was created."
+    else
+      render :new
+    end
+  end
 end
