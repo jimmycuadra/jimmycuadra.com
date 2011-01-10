@@ -5,7 +5,7 @@ class Post < ActiveRecord::Base
   after_validation :enforce_screencast_title, :if => lambda { |record| record.screencast? }
 
   def screencast?
-    video_url.blank? ? false : true
+    youtube_id.blank? ? false : true
   end
 
   private

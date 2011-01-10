@@ -2,12 +2,12 @@
   <h1><%= link_to_unless_current post.title, post %></h1>
   <time pubdate datetime="<%= post.created_at.strftime("%Y-%m-%d") %>"><%= post.created_at.strftime("%B %d, %Y") %></time>
 
-  <% unless post.video_url.blank? %>
+  <% unless post.youtube_id.blank? %>
     <object width="640" height="385">
-      <param name="movie" value="<%= post.video_url %>?fs=1&amp;hl=en_US&amp;rel=0"></param>
+      <param name="movie" value="http://www.youtube.com/v/<%= post.youtube_id %>?fs=1&amp;hl=en_US&amp;rel=0"></param>
       <param name="allowFullScreen" value="true"></param>
       <param name="allowscriptaccess" value="always"></param>
-      <embed src="<%= post.video_url %>?fs=1&amp;hl=en_US&amp;rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed>
+      <embed src="http://www.youtube.com/v/<%= post.youtube_id %>?fs=1&amp;hl=en_US&amp;rel=0?fs=1&amp;hl=en_US&amp;rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed>
     </object>
   <% end %>
 

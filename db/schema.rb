@@ -10,12 +10,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110109033051) do
+ActiveRecord::Schema.define(:version => 20110110020427) do
 
   create_table "posts", :force => true do |t|
     t.string   "title",       :null => false
     t.text     "body",        :null => false
-    t.string   "video_url"
+    t.string   "youtube_id"
     t.string   "cached_slug"
     t.datetime "created_at"
     t.datetime "updated_at"

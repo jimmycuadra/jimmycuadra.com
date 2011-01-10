@@ -35,7 +35,7 @@ describe Post do
 
   context "with a video" do
     before(:each) do
-      @post.video_url = "path/to/a/video"
+      @post.youtube_id = "abc123"
     end
 
     context "with a title beginning with \"Screencast: \"" do
@@ -70,12 +70,12 @@ describe Post do
   end
 
   describe "#screencast?" do
-    it "returns true if the post has a video_url" do
-      @post.video_url = "path/to/a/video"
+    it "returns true if the post has a youtube_id" do
+      @post.youtube_id = "abc123"
       @post.should be_a_screencast
     end
 
-    it "returns false if the post doesn't have a video_url" do
+    it "returns false if the post doesn't have a youtube_id" do
       @post.should_not be_a_screencast
     end
   end
