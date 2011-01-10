@@ -28,6 +28,10 @@ a, a:active, a:visited, a:hover {
   text-decoration: none;
 }
 
+.clear {
+  clear: both;
+}
+
 #site-header {
   background: $darkblue;
   border-bottom: 1px solid $paleblue;
@@ -166,9 +170,19 @@ nav {
   }
 
   #projects {
-    h2 {
+    h1 {
       font-size: 18px;
       line-height: 24px;
+      margin-bottom: 0;
+    }
+
+    hgroup {
+      background: $paleblue;
+      box-shadow: 1px 1px 2px #6c6c6c;
+      -moz-box-shadow: 1px 1px 2px #6c6c6c;
+      -webkit-box-shadow: 1px 1px 2px #6c6c6c;
+      margin-bottom: 36px;
+      padding: 9px;
     }
 
     ul {
@@ -178,6 +192,21 @@ nav {
       h2 {
         font-size: 16px;
         margin-bottom: 18px;
+      }
+    }
+
+    figure {
+      border: 1px solid #000;
+      float: left;
+      margin: 0 36px 36px 0;
+
+      a, a:active, a:visited, a:hover {
+        border: 0;
+      }
+
+      &.alt {
+        float: right;
+        margin: 0 0 36px 36px;
       }
     }
   }

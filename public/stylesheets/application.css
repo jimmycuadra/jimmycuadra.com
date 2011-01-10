@@ -15,6 +15,9 @@ a, a:active, a:visited, a:hover {
   font-weight: bold;
   text-decoration: none; }
 
+.clear {
+  clear: both; }
+
 #site-header {
   background: #003366;
   border-bottom: 1px solid #e7ebf0;
@@ -107,15 +110,32 @@ nav {
       margin-bottom: 12px; }
       #content article footer p:last-child {
         margin-bottom: 0; }
-  #content #projects h2 {
+  #content #projects h1 {
     font-size: 18px;
-    line-height: 24px; }
+    line-height: 24px;
+    margin-bottom: 0; }
+  #content #projects hgroup {
+    background: #e7ebf0;
+    box-shadow: 1px 1px 2px #6c6c6c;
+    -moz-box-shadow: 1px 1px 2px #6c6c6c;
+    -webkit-box-shadow: 1px 1px 2px #6c6c6c;
+    margin-bottom: 36px;
+    padding: 9px; }
   #content #projects ul {
     list-style: none;
     margin-bottom: 36px; }
     #content #projects ul h2 {
       font-size: 16px;
       margin-bottom: 18px; }
+  #content #projects figure {
+    border: 1px solid #000;
+    float: left;
+    margin: 0 36px 36px 0; }
+    #content #projects figure a, #content #projects figure a:active, #content #projects figure a:visited, #content #projects figure a:hover {
+      border: 0; }
+    #content #projects figure.alt {
+      float: right;
+      margin: 0 0 36px 36px; }
 
 p {
   margin-bottom: 18px; }
