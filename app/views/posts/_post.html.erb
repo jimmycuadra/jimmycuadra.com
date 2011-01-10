@@ -16,7 +16,9 @@
   <%= textile(post.body) %>
 
   <footer>
-    <p>This post was tagged with <a href="/tags/ruby">ruby</a>, and <a href="/tags/to_lang">to_lang</a>.</p>
+    <% unless post.tags.empty? %>
+      <p>This post was tagged with <%= post.tags.map { |tag| link_to tag.name, tag_path(tag) }.to_sentence.html_safe %>.</p>
+    <% end %>
 
     <p>Find more content by <a href="/tags">browsing by tag</a>.</p>
   </footer>
