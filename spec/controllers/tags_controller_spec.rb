@@ -18,19 +18,26 @@ describe TagsController do
     before(:each) do
       @post = Factory.create(:post, :tag_list => "ruby")
       @tag = ActsAsTaggableOn::Tag.first
-      get :show, :id => @tag.to_param
     end
 
     it "renders the show template" do
+      get :show, :id => @tag.to_param
       response.should render_template(:show)
     end
 
     it "finds the tag" do
+      get :show, :id => @tag.to_param
       assigns(:tag).should == @tag
     end
 
     it "finds the tagged posts" do
+      get :show, :id => @tag.to_param
       assigns(:posts).should == [@post]
+    end
+
+    it "enforces friendly URLs" do
+      get :show, :id => @tag.id
+      response.status.should == 301
     end
   end
 end

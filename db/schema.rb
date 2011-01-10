@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110110032725) do
+ActiveRecord::Schema.define(:version => 20110110051638) do
 
   create_table "posts", :force => true do |t|
     t.string   "title",       :null => false
@@ -50,6 +50,9 @@ ActiveRecord::Schema.define(:version => 20110110032725) do
 
   create_table "tags", :force => true do |t|
     t.string "name"
+    t.string "cached_slug"
   end
+
+  add_index "tags", ["cached_slug"], :name => "index_tags_on_cached_slug", :unique => true
 
 end
