@@ -10,9 +10,9 @@
   <header id="site-header">
     <nav>
       <ul>
-        <li class="current"><div><%= link_to "Blog", root_path, :class => "awesome" %></div></li>
-        <li><div><%= link_to "Projects", projects_path, :class => "awesome" %></div></li>
-        <li><div><a href="/about" class="awesome">About</a></div></li>
+        <%= nav_to "Blog", root_path, "posts" %>
+        <%= nav_to "Projects", projects_path, "projects" %>
+        <%= nav_to "About", about_path, "about" %>
       </ul>
     </nav>
 
