@@ -79,4 +79,34 @@ describe Post do
       @post.should_not be_a_screencast
     end
   end
+
+  describe "with tags" do
+    before(:each) do
+      @post.tag_list = "ruby, to_lang, rails 3"
+      @post.save
+    end
+
+    it "associates itself with the tags" do
+      @post.tags.map(&:name).should == ["ruby", "to_lang", "rails 3"]
+    end
+
+    it "updates tag associations when updated" do
+      @post.tag_list = "ruby, rails 3"
+      @post.save
+      @post.tags.map(&:name).should == ["ruby", "rails 3"]
+    end
+
+    it "destroys orphaned tags when the post is saved" do
+      @post.tag_list = "ruby, rails 3"
+      @post.save
+      Tag.count.should == 2
+    end
+
+    it "destroys orphaned tags when the post is destroyed" do
+      Factory.create(:post, :tag_list => "ruby")
+      @post.destroy
+      Tag.count.should == 1
+    end
+
+  end
 end
