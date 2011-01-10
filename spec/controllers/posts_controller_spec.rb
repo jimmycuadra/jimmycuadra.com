@@ -27,8 +27,13 @@ describe PostsController do
     end
 
     it "displays the post" do
-      get :show, :id => Post.first.id
+      get :show, :id => Post.first.to_param
       assigns(:post).should == Post.first
+    end
+
+    it "enforces friendly URLs" do
+      get :show, :id => Post.first.id
+      response.status.should == 301
     end
   end
 
