@@ -8,10 +8,7 @@ describe TagsController do
     end
 
     it "gets all the tags in alphabetical order" do
-      ["banana", "apple", "carrot"].each do |tag|
-        Factory.create(:tag, :name => tag)
-      end
-
+      Factory.create(:post, :tag_list => "banana, apple, carrot")
       get :index
       assigns(:tags).map(&:name).should == ["apple", "banana", "carrot"]
     end
@@ -20,7 +17,7 @@ describe TagsController do
   describe "#show" do
     before(:each) do
       @post = Factory.create(:post, :tag_list => "ruby")
-      @tag = Tag.first
+      @tag = ActsAsTaggableOn::Tag.first
       get :show, :id => @tag.to_param
     end
 

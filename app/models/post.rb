@@ -19,6 +19,6 @@ class Post < ActiveRecord::Base
   end
 
   def destroy_orphaned_tags
-    Tag.where("`id` NOT IN (SELECT `tag_id` FROM `taggings`)").destroy_all
+    ActsAsTaggableOn::Tag.where("`id` NOT IN (SELECT `tag_id` FROM `taggings`)").destroy_all
   end
 end

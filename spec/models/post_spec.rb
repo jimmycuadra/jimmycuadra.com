@@ -99,13 +99,13 @@ describe Post do
     it "destroys orphaned tags when the post is saved" do
       @post.tag_list = "ruby, rails 3"
       @post.save
-      Tag.count.should == 2
+      ActsAsTaggableOn::Tag.count.should == 2
     end
 
     it "destroys orphaned tags when the post is destroyed" do
       Factory.create(:post, :tag_list => "ruby")
       @post.destroy
-      Tag.count.should == 1
+      ActsAsTaggableOn::Tag.count.should == 1
     end
 
   end
