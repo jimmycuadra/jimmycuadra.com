@@ -156,6 +156,10 @@ nav {
     margin-left: 18px; }
     #content #about ul li {
       line-height: 24px; }
+  #content #tags ul {
+    margin-left: 18px; }
+    #content #tags ul li {
+      line-height: 24px; }
 
 p {
   margin-bottom: 18px; }
