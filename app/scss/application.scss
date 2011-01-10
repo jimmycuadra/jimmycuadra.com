@@ -165,6 +165,22 @@ nav {
     }
   }
 
+  #projects {
+    h2 {
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    ul {
+      list-style: none;
+      margin-bottom: 36px;
+
+      h2 {
+        font-size: 16px;
+        margin-bottom: 18px;
+      }
+    }
+  }
 }
 
 p {

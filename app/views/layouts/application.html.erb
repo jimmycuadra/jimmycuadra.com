@@ -10,8 +10,8 @@
   <header id="site-header">
     <nav>
       <ul>
-        <li class="current"><div><a href="/" class="awesome">Blog</a></div></li>
-        <li><div><a href="/projects" class="awesome">Projects</a></div></li>
+        <li class="current"><div><%= link_to "Blog", root_path, :class => "awesome" %></div></li>
+        <li><div><%= link_to "Projects", projects_path, :class => "awesome" %></div></li>
         <li><div><a href="/about" class="awesome">About</a></div></li>
       </ul>
     </nav>
@@ -19,8 +19,8 @@
     <div class="bucket">
       <hgroup>
         <h1>I'm <a href="/about">Jimmy Cuadra</a>.</h1>
-        <h2>I <a href="/">write</a> about web development and programming.</h2>
-        <h3>I <a href="/projects">build websites</a>, work on <a href="https://github.com/jimmycuadra">open source projects</a>, and <a href="http://twitter.com/jimmycuadra">tweet</a>.</h3>
+        <h2>I <%= link_to "write", root_path %> about web development and programming.</h2>
+        <h3>I <%= link_to "build websites", projects_path %>, work on <a href="https://github.com/jimmycuadra">open source projects</a>, and <a href="http://twitter.com/jimmycuadra">tweet</a>.</h3>
       </hgroup>
     </div>
   </header>
