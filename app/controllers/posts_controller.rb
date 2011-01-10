@@ -2,7 +2,11 @@ class PostsController < ApplicationController
   before_filter :retrieve_record, :only => [:show, :update, :destroy]
 
   def index
-    @posts = Post.order('created_at desc').limit(3)
+    @posts = Post.order('created_at desc')
+
+    respond_to do |format|
+      format.html { @posts = @posts.paginate(:page => params[:page], :per_page => 3) }
+    end
   end
 
   def show

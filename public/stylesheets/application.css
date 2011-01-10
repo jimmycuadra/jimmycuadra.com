@@ -74,12 +74,17 @@ nav {
     font-size: 12px;
     margin-bottom: 18px;
     padding: 5px 8px; }
+  #content .pagination {
+    margin-bottom: 18px;
+    text-align: right; }
   #content h1 {
     font-size: 24px;
     line-height: 36px;
     margin-bottom: 18px; }
   #content article {
     margin-bottom: 72px; }
+    #content article:last-of-type {
+      margin-bottom: 36px; }
     #content article h1 {
       font-size: 24px;
       line-height: 30px;

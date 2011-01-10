@@ -1,1 +1,3 @@
-<%= render @posts %>
+<%= paginated_section @posts do %>
+  <%= render @posts %>
+<% end %>
