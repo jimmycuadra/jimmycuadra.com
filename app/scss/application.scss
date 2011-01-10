@@ -196,9 +196,12 @@ nav {
     }
 
     figure {
-      border: 1px solid #000;
       float: left;
       margin: 0 36px 36px 0;
+
+      img {
+        border: 1px solid #000;
+      }
 
       a, a:active, a:visited, a:hover {
         border: 0;
@@ -207,6 +210,30 @@ nav {
       &.alt {
         float: right;
         margin: 0 0 36px 36px;
+      }
+    }
+  }
+
+  #about {
+    h2 {
+      font-size: 16px;
+      margin-bottom: 18px;
+    }
+
+    figure {
+      float: right;
+      margin: 0 0 18px 18px;
+
+      img {
+        border: 1px solid #000;
+      }
+    }
+
+    ul {
+      margin-left: 18px;
+
+      li {
+        line-height: 24px;
       }
     }
   }

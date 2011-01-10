@@ -128,14 +128,27 @@ nav {
       font-size: 16px;
       margin-bottom: 18px; }
   #content #projects figure {
-    border: 1px solid #000;
     float: left;
     margin: 0 36px 36px 0; }
+    #content #projects figure img {
+      border: 1px solid #000; }
     #content #projects figure a, #content #projects figure a:active, #content #projects figure a:visited, #content #projects figure a:hover {
       border: 0; }
     #content #projects figure.alt {
       float: right;
       margin: 0 0 36px 36px; }
+  #content #about h2 {
+    font-size: 16px;
+    margin-bottom: 18px; }
+  #content #about figure {
+    float: right;
+    margin: 0 0 18px 18px; }
+    #content #about figure img {
+      border: 1px solid #000; }
+  #content #about ul {
+    margin-left: 18px; }
+    #content #about ul li {
+      line-height: 24px; }
 
 p {
   margin-bottom: 18px; }
