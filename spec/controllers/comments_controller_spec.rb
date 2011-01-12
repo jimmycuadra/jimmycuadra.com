@@ -28,9 +28,9 @@ describe CommentsController do
     end
 
     context "with invalid attributes" do
-      it "renders the new template" do
+      it "renders the post's show" do
         post :create, :post_id => @post.to_param
-        response.should render_template(:new)
+        response.should render_template('posts/show')
       end
     end
   end

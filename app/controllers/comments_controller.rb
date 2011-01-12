@@ -1,14 +1,11 @@
 class CommentsController < ApplicationController
-  def new
-  end
-
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.build(params[:comment])
     if @comment.save
       redirect_to @post, :notice => "Thanks for your comment!"
     else
-      render :new
+      render 'posts/show', :layout => 'application'
     end
   end
 

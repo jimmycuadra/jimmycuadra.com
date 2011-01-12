@@ -4,7 +4,7 @@ JimmycuadraCom::Application.routes.draw do
   resources :posts do
     resources :comments, :only => [:create, :destroy]
   end
-  resources :tags, :only => [:index, :show, :new]
+  resources :tags, :only => [:index, :show]
 
   match "projects" => "projects#index", :as => :projects
   match "about" => "about#index", :as => :about
