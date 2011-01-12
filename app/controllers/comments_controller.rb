@@ -4,8 +4,8 @@ class CommentsController < ApplicationController
 
   def create
     @post = Post.find(params[:post_id])
-    @post.comments.build(params[:comment])
-    if @post.save
+    @comment = @post.comments.build(params[:comment])
+    if @comment.save
       redirect_to @post, :notice => "Thanks for your comment!"
     else
       render :new

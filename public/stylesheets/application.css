@@ -63,7 +63,6 @@ nav {
   background-color: #e7ebf0;
   background-image: url("/images/content_texture.png");
   box-shadow: inset 0 5px 6px #6c6c6c;
-  -moz-box-shadow: inset 0 5px 6px #6c6c6c;
   -webkit-box-shadow: inset 0 5px 6px #6c6c6c; }
   #content .bucket {
     border-left: 2px dashed rgba(0, 0, 0, 0.6);
@@ -107,8 +106,6 @@ nav {
     #content article footer {
       background: #b1bdcd;
       border-radius: 4px;
-      -moz-border-radius: 4px;
-      -webkit-border-radius: 4px;
       display: inline-block;
       font-size: 12px;
       padding: 9px; }
@@ -124,7 +121,6 @@ nav {
   #content #projects hgroup {
     background: #e7ebf0;
     box-shadow: 1px 1px 2px #6c6c6c;
-    -moz-box-shadow: 1px 1px 2px #6c6c6c;
     -webkit-box-shadow: 1px 1px 2px #6c6c6c;
     margin-bottom: 36px;
     padding: 9px; }
@@ -160,6 +156,26 @@ nav {
     margin-left: 18px; }
     #content #tags ul li {
       line-height: 24px; }
+  #content #comments > section {
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    border-radius: 4px;
+    margin-bottom: 18px; }
+    #content #comments > section header, #content #comments > section section {
+      padding: 9px; }
+    #content #comments > section header {
+      background: #b1bdcd;
+      border-bottom: 1px solid #000;
+      border-radius: 4px 4px 0 0; }
+    #content #comments > section section {
+      background: #e7ebf0;
+      border-radius: 0 0 4px 4px; }
+    #content #comments > section p:last-of-type {
+      margin: 0; }
+  #content #comments h2 {
+    font-size: 16px;
+    margin-bottom: 18px; }
+  #content #comments time {
+    float: right; }
 
 p {
   margin-bottom: 18px; }
