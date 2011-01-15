@@ -14,6 +14,10 @@ describe CommentsHelper do
       format_comment("First line.\nSecond line.\n").should == "<p>First line.<br />Second line.</p>"
     end
 
+    it "strips blackslash-r" do
+      format_comment("One.\r\nTwo.").should == "<p>One.<br />Two.</p>"
+    end
+
     it "strips empty paragraphs" do
       format_comment("First line.\n\n\n\nSecond line.").should_not include("<p></p>")
     end

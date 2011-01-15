@@ -1,6 +1,7 @@
 module CommentsHelper
   def format_comment(comment)
     comment = h(comment) # escape user input
+    comment.gsub!("\r", "") # strip \r
     comment.gsub!("\n\n", "</p><p>") # split paragraphs
     comment.gsub!("<p></p>", "") # remove empty paragraphs
     comment.gsub!(/\n(?=.)/, "<br />") # add breaks
