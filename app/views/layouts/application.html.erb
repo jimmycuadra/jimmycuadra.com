@@ -29,6 +29,10 @@
     <div class="bucket">
       <%= render :partial => "partials/admin_actions" %>
 
+      <% if flash[:notice] %>
+        <section id="flash"><%= flash[:notice] %></section>
+      <% end %>
+
       <%= yield %>
     </div>
   </section>

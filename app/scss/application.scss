@@ -107,12 +107,17 @@ nav {
     padding: 20px;
   }
 
-  #admin-actions {
+  #admin-actions,
+  #flash {
     background: $paleblue;
     border: 1px solid #000;
     font-size: 12px;
     margin-bottom: 18px;
     padding: 5px 8px;
+  }
+
+  #flash {
+    font-size: 14px;
   }
 
   .pagination {

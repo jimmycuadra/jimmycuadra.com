@@ -68,12 +68,15 @@ nav {
   #content .bucket {
     border-left: 2px dashed rgba(0, 0, 0, 0.6);
     padding: 20px; }
-  #content #admin-actions {
+  #content #admin-actions,
+  #content #flash {
     background: #e7ebf0;
     border: 1px solid #000;
     font-size: 12px;
     margin-bottom: 18px;
     padding: 5px 8px; }
+  #content #flash {
+    font-size: 14px; }
   #content .pagination {
     margin-bottom: 18px;
     text-align: right; }
