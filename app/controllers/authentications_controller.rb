@@ -3,7 +3,7 @@ class AuthenticationsController < ApplicationController
     omniauth = env["omniauth.auth"]
     authentication = Authentication.find_by_provider_and_uid(omniauth["provider"], omniauth["uid"])
     if authentication
-      session[:current_user] = authentication.user.id
+      session[:user_id] = authentication.user.id
       redirect_to root_path, :notice => "Welcome back! You are now signed in."
     elsif current_user
       redirect_to root_path, :notice => "Adding another authorization is NYI."
@@ -14,7 +14,7 @@ class AuthenticationsController < ApplicationController
       user.avatar = omniauth["user_info"]["image"] if omniauth["user_info"]["image"]
       user.url = omniauth["user_info"]["urls"]["Website"] || omniauth["user_info"]["Twitter"] if omniauth["user_info"]["urls"]["Website"] || omniauth["user_info"]["Twitter"]
       if user.save
-        session[:current_user] = user.id
+        session[:user_id] = user.id
         redirect_to root_path, :notice => "You are now signed in."
       else
         redirect_to root_path, :notice => "Validation failed."
