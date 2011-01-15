@@ -10,10 +10,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110112064210) do
+ActiveRecord::Schema.define(:version => 20110115063204) do
 
   create_table "comments", :force => true do |t|
-    t.text     "comment",    :limit => 255
+    t.text     "comment"
     t.integer  "post_id"
     t.integer  "user_id"
     t.datetime "created_at"
