@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110115074237) do
+ActiveRecord::Schema.define(:version => 20110115074902) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -70,5 +70,14 @@ ActiveRecord::Schema.define(:version => 20110115074237) do
   end
 
   add_index "tags", ["cached_slug"], :name => "index_tags_on_cached_slug", :unique => true
+
+  create_table "users", :force => true do |t|
+    t.string   "username"
+    t.string   "email"
+    t.string   "avatar"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
