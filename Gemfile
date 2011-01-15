@@ -7,6 +7,7 @@ gem 'RedCloth', '~> 4.2.3'
 gem 'coderay', '~> 0.9.6'
 gem 'will_paginate', '~> 3.0.pre2'
 gem 'acts-as-taggable-on', '~> 2.0.6'
+gem 'omniauth', '~> 0.2.0.beta1'
 
 group :development, :test do
   gem 'sqlite3-ruby', :require => 'sqlite3'
