@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe CommentsController do
+  render_views
+
   before(:each) do
     @post = Factory(:post)
     @comment_attributes = Factory.attributes_for(:comment)

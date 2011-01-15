@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe ProjectsController do
+  render_views
+
   describe "#index" do
     it "should be successful" do
       get :index
