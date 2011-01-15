@@ -4,6 +4,6 @@
     <time pubdate datetime="<%= comment.created_at.strftime("%Y-%m-%d") %>"><%= comment.created_at.strftime("%B %d, %Y") %></time>
   </header>
   <section>
-    <%= simple_format(comment.comment) %>
+    <%= format_comment(comment.comment) %>
   </section>
 </section>
