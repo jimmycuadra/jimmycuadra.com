@@ -22,11 +22,13 @@ body {
 }
 
 a, a:active, a:visited, a:hover {
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
   color: $purple;
   font-weight: bold;
   text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 .clear {
@@ -138,12 +140,7 @@ nav {
       text-shadow: rgba(120,120,120,.4) 1px 2px 2px;
 
       a, a:active, a:visited, a:hover {
-        border-bottom-style: none;
         color: inherit;
-
-        &:hover {
-          border-bottom-style: solid;
-        }
       }
     }
 
@@ -209,10 +206,6 @@ nav {
 
       img {
         border: 1px solid #000;
-      }
-
-      a, a:active, a:visited, a:hover {
-        border: 0;
       }
 
       &.alt {
