@@ -8,4 +8,5 @@ JimmycuadraCom::Application.routes.draw do
 
   match "projects" => "projects#index", :as => :projects
   match "about" => "about#index", :as => :about
+  match "auth/:provider/callback" => "authentications#create"
 end
