@@ -15,6 +15,12 @@ describe SessionsController do
       get :create, :provider => "twitter"
       response.should redirect_to('/auth/twitter')
     end
+
+    it "redirects back if the user is already logged in" do
+      controller.stub(:current_user).and_return(true)
+      get :create, :provider => "twitter"
+      response.should redirect_to(:back)
+    end
   end
 
   describe "#destroy" do

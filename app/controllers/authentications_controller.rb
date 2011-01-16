@@ -1,9 +1,5 @@
 class AuthenticationsController < ApplicationController
   def create
-    if current_user
-      return redirect_to root_path, :notice => "Adding another authorization is NYI."
-    end
-
     omniauth = env["omniauth.auth"]
 
     authentication = Authentication.find_by_provider_and_uid(omniauth["provider"], omniauth["uid"])
