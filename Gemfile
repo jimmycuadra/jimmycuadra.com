@@ -16,4 +16,5 @@ group :development, :test do
   gem 'factory_girl', '~> 1.3.2'
   gem 'rails3-generators', '~> 0.17.0'
   gem 'ZenTest', '~> 4.4.2'
+  gem 'simplecov', '~> 0.3.9'
 end
