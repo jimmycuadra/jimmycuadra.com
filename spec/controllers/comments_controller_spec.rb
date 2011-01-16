@@ -9,6 +9,11 @@ describe CommentsController do
   end
 
   describe "#create" do
+    before(:each) do
+      current_user = mock(User, :id => 1, :username => "Bongo")
+      controller.stub(:current_user).and_return(current_user)
+    end
+
     context "with valid attributes" do
       it "increase's the post's comment count" do
         expect {
