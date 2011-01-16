@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_filter :require_admin, :except => [:index, :show]
   before_filter :retrieve_record, :only => [:show, :update, :destroy]
   before_filter :enforce_friendly_url, :only => :show
 

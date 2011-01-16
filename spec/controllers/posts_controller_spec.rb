@@ -3,6 +3,14 @@ require 'spec_helper'
 describe PostsController do
   render_views
 
+  [:new, :create, :edit, :update, :destroy].each do |action|
+    it "requires an admin for ##{action}" do
+      get action, :id => 1
+      response.should redirect_to(root_url)
+      flash[:notice].should include("not authorized")
+    end
+  end
+
   describe "#index" do
     it "renders the index template" do
       get :index
@@ -38,6 +46,10 @@ describe PostsController do
   end
 
   describe "#new" do
+    before(:each) do
+      log_in_as_admin
+    end
+
     it "renders the new template" do
       get :new
       response.should render_template(:new)
@@ -45,6 +57,10 @@ describe PostsController do
   end
 
   describe "#create" do
+    before(:each) do
+      log_in_as_admin
+    end
+
     context "with valid parameters" do
       it "increases the post count by 1" do
         expect {
@@ -75,6 +91,7 @@ describe PostsController do
 
   describe "#edit" do
     before(:each) do
+      log_in_as_admin
       Factory(:post)
       get :edit, :id => Post.first.id
     end
@@ -90,6 +107,7 @@ describe PostsController do
 
   describe "#update" do
     before(:each) do
+      log_in_as_admin
       @post = Factory(:post)
     end
 
@@ -117,6 +135,7 @@ describe PostsController do
 
   describe "#destroy" do
     before(:each) do
+      log_in_as_admin
       Factory(:post)
     end
 
