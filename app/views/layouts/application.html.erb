@@ -27,7 +27,7 @@
 
   <section id="content">
     <div class="bucket">
-      <%= render :partial => "partials/admin_actions" %>
+      <%= render :partial => "partials/admin_actions" if admin? %>
 
       <% if flash[:notice] %>
         <section id="flash"><%= flash[:notice] %></section>
