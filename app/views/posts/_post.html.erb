@@ -16,6 +16,10 @@
   <%= textile(post.body) %>
 
   <footer>
+		<% unless params[:action] == "show" %>
+			<p><%= link_to "#{pluralize(post.comments.count, 'comment')}", post %></p>
+		<% end %>
+
     <% unless post.tags.empty? %>
       <p>This post was tagged with <%= post.tags.map { |tag| link_to tag.name, tag_path(tag) }.to_sentence.html_safe %>.</p>
     <% end %>
