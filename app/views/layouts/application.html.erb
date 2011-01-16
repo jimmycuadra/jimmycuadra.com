@@ -39,6 +39,11 @@
 
   <footer id="site-footer">
     <div class="bucket">
+			<% if current_user %>
+				<p>You are logged in as <strong><%= current_user.username %>. <%= link_to "Log out", logout_path %>.</strong></p>
+			<% else %>
+		    <p><a href="/auth/twitter"><img src="/images/auth/twitter.png" width="151" height="24" alt="Sign in with Twitter" /></a></p>
+			<% end %>
       <p>Built on a <a href="http://www.apple.com/">Mac</a> using <a href="http://www.rubyonrails.org/">Ruby on Rails</a>. If you're not using <a href="http://webkit.org/">Webkit</a>, get on that.</p>
       <small>&copy; <%= Date.today.year.to_s %> Jimmy Cuadra. All rights reserved.</small>
     </div>
