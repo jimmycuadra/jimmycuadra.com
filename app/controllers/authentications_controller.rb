@@ -6,7 +6,8 @@ class AuthenticationsController < ApplicationController
 
     if authentication
       session[:user_id] = authentication.user.id
-      redirect_to root_path, :notice => "Welcome back! You are now logged in."
+      redirect_to (session[:return_to] || root_path), :notice => "Welcome back! You are now logged in."
+      session[:return_to] = nil
     else
       user = case omniauth["provider"]
       when "twitter"
@@ -15,9 +16,11 @@ class AuthenticationsController < ApplicationController
 
       if user.save
         session[:user_id] = user.id
-        redirect_to root_path, :notice => "You are now logged in."
+        redirect_to (session[:return_to] || root_path), :notice => "You are now logged in."
+        session[:return_to] = nil
       else
-        redirect_to root_path, :notice => "Validation failed."
+        redirect_to (session[:return_to] || root_path), :notice => "Validation failed."
+        session[:return_to] = nil
       end
     end
   end
