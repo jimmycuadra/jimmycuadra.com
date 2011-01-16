@@ -10,4 +10,10 @@ class ApplicationController < ActionController::Base
   def admin?
     current_user && current_user.id == 1
   end
+
+  private
+
+  def require_user
+    redirect_to root_path, :notice => "You must be logged in." unless current_user
+  end
 end

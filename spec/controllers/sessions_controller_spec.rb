@@ -24,19 +24,27 @@ describe SessionsController do
   end
 
   describe "#destroy" do
-    before(:each) do
-      session[:user_id] = 1
-      request.env["HTTP_REFERER"] = "http://dev.jimmycuadra.com/foobar"
+    it "redirects users who are not logged in" do
+      get :destroy
+      response.should redirect_to(root_path)
+      flash[:notice].should include("must be logged in")
     end
 
-    it "destroys the session" do
-      get :destroy
-      session[:user_id].should_not be
-    end
+    context "when the user is logged in" do
+      before(:each) do
+        log_in_as_user
+        request.env["HTTP_REFERER"] = "http://dev.jimmycuadra.com/foobar"
+      end
 
-    it "redirects back" do
-      get :destroy
-      response.should redirect_to(:back)
+      it "destroys the session" do
+        get :destroy
+        session[:user_id].should_not be
+      end
+
+      it "redirects back" do
+        get :destroy
+        response.should redirect_to(:back)
+      end
     end
   end
 end

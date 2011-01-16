@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_filter :require_user, :only => :destroy
+
   def create
     return redirect_to (request.env["HTTP_REFERER"] || root_path), :notice => "You are already logged in." if current_user
 
