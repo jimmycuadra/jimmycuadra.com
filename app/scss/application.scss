@@ -268,6 +268,12 @@ nav {
         background: $periwinkle;
         border-bottom: 1px solid #000;
         border-radius: 4px 4px 0 0;
+
+				img {
+					border: 1px solid #000;
+					float: left;
+					margin-right: 10px;
+				}
       }
 
       section {
@@ -283,10 +289,6 @@ nav {
     h2 {
       font-size: 16px;
       margin-bottom: 18px;
-    }
-
-    time {
-      float: right;
     }
   }
 }

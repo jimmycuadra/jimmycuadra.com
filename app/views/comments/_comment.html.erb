@@ -1,7 +1,11 @@
 <section>
   <header>
-    <span><%= comment.user.url.blank? ? comment.user.username : link_to(comment.user.username, comment.user.url) %> commented</span>
+		<% unless comment.user.avatar.blank? %>
+			<img src="<%= comment.user.avatar %>" width="48" height="48" alt="<%= comment.user.username %>'s avatar" />
+		<% end %>
+    <span><%= comment.user.url.blank? ? comment.user.username : link_to(comment.user.username, comment.user.url) %> commented</span><br />
     <time pubdate datetime="<%= comment.created_at.strftime("%Y-%m-%d") %>"><%= comment.created_at.strftime("%B %d, %Y") %></time>
+		<div class="clear"></div>
   </header>
   <section>
     <%= format_comment(comment.comment) %>

@@ -165,6 +165,10 @@ nav {
       background: #b1bdcd;
       border-bottom: 1px solid #000;
       border-radius: 4px 4px 0 0; }
+      #content #comments > section header img {
+        border: 1px solid #000;
+        float: left;
+        margin-right: 10px; }
     #content #comments > section section {
       background: #e7ebf0;
       border-radius: 0 0 4px 4px; }
@@ -173,8 +177,6 @@ nav {
   #content #comments h2 {
     font-size: 16px;
     margin-bottom: 18px; }
-  #content #comments time {
-    float: right; }
 
 p {
   margin-bottom: 18px; }
