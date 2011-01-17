@@ -12,6 +12,8 @@ class AuthenticationsController < ApplicationController
       user = case omniauth["provider"]
       when "twitter"
         User.build_from_twitter(omniauth)
+      when "github"
+        User.build_from_github(omniauth)
       end
 
       user.save!

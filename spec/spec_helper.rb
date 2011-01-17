@@ -36,4 +36,5 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
 
   config.include ControllerMacros, :type => :controller
+  config.extend ControllerMacros::ClassMethods, :type => :controller
 end
