@@ -12,6 +12,14 @@ class User < ActiveRecord::Base
     user
   end
 
+  def self.build_from_github(omniauth)
+    user = build_from_auth(omniauth)
+    user.username = omniauth["user_info"]["name"] || omniauth["user_info"]["nickname"]
+    user.email = omniauth["user_info"]["email"] if omniauth["user_info"]["email"]
+    user.url = omniauth["user_info"]["urls"]["Blog"] || omniauth["user_info"]["urls"]["GitHub"] if omniauth["user_info"]["urls"]["Blog"] || omniauth["user_info"]["urls"]["GitHub"]
+    user
+  end
+
   private
 
   def self.build_from_auth(omniauth)
