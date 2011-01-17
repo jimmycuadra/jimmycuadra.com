@@ -1,12 +1,12 @@
 class User < ActiveRecord::Base
-  validates_presence_of :username
+  validates_presence_of :name
 
   has_many :authentications
   has_many :comments
 
   def self.build_from_twitter(omniauth)
     user = build_from_auth(omniauth)
-    user.username = omniauth["user_info"]["name"] || omniauth["user_info"]["nickname"]
+    user.name = omniauth["user_info"]["name"] || omniauth["user_info"]["nickname"]
     user.avatar = omniauth["user_info"]["image"] if omniauth["user_info"]["image"]
     user.url = omniauth["user_info"]["urls"]["Website"] || omniauth["user_info"]["urls"]["Twitter"] if omniauth["user_info"]["urls"]["Website"] || omniauth["user_info"]["urls"]["Twitter"]
     user
@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   def self.build_from_github(omniauth)
     user = build_from_auth(omniauth)
-    user.username = omniauth["user_info"]["name"] || omniauth["user_info"]["nickname"]
+    user.name = omniauth["user_info"]["name"] || omniauth["user_info"]["nickname"]
     user.email = omniauth["user_info"]["email"] if omniauth["user_info"]["email"]
     user.url = omniauth["user_info"]["urls"]["Blog"] || omniauth["user_info"]["urls"]["GitHub"] if omniauth["user_info"]["urls"]["Blog"] || omniauth["user_info"]["urls"]["GitHub"]
     user

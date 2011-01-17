@@ -12,6 +12,6 @@ module UsersHelper
       "http://gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email.downcase)}.png?s=48"
     end
 
-    "<img src=\"#{avatar_url || default_avatar_url}\" width=\"48\" height=\"48\" alt=\"#{user.username}'s avatar\" />".html_safe
+    "<img src=\"#{avatar_url || default_avatar_url}\" width=\"48\" height=\"48\" alt=\"#{user.name}'s avatar\" />".html_safe
   end
 end

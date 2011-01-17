@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe User do
-  it "requires a username" do
+  it "requires a name" do
     user = User.new
     user.valid?
-    user.should have(1).error_on(:username)
+    user.should have(1).error_on(:name)
   end
 
   describe ".build_from_twitter" do
@@ -24,8 +24,8 @@ describe User do
       @user = User.build_from_twitter(omniauth)
     end
 
-    it "populates the user's username" do
-      @user.username.should == "Bongo"
+    it "populates the user's name" do
+      @user.name.should == "Bongo"
     end
 
     it "populates the user's avatar" do
@@ -56,8 +56,8 @@ describe User do
       @user = User.build_from_github(omniauth)
     end
 
-    it "populates the user's username" do
-      @user.username.should == "Bongo"
+    it "populates the user's name" do
+      @user.name.should == "Bongo"
     end
 
     it "populates the user's email" do
