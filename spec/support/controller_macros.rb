@@ -1,4 +1,8 @@
 module ControllerMacros
+  def log_in_as(user)
+    session[:user_id] = user.id
+  end
+
   def log_in_as_user
     controller.stub(:current_user).and_return(mock(User, :id => 2, :name => "Bongo"))
     session[:user_id] = controller.current_user.id

@@ -7,6 +7,7 @@ JimmycuadraCom::Application.routes.draw do
     resources :comments, :only => [:create, :destroy]
   end
   resources :tags, :only => [:index, :show]
+  resources :users, :only => [:edit, :update]
 
   # static pages
   match "projects" => "projects#index", :as => :projects

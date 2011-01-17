@@ -1,6 +1,13 @@
-<h1><%= @user.name %></h1>
+<h1>Edit your profile</h1>
 
-<%= semantic_form_for @user do %>
-	<%= f.inputs %>
-	<%= f.buttons %>
+<%= semantic_form_for current_user do |f| %>
+	<%= f.inputs do %>
+		<%= f.input :name %>
+		<%= f.input :email %>
+		<%= f.input :url, :label => "Website" %>
+	<% end %>
+
+	<%= f.buttons do %>
+		<%= f.submit "Update profile" %>
+	<% end %>
 <% end %>
