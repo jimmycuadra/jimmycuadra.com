@@ -7,6 +7,21 @@ describe User do
     user.should have(1).error_on(:name)
   end
 
+  it "requires a valid URL" do
+    user = User.new(:url => "foobar")
+    user.valid?
+    user.should have(1).error_on(:url)
+  end
+
+  it "doesn't allow mass assignment of avatar" do
+    Factory(:user)
+    expect {
+      User.first.update_attributes!(:avatar => "hax0r3d")
+    }.to_not change {
+      User.first.avatar
+    }
+  end
+
   describe ".build_from_twitter" do
     let(:omniauth) do
       {

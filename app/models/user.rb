@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
   validates_presence_of :name
+  validates_format_of :url, :with => /^(#{URI::regexp(%w(http https))})$/, :allow_blank => true
+
+  attr_accessible :name, :email, :url
 
   has_many :authentications
   has_many :comments
