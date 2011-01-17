@@ -40,7 +40,7 @@
   <footer id="site-footer">
     <div class="bucket">
 			<% if current_user %>
-				<p>You are logged in as <strong><%= current_user.name %>. <%= link_to "Log out", logout_path %>.</strong></p>
+				<p>You are logged in as <strong><%= current_user.name %>. <%= link_to "Edit your profile", profile_path %> or <%= link_to "og out", logout_path %>.</strong></p>
 			<% else %>
 				<%= render :partial => "partials/auth_links" %>
 			<% end %>

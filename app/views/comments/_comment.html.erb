@@ -1,7 +1,7 @@
 <section>
   <header>
 		<% if comment.user == current_user %>
-			<span class="edit-profile">This is you! Want to <%= link_to "edit your profile", "#" %>?</span>
+			<span class="edit-profile">This is you! Want to <%= link_to "edit your profile", profile_path %>?</span>
 		<% end %>
 		<%= user_avatar(comment.user) %>
     <span><%= comment.user.url.blank? ? comment.user.name : link_to(comment.user.name, comment.user.url) %> commented</span><br />

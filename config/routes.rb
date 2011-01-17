@@ -19,4 +19,7 @@ JimmycuadraCom::Application.routes.draw do
   # sessions
   match "login/:provider" => "sessions#create", :as => :login
   match "logout" => "sessions#destroy", :as => :logout
+
+  # users
+  match "profile" => "users#edit", :as => :profile
 end
