@@ -14,6 +14,7 @@ JimmycuadraCom::Application.routes.draw do
 
   # omniauth callback
   match "auth/:provider/callback" => "authentications#create"
+  match "auth/failure" => "authentications#failure"
 
   # sessions
   match "login/:provider" => "sessions#create", :as => :login

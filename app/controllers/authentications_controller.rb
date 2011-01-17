@@ -20,4 +20,9 @@ class AuthenticationsController < ApplicationController
       session[:return_to] = nil
     end
   end
+
+  def failure
+    redirect_to (session[:return_to] || root_path), :notice => "Login cancelled."
+    session[:return_to] = nil
+  end
 end

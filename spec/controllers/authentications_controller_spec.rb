@@ -53,4 +53,17 @@ describe AuthenticationsController do
       end
     end
   end
+
+  describe "#failure" do
+    it "redirects back" do
+      session[:return_to] = "http://dev.jimmycuadra.com/foobar"
+      get :failure
+      response.should redirect_to("http://dev.jimmycuadra.com/foobar")
+    end
+
+    it "sets the flash" do
+      get :failure
+      flash[:notice].should include("cancelled")
+    end
+  end
 end
