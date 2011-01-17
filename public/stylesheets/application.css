@@ -191,3 +191,6 @@ p {
   #site-footer a, #site-footer a:active, #site-footer a:visited, #site-footer a:hover {
     color: #e7ebf0;
     text-decoration: underline; }
+
+.auth-links img {
+  vertical-align: middle; }

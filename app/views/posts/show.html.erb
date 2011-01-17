@@ -10,8 +10,8 @@
 
     <%= render :partial => 'comments/form' %>
   <% else %>
-    <h2>Sign in with an existing account to comment</h2>
+    <h2>You must be logged in to comment</h2>
     
-    <a href="<%= login_path("twitter") %>"><img src="/images/auth/twitter.png" width="151" height="24" alt="Sign in with Twitter" /></a>
+		<%= render :partial => "partials/auth_links" %>
   <% end %>
 </div>
