@@ -36,8 +36,7 @@ a:hover {
   #site-header h1, #site-header h2, #site-header h3 {
     text-shadow: black 1px 1px 1px; }
   #site-header a, #site-header a:active, #site-header a:visited, #site-header a:hover {
-    color: #30b041;
-    border: none; }
+    color: #30b041; }
 
 nav {
   float: right;
