@@ -33,6 +33,12 @@ describe Post do
     @post.cached_slug.should == "my-resume"
   end
 
+  it "converts underscores to dashes in generated slugs" do
+    @post.title = "this_has_underscores"
+    @post.save
+    @post.cached_slug.should == "this-has-underscores"
+  end
+
   context "with a video" do
     before(:each) do
       @post.youtube_id = "abc123"

@@ -14,6 +14,11 @@ class Post < ActiveRecord::Base
     youtube_id.blank? ? false : true
   end
 
+  def normalize_friendly_id(text)
+    text.gsub!("_", "-")
+    super
+  end
+
   private
 
   def enforce_screencast_title
