@@ -1,10 +1,7 @@
 <section>
   <header>
-		<% if comment.user == current_user %>
-			<span class="edit-profile">This is you! Want to <%= link_to "edit your profile", profile_path %>?</span>
-		<% end %>
-		<%= user_avatar(comment.user) %>
-    <span><%= comment.user.url.blank? ? comment.user.name : link_to(comment.user.name, comment.user.url) %> commented</span><br />
+		<!-- commenter's avatar will go here -->
+    <span><%= comment.url.blank? ? comment.name : link_to(comment.name, comment.url) %> commented</span><br />
     <time pubdate datetime="<%= comment.created_at.strftime("%Y-%m-%d") %>"><%= comment.created_at.strftime("%B %d, %Y") %></time>
 		<div class="clear"></div>
   </header>

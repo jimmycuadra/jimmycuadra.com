@@ -27,7 +27,7 @@
 
   <section id="content">
     <div class="bucket">
-      <%= render :partial => "partials/admin_actions" if admin? %>
+      <%= render :partial => "partials/admin_actions" %>
 
       <% if flash[:notice] %>
         <section id="flash"><%= flash[:notice] %></section>
@@ -39,11 +39,6 @@
 
   <footer id="site-footer">
     <div class="bucket">
-			<% if current_user %>
-				<p>You are logged in as <strong><%= current_user.name %>. <%= link_to "Edit your profile", profile_path %> or <%= link_to "log out", logout_path %>.</strong></p>
-			<% else %>
-				<%= render :partial => "partials/auth_links" %>
-			<% end %>
       <p>Built on a <a href="http://www.apple.com/">Mac</a> using <a href="http://www.rubyonrails.org/">Ruby on Rails</a>. If you're not using <a href="http://webkit.org/">Webkit</a>, get on that.</p>
       <small>&copy; <%= Date.today.year.to_s %> Jimmy Cuadra. All rights reserved.</small>
     </div>
