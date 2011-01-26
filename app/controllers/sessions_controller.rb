@@ -12,6 +12,11 @@ class SessionsController < ApplicationController
     end
   end
 
+  def destroy
+    reset_session
+    redirect_to root_path, :notice => "You are now logged out."
+  end
+
   private
 
   def password_match?(password)

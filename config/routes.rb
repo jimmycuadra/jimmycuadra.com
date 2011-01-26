@@ -13,5 +13,7 @@ JimmycuadraCom::Application.routes.draw do
   match "about" => "about#index", :as => :about
 
   # sessions
-  resources :sessions, :only => [:new, :create, :destroy]
+  match "login" => "sessions#new", :via => :get, :as => :new_login
+  match "login" => "sessions#create", :via => :post, :as => :login
+  match "logout" => "sessions#destroy", :as => :logout
 end

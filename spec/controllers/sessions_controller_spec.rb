@@ -36,4 +36,20 @@ describe SessionsController do
       end
     end
   end
+
+  describe "#destroy" do
+    before(:each) do
+      session[:admin] == true
+      delete :destroy
+    end
+
+    it "logs the user out" do
+      controller.admin?.should == false
+    end
+
+    it "redirects to the root with a flash" do
+      response.should redirect_to(root_path)
+      flash[:notice].should include("logged out")
+    end
+  end
 end
