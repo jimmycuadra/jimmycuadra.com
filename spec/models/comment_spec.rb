@@ -28,15 +28,28 @@ describe Comment do
     @comment.should have(1).error_on(:email)
   end
 
-  it "requires URLs to be a valid format" do
-    @comment.url = "not a URL"
-    @comment.valid?
-    @comment.should have(1).error_on(:url)
+  it "prepends http:// to the URL before saving if a URL is provided" do
+    @comment.url = "example.com"
+    @comment.save
+    @comment.url.should =~ /^http:\/\//
   end
 
-  it "prepends the protocol to the URL if absent" do
-    @comment.url = "example.com"
-    @comment.should be_valid
+  it "doesn't prepend http:// if the URL already has it" do
+    original_url = @comment.url
+    @comment.save
+    @comment.url.should == original_url
+  end
+
+  it "doesn't prepend http:// if the URL starts with https://" do
+    original_url = @comment.url = "https://example.com/"
+    @comment.save
+    @comment.url.should == original_url
+  end
+
+  it "doesn't prepend http:// to the URL if no URL is provided" do
+    @comment.url = nil
+    @comment.save
+    @comment.url.should be_blank
   end
 
   it "requires a comment" do
