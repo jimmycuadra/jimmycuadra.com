@@ -10,15 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110117045537) do
-
-  create_table "authentications", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "provider"
-    t.string   "uid"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(:version => 20110126044746) do
 
   create_table "comments", :force => true do |t|
     t.text     "comment"
@@ -70,14 +62,5 @@ ActiveRecord::Schema.define(:version => 20110117045537) do
   end
 
   add_index "tags", ["cached_slug"], :name => "index_tags_on_cached_slug", :unique => true
-
-  create_table "users", :force => true do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "avatar"
-    t.string   "url"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
 end
