@@ -3,6 +3,14 @@ require 'spec_helper'
 describe PostsController do
   render_views
 
+  [:new, :create, :edit, :update, :destroy].each do |action|
+    it "requires an admin for ##{action}" do
+      get action, :id => 1
+      response.should redirect_to(root_path)
+      flash[:notice].should include("not authorized")
+    end
+  end
+
   describe "#index" do
     it "renders the index template" do
       get :index
@@ -37,98 +45,104 @@ describe PostsController do
     end
   end
 
-  describe "#new" do
-    it "renders the new template" do
-      get :new
-      response.should render_template(:new)
-    end
-  end
-
-  describe "#create" do
-    context "with valid parameters" do
-      it "increases the post count by 1" do
-        expect {
-          post :create, { :post => Factory.attributes_for(:post) }
-        }.to change {
-          Post.count
-        }.from(0).to(1)
-      end
-
-      it "redirects to the new post" do
-        post :create, { :post => Factory.attributes_for(:post) }
-        response.should redirect_to assigns(:post)
-      end
-
-      it "sets the flash" do
-        post :create, { :post => Factory.attributes_for(:post) }
-        flash[:notice].should_not be_nil
-      end
+  context "as an admin" do
+    before(:each) do
+      controller.stub(:admin?).and_return(true)
     end
 
-    context "with invalid parameters" do
-      it "renders :new" do
-        post :create
+    describe "#new" do
+      it "renders the new template" do
+        get :new
         response.should render_template(:new)
       end
     end
-  end
 
-  describe "#edit" do
-    before(:each) do
-      Factory(:post)
-      get :edit, :id => Post.first.id
+    describe "#create" do
+      context "with valid parameters" do
+        it "increases the post count by 1" do
+          expect {
+            post :create, { :post => Factory.attributes_for(:post) }
+          }.to change {
+            Post.count
+          }.from(0).to(1)
+        end
+
+        it "redirects to the new post" do
+          post :create, { :post => Factory.attributes_for(:post) }
+          response.should redirect_to assigns(:post)
+        end
+
+        it "sets the flash" do
+          post :create, { :post => Factory.attributes_for(:post) }
+          flash[:notice].should_not be_nil
+        end
+      end
+
+      context "with invalid parameters" do
+        it "renders :new" do
+          post :create
+          response.should render_template(:new)
+        end
+      end
     end
 
-    it "renders the edit template" do
-      response.should render_template(:edit)
-    end
-
-    it "finds the post" do
-      assigns(:post).should_not be_nil
-    end
-  end
-
-  describe "#update" do
-    before(:each) do
-      @post = Factory(:post)
-    end
-
-    context "with valid parameters" do
+    describe "#edit" do
       before(:each) do
-        put :update, :id => @post.id, :post => { :body => "Updated body" }
+        Factory(:post)
+        get :edit, :id => Post.first.id
       end
 
-      it "redirects to the updated post" do
-        response.should redirect_to assigns(:post)
-      end
-
-      it "sets the flash" do
-        flash[:notice].should_not be_nil
-      end
-    end
-
-    context "with invalid parameters" do
-      it "renders :edit" do
-        put :update, :id => @post.id, :post => { :body => nil }
+      it "renders the edit template" do
         response.should render_template(:edit)
       end
-    end
-  end
 
-  describe "#destroy" do
-    before(:each) do
-      Factory(:post)
+      it "finds the post" do
+        assigns(:post).should_not be_nil
+      end
     end
 
-    it "destroys the post" do
-      post_id = Post.first.id
-      delete :destroy, :id => post_id
-      expect { Post.find(post_id) }.to raise_error(ActiveRecord::RecordNotFound)
+    describe "#update" do
+      before(:each) do
+        @post = Factory(:post)
+      end
+
+      context "with valid parameters" do
+        before(:each) do
+          put :update, :id => @post.id, :post => { :body => "Updated body" }
+        end
+
+        it "redirects to the updated post" do
+          response.should redirect_to assigns(:post)
+        end
+
+        it "sets the flash" do
+          flash[:notice].should_not be_nil
+        end
+      end
+
+      context "with invalid parameters" do
+        it "renders :edit" do
+          put :update, :id => @post.id, :post => { :body => nil }
+          response.should render_template(:edit)
+        end
+      end
     end
 
-    it "redirects to :index" do
-      delete :destroy, :id => Post.first.id
-      response.should redirect_to posts_path
+    describe "#destroy" do
+      before(:each) do
+        Factory(:post)
+      end
+
+      it "destroys the post" do
+        post_id = Post.first.id
+        delete :destroy, :id => post_id
+        expect { Post.find(post_id) }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+
+      it "redirects to :index" do
+        delete :destroy, :id => Post.first.id
+        response.should redirect_to posts_path
+      end
     end
   end
 end
