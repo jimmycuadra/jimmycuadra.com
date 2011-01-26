@@ -1,9 +1,11 @@
 <%= render @post %>
 
 <div id="comments">
-  <h2>Comments</h2>
+	<% comments = @post.comments.reject(&:new_record?); unless comments.empty? %>
+	  <h2>Comments</h2>
 
-  <%= render @post.comments.reject(&:new_record?) %>
+	  <%= render @post.comments.reject(&:new_record?) %>
+	<% end %>
 
    <h2>Add a comment</h2>
 
