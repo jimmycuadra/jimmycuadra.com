@@ -4,4 +4,12 @@ class Comment < ActiveRecord::Base
   validates_format_of :url, :with => /^(#{URI::regexp(%w(http https))})$/i, :allow_blank => true, :message => "must be valid URL"
 
   belongs_to :post
+
+  before_validation :prepend_protocol
+
+  private
+
+  def prepend_protocol
+    self.url = "http://#{url}" unless url =~ /^https?:\/\//
+  end
 end

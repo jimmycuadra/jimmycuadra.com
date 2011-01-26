@@ -34,6 +34,11 @@ describe Comment do
     @comment.should have(1).error_on(:url)
   end
 
+  it "prepends the protocol to the URL if absent" do
+    @comment.url = "example.com"
+    @comment.should be_valid
+  end
+
   it "requires a comment" do
     @comment.comment = nil
     @comment.valid?
