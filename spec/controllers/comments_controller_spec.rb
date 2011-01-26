@@ -3,6 +3,14 @@ require 'spec_helper'
 describe CommentsController do
   render_views
 
+  it "requires an admin for #destroy" do
+    @post = Factory(:post)
+    @comment = @post.comments.create(Factory.attributes_for(:comment))
+    delete :destroy, :post_id => @post.to_param, :id => @comment.to_param
+    response.should redirect_to(root_path)
+    flash[:notice].should include("not authorized")
+  end
+
   describe "#create" do
     before(:each) do
       @post = Factory(:post)
@@ -39,6 +47,7 @@ describe CommentsController do
 
   describe "#destroy" do
     before(:each) do
+      controller.stub(:admin?).and_return(true)
       @post = Factory(:post)
       @comment = @post.comments.create(Factory.attributes_for(:comment))
     end
