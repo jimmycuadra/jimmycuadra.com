@@ -268,10 +268,6 @@ nav {
         border-bottom: 1px solid #000;
         border-radius: 4px 4px 0 0;
 
-				.edit-profile {
-					float: right;
-				}
-
 				img {
 					border: 1px solid #000;
 					float: left;
@@ -321,8 +317,4 @@ p {
     color: $paleblue;
 		text-decoration: underline;
   }
-}
-
-.auth-links img {
-	vertical-align: middle;
 }

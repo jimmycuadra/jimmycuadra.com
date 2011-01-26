@@ -164,8 +164,6 @@ nav {
       background: #b1bdcd;
       border-bottom: 1px solid #000;
       border-radius: 4px 4px 0 0; }
-      #content #comments > section header .edit-profile {
-        float: right; }
       #content #comments > section header img {
         border: 1px solid #000;
         float: left;
@@ -192,6 +190,3 @@ p {
   #site-footer a, #site-footer a:active, #site-footer a:visited, #site-footer a:hover {
     color: #e7ebf0;
     text-decoration: underline; }
-
-.auth-links img {
-  vertical-align: middle; }
