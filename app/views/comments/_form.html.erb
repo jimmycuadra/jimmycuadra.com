@@ -1,10 +1,12 @@
 <%= semantic_form_for [@post, @comment || Comment.new] do |f| %>
   <%= f.inputs do %>
 		<%= f.input :name %>
-		<%= f.input :email %>
+		<%= f.input :email, :hint => "Your email address is only used for Gravatar. It will never be published, sold, or traded, and you will never receive unsolicited email." %>
 		<%= f.input :url, :label => "URL" %>
     <%= f.input :comment %>
   <% end %>
 
-  <%= f.buttons %>
+  <%= f.buttons do %>
+		<%= f.submit "Comment" %>
+	<% end %>
 <% end %>
