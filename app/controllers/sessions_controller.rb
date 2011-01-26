@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_filter :require_no_admin, :only => [:new, :create]
+
   def new
   end
 

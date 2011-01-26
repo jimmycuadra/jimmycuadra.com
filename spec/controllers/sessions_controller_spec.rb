@@ -3,6 +3,15 @@ require 'spec_helper'
 describe SessionsController do
   render_views
 
+  [:new, :create].each do |action|
+    it "requires no admin for ##{action}" do
+      controller.stub(:admin?).and_return(true)
+      get action
+      response.should redirect_to(root_path)
+      flash[:notice].should include("already logged in")
+    end
+  end
+
   describe "#new" do
     it "should render the new template" do
       get :new

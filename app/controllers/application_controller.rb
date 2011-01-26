@@ -11,4 +11,8 @@ class ApplicationController < ActionController::Base
   def require_admin
     redirect_to root_path, :notice => "You are not authorized." unless admin?
   end
+
+  def require_no_admin
+    redirect_to root_path, :notice => "You are already logged in." if admin?
+  end
 end
