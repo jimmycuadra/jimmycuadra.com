@@ -10,6 +10,24 @@ describe Comment do
     @comment.should be_valid
   end
 
+  it "requires an email address" do
+    @comment.email = nil
+    @comment.valid?
+    @comment.should have(1).error_on(:email)
+  end
+
+  it "requires email addresses are a valid format" do
+    @comment.email = "not an email address"
+    @comment.valid?
+    @comment.should have(1).error_on(:email)
+  end
+
+  it "requires URLs to be a valid format" do
+    @comment.url = "not a URL"
+    @comment.valid?
+    @comment.should have(1).error_on(:url)
+  end
+
   it "requires a comment" do
     @comment.comment = nil
     @comment.valid?
