@@ -1,0 +1,7 @@
+<h1>Log in</h1>
+
+<%= semantic_form_for 'session', :url => sessions_path do |f| %>
+	<%= f.inputs do %>
+		<%= f.input :password, :input_html => { :name => "password" } %>
+	<% end %>
+<% end %>
