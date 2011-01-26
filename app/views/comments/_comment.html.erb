@@ -1,6 +1,6 @@
 <section>
   <header>
-		<!-- commenter's avatar will go here -->
+		<img src="http://gravatar.com/avatar/<%= Digest::MD5.hexdigest(comment.email.downcase) %>.png?s=48" width="48" height="48" alt="<%= comment.name %>" />
     <span><%= comment.url.blank? ? comment.name : link_to(comment.name, comment.url) %> commented</span><br />
     <time pubdate datetime="<%= comment.created_at.strftime("%Y-%m-%d") %>"><%= comment.created_at.strftime("%B %d, %Y") %></time>
 		<div class="clear"></div>
