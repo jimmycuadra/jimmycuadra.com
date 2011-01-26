@@ -10,6 +10,12 @@ describe Comment do
     @comment.should be_valid
   end
 
+  it "requires a name" do
+    @comment.name = nil
+    @comment.valid?
+    @comment.should have(1).error_on(:name)
+  end
+
   it "requires an email address" do
     @comment.email = nil
     @comment.valid?
