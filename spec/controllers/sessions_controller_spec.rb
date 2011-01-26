@@ -22,8 +22,8 @@ describe SessionsController do
   describe "#create" do
     context "with a valid password" do
       before(:each) do
-        controller.stub(:password_match?).and_return(true)
-        post :create
+        ENV['ADMIN_PASSWORD'] = 'password'
+        post :create, :password => 'password'
       end
 
       it "logs in as an admin" do
@@ -38,8 +38,8 @@ describe SessionsController do
 
     context "with an invalid password" do
       it "renders the new template with a flash" do
-        controller.stub(:password_match?).and_return(false)
-        post :create
+        ENV['ADMIN_PASSWORD'] = 'password'
+        post :create, :password => 'foo'
         response.should render_template(:new)
         flash[:notice].should include("Invalid")
       end
