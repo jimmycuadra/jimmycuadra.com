@@ -67,14 +67,10 @@ describe PostsController do
           }.from(0).to(1)
         end
 
-        it "redirects to the new post" do
+        it "redirects to the new post with flash" do
           post :create, { :post => Factory.attributes_for(:post) }
           response.should redirect_to assigns(:post)
-        end
-
-        it "sets the flash" do
-          post :create, { :post => Factory.attributes_for(:post) }
-          flash[:notice].should_not be_nil
+          flash[:notice].should include("created")
         end
       end
 
@@ -111,12 +107,9 @@ describe PostsController do
           put :update, :id => @post.id, :post => { :body => "Updated body" }
         end
 
-        it "redirects to the updated post" do
+        it "redirects to the updated post with flash" do
           response.should redirect_to assigns(:post)
-        end
-
-        it "sets the flash" do
-          flash[:notice].should_not be_nil
+          flash[:notice].should include("updated")
         end
       end
 
@@ -139,9 +132,10 @@ describe PostsController do
         expect { Post.find(post_id) }.to raise_error(ActiveRecord::RecordNotFound)
       end
 
-      it "redirects to :index" do
+      it "redirects to :index with flash" do
         delete :destroy, :id => Post.first.id
         response.should redirect_to posts_path
+        flash[:notice].should include("destroyed")
       end
     end
   end

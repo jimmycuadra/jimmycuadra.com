@@ -4,7 +4,7 @@
   <title>Jimmy Cuadra</title>
   <%= stylesheet_link_tag 'reset', 'awesome-buttons', 'coderay', 'formtastic', 'formtastic_changes', 'application' %>
   <%= csrf_meta_tag %>
-	<link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/jimmycuadra" />
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/jimmycuadra" />
 </head>
 <body>
   <header id="site-header">
@@ -39,10 +39,14 @@
 
   <footer id="site-footer">
     <div class="bucket">
-			<p><%= if admin?; link_to "Log out", logout_path; else; link_to "Log in", new_login_path; end %></p>
+      <p><%= if admin?; link_to "Log out", logout_path; else; link_to "Log in", new_login_path; end %></p>
       <p>Built on a <a href="http://www.apple.com/">Mac</a> using <a href="http://www.rubyonrails.org/">Ruby on Rails</a>. If you're not using <a href="http://webkit.org/">Webkit</a>, get on that.</p>
       <small>&copy; <%= Date.today.year.to_s %> Jimmy Cuadra. All rights reserved.</small>
     </div>
   </footer>
+  <% if admin? %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript"></script>
+    <%= javascript_include_tag 'rails' %>
+  <% end %>
 </body>
 </html>
