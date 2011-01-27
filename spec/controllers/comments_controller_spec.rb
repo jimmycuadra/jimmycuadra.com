@@ -29,11 +29,7 @@ describe CommentsController do
       it "redirects to the post" do
         post :create, :post_id => @post.to_param, :comment => @comment_attributes
         response.should redirect_to(@post)
-      end
-
-      it "sets the flash" do
-        post :create, :post_id => @post.to_param, :comment => @comment_attributes
-        flash[:notice].should be
+        flash[:notice].should include("Thanks")
       end
     end
 
@@ -57,9 +53,10 @@ describe CommentsController do
       expect { Comment.find(@comment.to_param) }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
-    it "redirects to the post" do
+    it "redirects to the post with flash" do
       delete :destroy, :post_id => @post.to_param, :id => @comment.to_param
       response.should redirect_to(@post)
+      flash[:notice].should include("destroyed")
     end
   end
 end

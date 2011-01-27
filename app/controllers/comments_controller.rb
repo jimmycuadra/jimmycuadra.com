@@ -15,6 +15,6 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = Comment.find(params[:id])
     @comment.destroy
-    redirect_to @post
+    redirect_to @post, :notice => "The comment was destroyed."
   end
 end
