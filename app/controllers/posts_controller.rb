@@ -8,6 +8,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.html { @posts = @posts.paginate(:page => params[:page], :per_page => 3) }
+      format.atom { @posts = @posts.limit(10) }
     end
   end
 

@@ -22,6 +22,15 @@ describe PostsController do
       get :index
       assigns(:posts).should == recent_posts.tap { |o| o.shift }.reverse
     end
+
+    context "when the atom format is requested" do
+      it "displays the 10 most recent posts in descending order" do
+        recent_posts = []
+        11.times { |n| recent_posts.push Factory(:post) }
+        get :index, :format => :atom
+        assigns(:posts).should == recent_posts.tap { |o| o.shift }.reverse
+      end
+    end
   end
 
   describe "#show" do
