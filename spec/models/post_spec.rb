@@ -115,4 +115,16 @@ describe Post do
     end
 
   end
+
+  describe "#closed?" do
+    it "returns true if the post is older than 2 weeks" do
+      @post = Factory.build(:post, :created_at => 3.weeks.ago)
+      @post.should be_closed
+    end
+
+    it "returns false if the post is newer than 2 weeks" do
+      @post.save
+      @post.should_not be_closed
+    end
+  end
 end

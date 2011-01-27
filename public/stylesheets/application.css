@@ -181,6 +181,8 @@ nav {
       border-radius: 0 0 4px 4px; }
     #content #comments > section p:last-of-type {
       margin: 0; }
+    #content #comments > section:last-of-type {
+      margin-bottom: 36px; }
   #content #comments h2 {
     font-size: 16px;
     margin-bottom: 18px; }

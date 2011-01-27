@@ -14,6 +14,10 @@ class Post < ActiveRecord::Base
     youtube_id.blank? ? false : true
   end
 
+  def closed?
+    self.created_at < lambda { 2.weeks.ago }.call
+  end
+
   def normalize_friendly_id(text)
     text.gsub!("_", "-")
     super
