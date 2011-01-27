@@ -105,6 +105,10 @@ nav {
     #content article ul {
       padding-left: 20px;
       margin-bottom: 18px; }
+    #content article code {
+      background: #b1bdcd;
+      border-radius: 4px;
+      padding: 1px; }
     #content article footer {
       background: #b1bdcd;
       border-radius: 4px;
