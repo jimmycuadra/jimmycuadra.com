@@ -48,9 +48,9 @@ JimmycuadraCom::Application.configure do
   config.active_support.deprecation = :notify
   # Rack middleware
 
-  config.middleware.use Rack::Rewrite do
+  config.middleware.insert_before(Rack::Lock, Rack::Rewrite) do
     r301 %r{.*}, 'http://jimmycuadra.com$&', :if => Proc.new { |rack_env|
-      rack_env['SERVER_NAME'] != 'jimmycuadra.com'
+      rack_env['SERVER_NAME'] == 'www.jimmycuadra.com'
     }
   end
 end
