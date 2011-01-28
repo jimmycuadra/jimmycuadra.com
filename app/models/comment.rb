@@ -6,6 +6,12 @@ class Comment < ActiveRecord::Base
 
   before_save :prepend_scheme, :unless => lambda { |record| record.url.blank? || record.url =~ /^https?:\/\// }
 
+  def admin!
+    self.name = "Jimmy Cuadra"
+    self.email = "jimmy@jimmycuadra.com"
+    self.url = "http://jimmycuadra.com/"
+  end
+
   private
 
   def prepend_scheme

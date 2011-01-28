@@ -39,6 +39,15 @@ describe CommentsController do
         response.should render_template('posts/show')
       end
     end
+
+    it "marks comments as admin comments if the admin is logged in" do
+      controller.stub(:admin?).and_return(true)
+      expect {
+        post :create, :post_id => @post.to_param, :comment => { :comment => "I'm an admin!" }
+      }.to change {
+        @post.comments.count
+      }.from(0).to(1)
+    end
   end
 
   describe "#destroy" do

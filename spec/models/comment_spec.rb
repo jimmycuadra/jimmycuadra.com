@@ -57,4 +57,10 @@ describe Comment do
     @comment.valid?
     @comment.should have(1).error_on(:comment)
   end
+
+  it "autofills fields if the commenter is the admin" do
+    @comment = @post.comments.build(:comment => "I'm an admin!")
+    @comment.admin!
+    @comment.should be_valid
+  end
 end
