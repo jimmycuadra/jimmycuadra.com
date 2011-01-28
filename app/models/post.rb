@@ -7,6 +7,7 @@ class Post < ActiveRecord::Base
   acts_as_taggable_on :tags
 
   after_validation :enforce_screencast_title, :if => lambda { |record| record.screencast? }
+  after_validation :enforce_screencast_tag, :if => lambda { |record| record.screencast? }
   after_save :destroy_orphaned_tags
   after_destroy :destroy_orphaned_tags
 
@@ -27,6 +28,10 @@ class Post < ActiveRecord::Base
 
   def enforce_screencast_title
     self.title = "Screencast: #{title}" unless title.starts_with? "Screencast: "
+  end
+
+  def enforce_screencast_tag
+    self.tag_list << "screencast" unless self.tag_list.include? "screencast"
   end
 
   def destroy_orphaned_tags

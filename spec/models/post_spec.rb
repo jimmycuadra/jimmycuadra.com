@@ -73,6 +73,12 @@ describe Post do
         @post.cached_slug.should == "screencast-awesome-tutorial"
       end
     end
+
+    it "adds \"screencast\" to the tag list if not present" do
+      @post.tag_list = "foo"
+      @post.save
+      @post.tag_list.should == ["foo", "screencast"]
+    end
   end
 
   describe "#screencast?" do
