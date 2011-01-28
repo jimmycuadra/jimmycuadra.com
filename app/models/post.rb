@@ -15,7 +15,7 @@ class Post < ActiveRecord::Base
   end
 
   def closed?
-    self.created_at < lambda { 2.weeks.ago }.call
+    self.created_at < 2.weeks.ago
   end
 
   def normalize_friendly_id(text)
