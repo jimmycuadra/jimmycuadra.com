@@ -14,8 +14,8 @@ class Post < ActiveRecord::Base
     youtube_id.blank? ? false : true
   end
 
-  def closed?
-    self.created_at < 2.weeks.ago
+  def comments_allowed?
+    self.created_at > 2.weeks.ago
   end
 
   def normalize_friendly_id(text)
