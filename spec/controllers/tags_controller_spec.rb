@@ -41,5 +41,11 @@ describe TagsController do
       get :show, :id => @tag.id
       response.status.should == 301
     end
+
+    it "redirects to #index with flash if the tag is not found" do
+      get :show, :id => 123
+      response.should redirect_to(tags_path)
+      flash[:notice].should include("not found")
+    end
   end
 end
