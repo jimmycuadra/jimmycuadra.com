@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  attr_accessible :title, :body, :youtube_id
+  attr_accessible :title, :body, :youtube_id, :tag_list
 
   validates_presence_of :title, :body
 
