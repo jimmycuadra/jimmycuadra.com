@@ -3,4 +3,5 @@ Factory.define :comment do |f|
   f.email "bongo@example.com"
   f.url "http://example.com"
   f.comment "Great post!"
+  f.association :post, :factory => :post
 end
