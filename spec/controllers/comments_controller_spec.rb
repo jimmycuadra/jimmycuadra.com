@@ -12,7 +12,7 @@ describe CommentsController do
   end
 
   describe "#create" do
-    before(:each) do
+    before do
       @post = Factory(:post)
       @comment_attributes = Factory.attributes_for(:comment)
     end
@@ -51,7 +51,7 @@ describe CommentsController do
   end
 
   describe "#destroy" do
-    before(:each) do
+    before do
       controller.stub(:admin?).and_return(true)
       @post = Factory(:post)
       @comment = @post.comments.create(Factory.attributes_for(:comment))

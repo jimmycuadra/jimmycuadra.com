@@ -21,7 +21,7 @@ describe SessionsController do
 
   describe "#create" do
     context "with a valid password" do
-      before(:each) do
+      before do
         ENV['ADMIN_PASSWORD'] = 'password'
         post :create, :password => 'password'
       end
@@ -47,7 +47,7 @@ describe SessionsController do
   end
 
   describe "#destroy" do
-    before(:each) do
+    before do
       session[:admin] == true
       delete :destroy
     end

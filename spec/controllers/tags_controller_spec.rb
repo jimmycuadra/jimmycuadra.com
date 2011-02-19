@@ -17,7 +17,7 @@ describe TagsController do
   end
 
   describe "#show" do
-    before(:each) do
+    before do
       @post = Factory.create(:post, :tag_list => "ruby")
       @tag = ActsAsTaggableOn::Tag.first
     end

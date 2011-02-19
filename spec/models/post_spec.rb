@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe Post do
-  before(:each) do
+  before do
     @post = Factory.build(:post)
   end
 
@@ -40,12 +40,12 @@ describe Post do
   end
 
   context "with a video" do
-    before(:each) do
+    before do
       @post.youtube_id = "abc123"
     end
 
     context "with a title beginning with \"Screencast: \"" do
-      before(:each) do
+      before do
         @post.title = "Screencast: Awesome tutorial"
         @post.save
       end
@@ -60,7 +60,7 @@ describe Post do
     end
 
     context "with a title not beginning with \"Screencast: \"" do
-      before(:each) do
+      before do
         @post.title = "Awesome tutorial"
         @post.save
       end
@@ -93,7 +93,7 @@ describe Post do
   end
 
   describe "with tags" do
-    before(:each) do
+    before do
       @post.tag_list = "ruby, to_lang, rails 3"
       @post.save
     end

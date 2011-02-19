@@ -34,7 +34,7 @@ describe PostsController do
   end
 
   describe "#show" do
-    before(:each) do
+    before do
       Factory(:post)
     end
 
@@ -55,7 +55,7 @@ describe PostsController do
   end
 
   context "as an admin" do
-    before(:each) do
+    before do
       controller.stub(:admin?).and_return(true)
     end
 
@@ -92,7 +92,7 @@ describe PostsController do
     end
 
     describe "#edit" do
-      before(:each) do
+      before do
         Factory(:post)
         get :edit, :id => Post.first.id
       end
@@ -107,12 +107,12 @@ describe PostsController do
     end
 
     describe "#update" do
-      before(:each) do
+      before do
         @post = Factory(:post)
       end
 
       context "with valid parameters" do
-        before(:each) do
+        before do
           put :update, :id => @post.id, :post => { :body => "Updated body" }
         end
 
@@ -131,7 +131,7 @@ describe PostsController do
     end
 
     describe "#destroy" do
-      before(:each) do
+      before do
         Factory(:post)
       end
 

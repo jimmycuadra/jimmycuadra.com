@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Comment do
-  before(:each) do
+  before do
     @post = Factory(:post)
     @comment = @post.comments.build(Factory.attributes_for(:comment))
   end

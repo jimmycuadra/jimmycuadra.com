@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Notification do
   describe "#new_comment" do
-    before(:each) do
+    before do
       ENV['ADMIN_EMAIL'] = 'admin@example.com'
       @comment = Factory(:comment)
       @email = Notification.new_comment(@comment).deliver
