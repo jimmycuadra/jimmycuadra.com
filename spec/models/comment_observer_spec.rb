@@ -8,4 +8,11 @@ describe CommentObserver do
     Notification.should_receive(:new_comment).with(@comment)
     @comment.save
   end
+
+  it "does not trigger the notification mailer if the comment was made by the admin" do
+    ENV['ADMIN_EMAIL'] = "admin@example.com"
+    @comment = Factory.build(:comment, :email => ENV['ADMIN_EMAIL'])
+    Notification.should_not_receive(:new_comment)
+    @comment.save
+  end
 end
