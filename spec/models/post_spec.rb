@@ -22,6 +22,13 @@ describe Post do
     @post.should have(1).error_on(:body)
   end
 
+  it "destroys associated comments when destroyed" do
+    @post.save
+    Factory(:comment, :post_id => @post.id)
+    @post.destroy
+    Comment.count.should == 0
+  end
+
   it "generates a slug when saved" do
     @post.save
     @post.cached_slug.should_not be_nil

@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
 
   validates_presence_of :title, :body
 
-  has_many :comments
+  has_many :comments, :dependent => :destroy
 
   has_friendly_id :title, :use_slug => true, :approximate_ascii => true
   acts_as_taggable_on :tags
