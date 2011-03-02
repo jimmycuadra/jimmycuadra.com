@@ -20,3 +20,8 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'guard-sass'
 end
+
+group :darwin do
+  gem 'growl'
+  gem 'rb-fsevent'
+end
