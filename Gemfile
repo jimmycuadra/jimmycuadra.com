@@ -15,6 +15,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl'
   gem 'rails3-generators'
-  gem 'ZenTest'
   gem 'simplecov'
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'guard-sass'
 end
