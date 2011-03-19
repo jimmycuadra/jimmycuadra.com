@@ -2,10 +2,10 @@
 <%= render @post %>
 
 <div id="comments">
-	<% comments = @post.comments.reject(&:new_record?); unless comments.empty? %>
+	<% comments = @post.comments.order('created_at asc').reject(&:new_record?); unless comments.empty? %>
 	  <h2>Comments</h2>
 
-	  <%= render @post.comments.reject(&:new_record?) %>
+	  <%= render comments %>
 	<% end %>
 
   <% if @post.comments_allowed? %>
