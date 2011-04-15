@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'rails', '3.0.5'
+gem 'rails', '3.0.6'
 gem 'friendly_id'
 gem 'formtastic'
 gem 'RedCloth'
