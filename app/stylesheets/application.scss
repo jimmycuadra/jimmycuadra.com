@@ -138,6 +138,12 @@ nav {
     margin-bottom: 18px;
   }
 
+  h2 {
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 18px;
+  }
+
   article {
     margin-bottom: 72px;
 
@@ -235,11 +241,6 @@ nav {
     ul {
       list-style: none;
       margin-bottom: 36px;
-
-      h2 {
-        font-size: 16px;
-        margin-bottom: 18px;
-      }
     }
 
     figure {
@@ -340,6 +341,21 @@ nav {
 
 p {
   margin-bottom: 18px;
+}
+
+table {
+  border: 1px solid rgba(0,0,0,.6);
+  margin-bottom: 18px;
+}
+
+th, td {
+  border: 1px solid rgba(0,0,0,.6);
+  padding: 6px;
+  text-align: left;
+}
+
+th {
+  background: $periwinkle;
 }
 
 #site-footer {
