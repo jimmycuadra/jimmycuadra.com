@@ -5,6 +5,7 @@
 @import "coderay";
 @import "formtastic";
 @import "formtastic_changes";
+@import "lifestream";
 
 // colors
 
@@ -41,6 +42,10 @@ a:hover {
 
 .clear {
   clear: both;
+}
+
+.hidden {
+  display: none;
 }
 
 #site-header {
