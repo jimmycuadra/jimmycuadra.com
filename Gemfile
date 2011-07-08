@@ -9,6 +9,7 @@ gem 'will_paginate', '~> 3.0.pre2'
 gem 'acts-as-taggable-on'
 gem 'rack-rewrite'
 gem 'heroku_backup_task'
+gem 'jquery-rails'
 
 group :development, :test do
   gem 'sqlite3-ruby', :require => 'sqlite3'
