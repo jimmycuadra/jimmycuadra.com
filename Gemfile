@@ -10,6 +10,7 @@ gem 'acts-as-taggable-on'
 gem 'rack-rewrite'
 gem 'heroku_backup_task'
 gem 'jquery-rails'
+gem 'rails_autolink'
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.0"
