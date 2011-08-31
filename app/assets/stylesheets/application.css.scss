@@ -1,11 +1,11 @@
-// includes
-
-@import "reset";
-@import "awesome-buttons";
-@import "coderay";
-@import "formtastic";
-@import "formtastic_changes";
-@import "lifestream";
+/*
+ *= require reset
+ *= require awesome-buttons
+ *= require coderay
+ *= require formtastic
+ *= require formtastic_changes
+ *= require lifestream
+*/
 
 // colors
 
@@ -110,7 +110,7 @@ nav {
 
 #content {
   background-color: $paleblue;
-  background-image: url('/images/content_texture.png');
+  background-image: url('/assets/content_texture.png');
   box-shadow: inset 0 5px 6px #6c6c6c;
   -webkit-box-shadow: inset 0 5px 6px #6c6c6c;
 

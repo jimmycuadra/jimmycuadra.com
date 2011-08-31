@@ -1,3 +1,6 @@
+//= require jquery_ujs
+//= require jquery.lifestream.min
+
 $(function () {
   var user = "jimmycuadra";
 
