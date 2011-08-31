@@ -16,12 +16,16 @@ group :assets do
   gem 'uglifier'
 end
 
+group :production do
+  gem 'pg'
+  gem 'thin'
+end
+
 group :development, :test do
-  gem 'sqlite3-ruby', :require => 'sqlite3'
+  gem 'sqlite3'
   gem 'rspec-rails'
   gem 'factory_girl'
   gem 'simplecov'
-  gem 'guard'
   gem 'guard-rspec'
 end
 
