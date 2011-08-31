@@ -11,6 +11,11 @@ gem 'rack-rewrite'
 gem 'heroku_backup_task'
 gem 'jquery-rails'
 
+group :assets do
+  gem 'sass-rails', "  ~> 3.1.0"
+  gem 'uglifier'
+end
+
 group :development, :test do
   gem 'sqlite3-ruby', :require => 'sqlite3'
   gem 'rspec-rails'
