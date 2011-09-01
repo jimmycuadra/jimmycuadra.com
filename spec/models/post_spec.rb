@@ -25,7 +25,7 @@ describe Post do
   it "destroys associated comments when destroyed" do
     @post.save
     Factory(:comment, :post_id => @post.id)
-    @post.destroy
+    @post.reload.destroy
     Comment.count.should == 0
   end
 
@@ -123,7 +123,7 @@ describe Post do
 
     it "destroys orphaned tags when the post is destroyed" do
       Factory.create(:post, :tag_list => "ruby")
-      @post.destroy
+      @post.reload.destroy
       ActsAsTaggableOn::Tag.count.should == 1
     end
 
