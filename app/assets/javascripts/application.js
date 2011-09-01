@@ -14,7 +14,7 @@ $(function () {
       {
         service: "twitter",
         user: user
-      },
+      }
     ],
     feedloaded: function () {
       setTimeout(function () {
