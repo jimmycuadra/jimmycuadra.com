@@ -1,6 +1,7 @@
 source :rubygems
 
 gem 'rails', '3.1.0'
+gem 'thin'
 gem 'friendly_id'
 gem 'formtastic'
 gem 'RedCloth'
@@ -19,10 +20,10 @@ end
 
 group :production do
   gem 'pg'
-  gem 'thin'
 end
 
 group :development, :test do
+  gem 'foreman'
   gem 'sqlite3'
   gem 'rspec-rails'
   gem 'factory_girl'
