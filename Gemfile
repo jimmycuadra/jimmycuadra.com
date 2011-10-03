@@ -29,9 +29,6 @@ group :development, :test do
   gem 'factory_girl'
   gem 'simplecov'
   gem 'guard-rspec'
-end
-
-group :darwin do
   gem 'growl_notify'
   gem 'rb-fsevent'
 end
