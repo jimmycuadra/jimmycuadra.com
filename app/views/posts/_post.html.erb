@@ -13,7 +13,7 @@
     <p><%= link_to "Watch the screencast", post %></p>
   <% end %>
 
-  <%= textile(post.body) %>
+  <%= markdown(post.body) %>
 
   <footer>
 		<% unless params[:action] == "show" %>

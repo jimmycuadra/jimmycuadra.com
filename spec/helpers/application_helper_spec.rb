@@ -13,29 +13,15 @@ describe ApplicationHelper do
     end
   end
 
-  describe "#textile" do
-    it "processes input with Textile" do
-      textile("hello *world*").should == "<p>hello <strong>world</strong></p>"
+  describe "#markdown" do
+    it "processes input with Markdown" do
+      markdown("# Hello world").should =~ %r{<h1>Hello world</h1>}
     end
+  end
 
-    it "wraps @@@ in a code block" do
-      textile("@@@\nfoo\n@@@").strip.should == CodeRay.scan('foo', nil).div(:css => :class).strip
-    end
-
-    it "doesn't process Textile in code blocks" do
-      textile("@@@\nfoo *bar*\n@@@").strip.should == CodeRay.scan('foo *bar*', nil).div(:css => :class).strip
-    end
-
-    it "accepts a language for code blocks" do
-      textile("@@@ ruby\n@foo\n@@@").strip.should == CodeRay.scan('@foo', 'ruby').div(:css => :class).strip
-    end
-
-    it "processes code blocks in the middle of other Textile" do
-      textile("foo\n@@@\ntest\n@@@\nbar").should include(CodeRay.scan('test', 'ruby').div(:css => :class).strip)
-    end
-
-    it "removes backslash-r in code blocks" do
-      textile("\r\n@@@\r\nfoo\r\n@@@\r\n").strip.should == CodeRay.scan('foo', nil).div(:css => :class).strip
+  describe "#format_comment" do
+    it "processes input with Markdown" do
+      format_comment("# Hello world").should =~ %r{<h1>Hello world</h1>}
     end
   end
 end
