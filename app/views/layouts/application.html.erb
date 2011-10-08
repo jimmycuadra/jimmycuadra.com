@@ -41,11 +41,6 @@
 
   <section id="content">
     <div class="bucket">
-      <aside id="lifestream-container" class="hidden">
-        <h2>The latest activity on GitHub and Twitter</h2>
-        <div id="lifestream"></div>
-      </aside>
-
       <%= render :partial => "partials/admin_actions" if admin? %>
 
       <% if flash[:notice] %>
