@@ -7,34 +7,20 @@ module ApplicationHelper
     end
   end
 
-  def markdown(text)
-    options = [:autolink, :fenced_code, :hard_wrap, :no_intraemphasis, :xhtml]
-    html = Redcarpet.new(text, *options).to_html
+  def markdown(text, *args)
+    options = args.extract_options!
+    md_options = [:autolink, :fenced_code, :hard_wrap, :no_intraemphasis, :xhtml]
+    md_options.concat [:filter_html, :filter_styles, :safelink] if options[:safe]
+
+    html = Redcarpet.new(text, *md_options).to_html
 
     doc = Nokogiri::HTML(html)
     doc.css("pre").each do |pre|
       codeblock = pre.children.first
       lang = codeblock[:class]
-      lang = nil if lang.empty?
       pre.replace CodeRay.scan(codeblock.text, lang).div(:css => :class)
     end
 
     doc.to_s.html_safe
-  end
-
-  def format_comment(text)
-    options = [
-      :autolink,
-      :fenced_code,
-      :filter_html,
-      :filter_styles,
-      :gh_blockcode,
-      :hard_wrap,
-      :no_intraemphasis,
-      :safelink,
-      :xhtml
-    ]
-
-    Redcarpet.new(text, *options).to_html.html_safe
   end
 end

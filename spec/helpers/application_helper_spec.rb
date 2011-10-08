@@ -21,11 +21,9 @@ describe ApplicationHelper do
     it "highlights code blocks with CodeRay" do
       markdown("``` ruby\nclass Foo; end\n```").should =~ /CodeRay/
     end
-  end
 
-  describe "#format_comment" do
-    it "processes input with Markdown" do
-      format_comment("# Hello world").should =~ %r{<h1>Hello world</h1>}
+    it "uses additional options for safety when parsing comments" do
+      markdown("<script>alert('lol');</script>", :safe => true).should_not =~ /script/
     end
   end
 end
