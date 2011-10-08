@@ -81,6 +81,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.16)
     multi_json (1.0.3)
+    nokogiri (1.5.0)
     pg (0.11.0)
     polyglot (0.3.2)
     rack (1.3.2)
@@ -174,6 +175,7 @@ DEPENDENCIES
   guard-rspec
   heroku_backup_task
   jquery-rails
+  nokogiri
   pg
   rack-rewrite
   rails (= 3.1.0)

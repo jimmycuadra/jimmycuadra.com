@@ -8,7 +8,18 @@ module ApplicationHelper
   end
 
   def markdown(text)
-    Redcarpet.new(text, :autolink, :fenced_code, :hard_wrap, :no_intraemphasis, :xhtml).to_html.html_safe
+    options = [:autolink, :fenced_code, :hard_wrap, :no_intraemphasis, :xhtml]
+    html = Redcarpet.new(text, *options).to_html
+
+    doc = Nokogiri::HTML(html)
+    doc.css("pre").each do |pre|
+      codeblock = pre.children.first
+      lang = codeblock[:class]
+      lang = nil if lang.empty?
+      pre.replace CodeRay.scan(codeblock.text, lang).div(:css => :class)
+    end
+
+    doc.to_s.html_safe
   end
 
   def format_comment(text)

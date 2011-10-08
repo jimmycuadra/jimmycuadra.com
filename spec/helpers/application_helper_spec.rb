@@ -17,6 +17,10 @@ describe ApplicationHelper do
     it "processes input with Markdown" do
       markdown("# Hello world").should =~ %r{<h1>Hello world</h1>}
     end
+
+    it "highlights code blocks with CodeRay" do
+      markdown("``` ruby\nclass Foo; end\n```").should =~ /CodeRay/
+    end
   end
 
   describe "#format_comment" do
