@@ -1,7 +1,6 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    RedCloth (4.2.8)
     actionmailer (3.1.0)
       actionpack (= 3.1.0)
       mail (~> 2.3.0)
@@ -115,6 +114,7 @@ GEM
     rb-appscript (0.6.1)
     rb-fsevent (0.4.3.1)
     rdoc (3.9.4)
+    redcarpet (1.17.2)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rspec (2.6.0)
@@ -164,7 +164,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  RedCloth
   acts-as-taggable-on
   coderay
   factory_girl
@@ -180,6 +179,7 @@ DEPENDENCIES
   rails (= 3.1.0)
   rails_autolink
   rb-fsevent
+  redcarpet
   rspec-rails
   sass-rails (~> 3.1.0)
   simplecov
