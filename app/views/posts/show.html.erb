@@ -11,6 +11,8 @@
   <% if @post.comments_allowed? %>
     <h2>Add a comment</h2>
 
+    <p><em>Comments are rendered with Markdown.</em></p>
+
     <%= render :partial => 'comments/form' %>
   <% else %>
   <h2>Comments are closed</h2>
