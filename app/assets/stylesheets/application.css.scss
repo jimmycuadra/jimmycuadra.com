@@ -133,7 +133,16 @@ th {
 // pagination
 
 .pagination {
-  text-align: right;
+  text-align: center;
+
+  a,
+  .current,
+  .disabled {
+    background: $periwinkle;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 9px;
+  }
 }
 
 .content {
