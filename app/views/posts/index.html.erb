@@ -1,5 +1,9 @@
-<%= will_paginate @posts %>
+<p class="pagination">
+  <%= will_paginate @posts, :container => false %>
+</p>
 
 <%= render @posts %>
 
-<%= will_paginate @posts %>
+<p class="pagination">
+  <%= will_paginate @posts, :container => false %>
+</p>

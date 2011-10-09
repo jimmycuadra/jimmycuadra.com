@@ -11,12 +11,12 @@
 <body>
   <%= render :partial => "partials/site_header" %>
 
-  <section id="content">
+  <section class="content">
     <div class="bucket">
       <%= render :partial => "partials/admin_actions" if admin? %>
 
       <% if flash[:notice] %>
-        <section id="flash"><%= flash[:notice] %></section>
+        <section class="notice"><%= flash[:notice] %></section>
       <% end %>
 
       <%= yield %>
