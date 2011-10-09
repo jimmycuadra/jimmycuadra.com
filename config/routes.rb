@@ -9,8 +9,8 @@ JimmycuadraCom::Application.routes.draw do
   resources :tags, :only => [:index, :show]
 
   # static pages
-  match "projects" => "projects#index", :as => :projects
-  match "about" => "about#index", :as => :about
+  match "projects" => "pages#projects", :as => :projects
+  match "about" => "pages#about", :as => :about
 
   # sessions
   match "login" => "sessions#new", :via => :get, :as => :new_login
