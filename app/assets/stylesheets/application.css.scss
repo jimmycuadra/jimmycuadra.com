@@ -76,28 +76,20 @@ th {
   background: $darkblue;
   border-bottom: 1px solid $paleblue;
   color: $paleblue;
-  font-family: Times, serif;
+  font: {
+    family: Times, serif;
+    size: 24px;
+    weight: bold;
+  };
+  line-height: 30px;
+  text-shadow: rgb(0, 0, 0) 1px 1px 1px;
 
   h1 {
     font-size: 36px;
     line-height: 40px;
   }
 
-  h2 {
-    font-size: 30px;
-    line-height: 36px;
-  }
-
-  h3 {
-    font-size: 24px;
-    line-height: 30px;
-  }
-
-  h1, h2, h3 {
-    text-shadow: rgb(0,0,0) 1px 1px 1px;
-  }
-
-  a, a:active, a:visited, a:hover {
+  span {
     color: $green;
   }
 }
