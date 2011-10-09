@@ -1,12 +1,7 @@
 /*
  *= require reset
- *= require awesome-buttons
  *= require coderay
- *= require formtastic
- *= require formtastic_changes
 */
-
-// colors
 
 $darkblue: #003366;
 $paleblue: #e7ebf0;
@@ -14,12 +9,6 @@ $green: #30b041;
 $purple: #660f57;
 $mediumblue: #405f85;
 $periwinkle: #b1bdcd;
-
-// elements
-
-html, body {
-  height: 100%;
-}
 
 body {
   background: $mediumblue;

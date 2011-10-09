@@ -1,0 +1,17 @@
+<header id="site-header">
+  <nav>
+    <ul>
+      <%= nav_to "Blog", root_path, "posts" %>
+      <%= nav_to "Projects", projects_path, "projects" %>
+      <%= nav_to "About", about_path, "about" %>
+    </ul>
+  </nav>
+
+  <div class="bucket">
+    <hgroup>
+      <h1>I'm <a href="/about">Jimmy Cuadra</a>.</h1>
+      <h2>I <%= link_to "write", root_path %> about web development and programming.</h2>
+      <h3>I <%= link_to "build websites", projects_path %>, work on <a href="https://github.com/jimmycuadra">open source projects</a>, and <a href="http://twitter.com/jimmycuadra">tweet</a>.</h3>
+    </hgroup>
+  </div>
+</header>

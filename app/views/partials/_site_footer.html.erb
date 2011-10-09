@@ -1,0 +1,7 @@
+<footer id="site-footer">
+  <div class="bucket">
+    <p><%= if admin?; link_to "Log out", logout_path; else; link_to "Log in", new_login_path; end %></p>
+    <p>Built on a <a href="http://www.apple.com/">Mac</a> using <a href="http://rubyonrails.org/">Ruby on Rails</a>. If you're not using <a href="http://www.webkit.org/">Webkit</a>, get on that.</p>
+    <small>&copy; <%= Date.today.year.to_s %> Jimmy Cuadra. All rights reserved.</small>
+  </div>
+</footer>
