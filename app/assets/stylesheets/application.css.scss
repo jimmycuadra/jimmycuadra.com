@@ -245,12 +245,6 @@ article {
 }
 
 .projects {
-  h1 {
-    font-size: 18px;
-    line-height: 24px;
-    margin-bottom: 0;
-  }
-
   hgroup {
     background: $paleblue;
     box-shadow: 1px 1px 2px #6c6c6c;
@@ -270,20 +264,15 @@ article {
     img {
       border: 1px solid #000;
     }
+  }
 
-    &.alt {
-      float: right;
-      margin: 0 0 36px 36px;
-    }
+  .alt {
+    float: right;
+    margin: 0 0 36px 36px;
   }
 }
 
 .about {
-  h2 {
-    font-size: 16px;
-    margin-bottom: 18px;
-  }
-
   figure {
     float: right;
     margin: 0 0 18px 18px;
@@ -295,10 +284,10 @@ article {
 
   ul {
     margin-left: 18px;
+  }
 
-    li {
-      line-height: 24px;
-    }
+  li {
+    line-height: 24px;
   }
 }
 
