@@ -107,6 +107,11 @@ th {
   line-height: 30px;
   text-shadow: rgb(0, 0, 0) 1px 1px 1px;
 
+  .title-link {
+    color: inherit;
+    text-decoration: none;
+  }
+
   span {
     color: $green;
   }
