@@ -13,11 +13,11 @@
 
   <section class="content">
     <div class="bucket">
-      <%= render :partial => "partials/admin_actions" if admin? %>
-
       <% if flash[:notice] %>
-        <section class="notice"><%= flash[:notice] %></section>
+        <section class="notice" id="flash"><%= flash[:notice] %></section>
       <% end %>
+
+      <%= render :partial => "partials/admin_actions" if admin? %>
 
       <%= yield %>
     </div>
