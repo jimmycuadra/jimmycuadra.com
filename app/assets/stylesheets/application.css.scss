@@ -81,6 +81,18 @@ th {
 }
 
 
+// mixins
+
+// bubble boxes
+
+@mixin bubble {
+  background: $periwinkle;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 9px;
+}
+
+
 // site header
 
 .site-header {
@@ -151,12 +163,10 @@ th {
   a,
   .current,
   .disabled {
-    background: $periwinkle;
-    border-radius: 4px;
-    display: inline-block;
-    padding: 9px;
+    @include bubble;
   }
 }
+
 
 .content {
   background-color: $paleblue;
@@ -218,20 +228,15 @@ article {
   }
 
   aside {
-    background: $periwinkle;
-    border-radius: 4px;
+    @include bubble;
     float: right;
     margin: 0 0 12px 20px;
     max-width: 40%;
-    padding: 9px;
   }
 
   footer {
-    background: $periwinkle;
-    border-radius: 4px;
-    display: inline-block;
+    @include bubble;
     font-size: 12px;
-    padding: 9px;
 
     p {
       line-height: 14px;
