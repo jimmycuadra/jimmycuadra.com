@@ -95,14 +95,14 @@ th {
   line-height: 30px;
   text-shadow: rgb(0, 0, 0) 1px 1px 1px;
 
-  h1 {
-    font-size: 36px;
-    line-height: 40px;
-  }
-
   span {
     color: $green;
   }
+}
+
+.main-title {
+  font-size: 36px;
+  line-height: 40px;
 }
 
 
@@ -175,7 +175,7 @@ article {
     margin-bottom: 18px;
   }
 
-  h1 {
+  .post-title {
     line-height: 30px;
     text-shadow: rgba(120,120,120,.4) 1px 2px 2px;
 
@@ -222,8 +222,8 @@ article {
     border-radius: 4px;
     float: right;
     margin: 0 0 12px 20px;
+    max-width: 40%;
     padding: 9px;
-    width: 40%;
   }
 
   footer {
