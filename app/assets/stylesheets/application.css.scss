@@ -305,55 +305,48 @@ article {
 .tags {
   ul {
     margin-left: 18px;
+  }
 
-    li {
-      line-height: 24px;
-    }
+  li {
+    line-height: 24px;
   }
 }
 
-.comments {
-  > section {
-    border: 1px solid rgba(0,0,0,.6);
-    border-radius: 4px;
-    margin-bottom: 18px;
+.comment {
+  border: 1px solid rgba(0,0,0,.6);
+  border-radius: 4px;
+  margin-bottom: 18px;
 
-    header, section {
-      padding: 9px;
+  .inner {
+    padding: 9px;
+  }
+
+  header {
+    background: $periwinkle;
+    border-bottom: 1px solid #000;
+    border-radius: 4px 4px 0 0;
+
+    .delete {
+      float: right;
     }
 
-    header {
-      background: $periwinkle;
-      border-bottom: 1px solid #000;
-      border-radius: 4px 4px 0 0;
-
-      > a {
-        float: right;
-      }
-
-      img {
-        border: 1px solid #000;
-        float: left;
-        margin-right: 10px;
-      }
-    }
-
-    section {
-      background: $paleblue;
-      border-radius: 0 0 4px 4px;
-    }
-
-    p:last-of-type {
-      margin: 0;
-    }
-
-    &:last-of-type {
-      margin-bottom: 36px;
+    img {
+      border: 1px solid #000;
+      float: left;
+      margin-right: 10px;
     }
   }
 
-  h2 {
-    font-size: 16px;
-    margin-bottom: 18px;
+  .comment-body {
+    background: $paleblue;
+    border-radius: 0 0 4px 4px;
+  }
+
+  p:last-of-type {
+    margin: 0;
+  }
+
+  &:last-of-type {
+    margin-bottom: 36px;
   }
 }
