@@ -5,7 +5,7 @@
   <%= stylesheet_link_tag 'application' %>
   <%= csrf_meta_tags %>
   <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/jimmycuadra" />
-  <% render :partial => "partials/production_scripts" if Rails.env.production? %>
+  <%= render :partial => "partials/production_scripts" if Rails.env.production? %>
 </head>
 <body>
   <%= render :partial => "partials/site_header" %>
