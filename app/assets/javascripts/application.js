@@ -1,5 +1,5 @@
 //= require jquery_ujs
 
 $(function () {
-  $("#flash").delay(3000).fadeOut("slow");
+  $("#flash").delay(1250).fadeOut("slow");
 });
