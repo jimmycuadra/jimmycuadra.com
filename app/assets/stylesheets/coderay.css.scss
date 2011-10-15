@@ -7,60 +7,60 @@
   overflow: auto;
   font-size: 12px;
   margin-bottom: 18px;
-}
 
-.CodeRay pre {
-  margin: 0px;
-  padding: 0px;
-}
+  pre {
+    margin: 0px;
+    padding: 0px;
+  }
 
-.CodeRay td {
-  padding-right: 15px;
-}
+  td {
+    padding-right: 15px;
+  }
 
-.CodeRay .predefined,
-.CodeRay .keyword {
-  color: #cc7833;
-}
+  .predefined,
+  .keyword {
+    color: #cc7833;
+  }
 
-.CodeRay .integer,
-.CodeRay .string,
-.CodeRay .content,
-.CodeRay .regex {
-  color: #a5c261;
-}
+  .integer,
+  .string,
+  .content,
+  .regex {
+    color: #a5c261;
+  }
 
-.CodeRay .content {
-  background: none;
-  box-shadow: none;
-}
+  .content {
+    background: none;
+    box-shadow: none;
+  }
 
-.CodeRay .local-variable,
-.CodeRay .predefined-constant,
-.CodeRay .symbol {
-  color: #6e9cbe;
-}
+  .local-variable,
+  .predefined-constant,
+  .symbol {
+    color: #6e9cbe;
+  }
 
-.CodeRay .function {
-  color: #ffc66d;
-}
+  .function {
+    color: #ffc66d;
+  }
 
-.CodeRay .comment {
-  color: #bc9458;
-  border: 0;
-  border-radius: 0;
-}
+  .comment {
+    color: #bc9458;
+    border: 0;
+    border-radius: 0;
+  }
 
-.CodeRay .tag,
-.CodeRay .doctype {
-  color: #e8bf6a;
-}
+  .tag,
+  .doctype {
+    color: #e8bf6a;
+  }
 
-.CodeRay .attribute-name {
-  color: #e8926a;
-}
+  .attribute-name {
+    color: #e8926a;
+  }
 
-.CodeRay .constant,
-.CodeRay .class {
-  color: #da4939;
+  .constant,
+  .class {
+    color: #da4939;
+  }
 }
