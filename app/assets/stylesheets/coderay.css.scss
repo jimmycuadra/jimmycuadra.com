@@ -18,46 +18,49 @@
   padding-right: 15px;
 }
 
-.CodeRay .pd,
-.CodeRay .kw,
-.CodeRay .r {
+.CodeRay .predefined,
+.CodeRay .keyword {
   color: #cc7833;
 }
 
-.CodeRay .i,
-.CodeRay .s,
-.CodeRay .ke,
-.CodeRay .rx {
+.CodeRay .integer,
+.CodeRay .string,
+.CodeRay .content,
+.CodeRay .regex {
   color: #a5c261;
 }
 
-.CodeRay .lv,
-.CodeRay .pc,
-.CodeRay .sy {
+.CodeRay .content {
+  background: none;
+  box-shadow: none;
+}
+
+.CodeRay .local-variable,
+.CodeRay .predefined-constant,
+.CodeRay .symbol {
   color: #6e9cbe;
 }
 
-.CodeRay .fu {
+.CodeRay .function {
   color: #ffc66d;
 }
 
-.CodeRay .c {
+.CodeRay .comment {
   color: #bc9458;
+  border: 0;
+  border-radius: 0;
 }
 
-.CodeRay .ta,
-.CodeRay .dt {
+.CodeRay .tag,
+.CodeRay .doctype {
   color: #e8bf6a;
 }
 
-.CodeRay .an {
+.CodeRay .attribute-name {
   color: #e8926a;
 }
 
-.CodeRay .co {
+.CodeRay .constant,
+.CodeRay .class {
   color: #da4939;
-}
-
-.CodeRay .cl {
-  color: #fff;
 }
