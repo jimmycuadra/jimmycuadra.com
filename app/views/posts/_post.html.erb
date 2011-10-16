@@ -8,6 +8,10 @@
     <% end %>
   </header>
 
+  <div class="social">
+    <div class="g-plusone" data-size="medium" data-href="<%= url_for post %>"></div>
+  </div>
+
   <% if !post.youtube_id.blank? && params[:action] == "show" %>
     <object width="640" height="385">
       <param name="movie" value="http://www.youtube.com/v/<%= post.youtube_id %>?fs=1&amp;hl=en_US&amp;rel=0"></param>
