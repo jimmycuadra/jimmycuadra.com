@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'rails', '3.1.0'
+gem 'rails', '3.1.1'
 gem 'thin'
 gem 'friendly_id'
 gem 'formtastic'
@@ -15,7 +15,7 @@ gem 'jquery-rails'
 gem 'rails_autolink'
 
 group :assets do
-  gem 'sass-rails', "  ~> 3.1.0"
+  gem 'sass-rails'
   gem 'uglifier'
 end
 
@@ -27,9 +27,8 @@ group :development, :test do
   gem 'foreman'
   gem 'sqlite3'
   gem 'rspec-rails'
-  gem 'factory_girl'
+  gem 'factory_girl_rails'
   gem 'simplecov'
   gem 'guard-rspec'
-  gem 'growl_notify'
   gem 'rb-fsevent'
 end
