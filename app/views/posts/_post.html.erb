@@ -9,7 +9,8 @@
   </header>
 
   <div class="social">
-    <div class="g-plusone" data-size="medium" data-href="<%= url_for post %>"></div>
+    <div class="g-plusone" data-size="medium" data-href="<%= post_url post %>"></div>
+    <a href="https://twitter.com/share" class="twitter-share-button" data-url="<%= post_url post %>" data-text="<%= post.title %>" data-count="horizontal" data-via="jimmycuadra">Tweet</a>
   </div>
 
   <% if !post.youtube_id.blank? && params[:action] == "show" %>
