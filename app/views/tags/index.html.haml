@@ -1,0 +1,6 @@
+- @page_title = "Tags"
+.tags
+  %h1 Find content by tag
+  %ul
+    - @tags.each do |tag|
+      %li= link_to tag.name, tag_path(tag)

@@ -1,0 +1,6 @@
+- @page_title = "#{@tag.name} | Tags"
+.tags
+  %h1= "Articles tagged with <em>#{@tag.name}</em>".html_safe
+  %ul
+    - @posts.each do |post|
+      %li= link_to post.title, post
