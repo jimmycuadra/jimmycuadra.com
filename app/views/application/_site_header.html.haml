@@ -1,0 +1,17 @@
+%header.site-header
+  .bucket
+    %a.title-link{ href: "/", title: "Jimmy Cuadra" }
+      %hgroup
+        %h1.main-title
+          I'm <span>Jimmy Cuadra</span>.
+        I write about <span>web development</span>, <span>programming</span> and <span>open source software</span>.
+
+%nav
+  .bucket
+    %ul
+      %li= nav_for "Writing", root_path
+      %li= nav_for "by tags", tags_path, true
+      %li= nav_for "About", about_path
+      %li= nav_for "Projects", projects_path
+      - if admin?
+        %li= nav_for "[ New post ]", new_post_path
