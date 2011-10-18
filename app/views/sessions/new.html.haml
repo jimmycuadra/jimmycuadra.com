@@ -1,0 +1,8 @@
+- @page_title = "Log in"
+%h1 Log in
+
+= semantic_form_for "session", url: login_path do |f|
+  = f.inputs do
+    = f.input :password, input_html: { name: "password" }
+  = f.buttons do
+    = f.submit "Log in"
