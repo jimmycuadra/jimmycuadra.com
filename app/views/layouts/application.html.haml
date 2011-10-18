@@ -17,7 +17,7 @@
           %section#flash.notice
             = flash[:notice]
         = yield
-    = render partial: "partials/site_footer"
+    = render "site_footer"
     = javascript_include_tag "jquery.min" unless Rails.env.production?
     = javascript_include_tag "application"
-    = render partial: "partials/social_scripts" if Rails.env.production? || params[:social]
+    = render "social_scripts" if Rails.env.production? || params[:social]
