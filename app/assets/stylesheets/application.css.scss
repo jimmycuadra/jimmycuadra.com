@@ -98,7 +98,7 @@ th {
 
 .site-header {
   background: $darkblue;
-  border-bottom: 1px solid $paleblue;
+  border-bottom: 1px solid $mediumblue;
   color: $paleblue;
   font: {
     family: Times, serif;
@@ -153,21 +153,25 @@ th {
 // navigation
 
 nav {
-  border-bottom: 2px dashed $darkblue;
-  margin-bottom: 18px;
+  background: #000;
+  color: $mediumblue;
+  text-transform: uppercase;
 
   ul {
-    margin-bottom: 18px;
     overflow: hidden;
   }
 
   li {
     float: left;
-    margin-left: 30px;
+    margin-right: 30px;
+  }
 
-    &:first-child {
-      margin-left: 0;
-    }
+  a, a:active, a:visited, a:hover {
+    color: #fff;
+  }
+
+  .sub-nav {
+    text-transform: none;
   }
 }
 

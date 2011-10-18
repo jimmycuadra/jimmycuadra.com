@@ -8,3 +8,17 @@
     </a>
   </div>
 </header>
+
+<nav>
+  <div class="bucket">
+    <ul>
+      <li><%= nav_for "Writing", root_path %></li>
+      <li><%= nav_for "by tags", tags_path, true %></li>
+      <li><%= nav_for "About", about_path %></li>
+      <li><%= nav_for "Projects", projects_path %></li>
+      <% if admin? %>
+        <li><%= nav_for "[ New post ]", new_post_path %></li>
+      <% end %>
+    </ul>
+  </div>
+</nav>

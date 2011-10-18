@@ -1,4 +1,13 @@
 module ApplicationHelper
+  def nav_for(name, path, sub = false)
+    html_class = "nav-item"
+    html_class += " sub-nav" if sub
+
+    link_to_unless_current(name, path, class: html_class) do
+      %{<span class="#{html_class}">#{name}</span>}.html_safe
+    end
+  end
+
   def markdown(text, *args)
     options = args.extract_options!
     md_options = [:autolink, :fenced_code, :hard_wrap, :no_intraemphasis, :xhtml]
