@@ -376,4 +376,9 @@ article {
   &:last-of-type {
     margin-bottom: 36px;
   }
+
+
+  &.formtastic {
+    border: 0;
+  }
 }
