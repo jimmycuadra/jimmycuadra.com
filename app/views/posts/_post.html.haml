@@ -24,10 +24,6 @@
       %p= link_to pluralize(post.comments.count, 'comment'), post
     - unless post.tags.empty?
       %p
-        This post was tagged with
-        = post.tags.map { |tag| link_to tag.name, tag_path(tag) }.to_sentence.html_safe
-        \.
+        This post was tagged with #{post.tags.map { |tag| link_to tag.name, tag_path(tag) }.to_sentence.html_safe}.
       %p
-        Find more content by
-        = link_to "browsing by tags", tags_path
-        \.
+        Find more content by #{link_to "browsing by tags", tags_path}.
