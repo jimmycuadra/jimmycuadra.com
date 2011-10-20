@@ -18,7 +18,7 @@
       %embed{ src: "http://www.youtube.com/v/#{post.youtube_id}?fs=1&amp;hl=en_US&amp;rel=0", type: "application/x-shockwave-flash", allowcriptaccess: "always", allowfullscreen: "true", width: "640", height: "385" }
   - elsif post.youtube_id.present?
     %p= link_to "Watch the screencast", post
-  = markdown post.body
+  ~ markdown post.body
   %footer
     - unless params[:action] == "show"
       %p= link_to pluralize(post.comments.count, 'comment'), post
