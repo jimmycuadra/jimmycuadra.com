@@ -9,7 +9,7 @@
       = link_to "Delete post", post, method: :delete, confirm: "Are you sure you want to delete this post?"
   .social
     .g-plusone{ data: { size: "medium", href: post_url(post) } }
-    %a.twiter-share-button{ href: "https://twitter.com/share", data: { url: post_url(post), text: post.title, count: "horizontal", via: "jimmycuadra" } }
+    %a.twitter-share-button{ href: "https://twitter.com/share", data: { url: post_url(post), text: post.title, count: "horizontal", via: "jimmycuadra" } } Tweet
   - if post.youtube_id.present? && params[:action] == "show"
     %object{ width: "640", height: "385" }
       %param{ name: "movie", value: "http://www.youtube.com/v/#{post.youtube_id}?fs=1&amp;hl=en_US&amp;rel=0"}
