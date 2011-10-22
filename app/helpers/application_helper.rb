@@ -1,10 +1,7 @@
 module ApplicationHelper
-  def nav_for(name, path, sub = false)
-    html_class = "nav-item"
-    html_class += " sub-nav" if sub
-
-    link_to_unless_current(name, path, class: html_class) do
-      %{<span class="#{html_class}">#{name}</span>}.html_safe
+  def nav_for(name, path, options = {})
+    link_to_unless_current(name, path, options) do
+      content_tag(:span) { name }
     end
   end
 
