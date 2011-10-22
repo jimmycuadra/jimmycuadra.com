@@ -44,6 +44,9 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'simplecov'
+  gem 'guard'
   gem 'guard-rspec'
+  gem 'guard-process'
   gem 'rb-fsevent'
+  gem 'ruby_gntp'
 end
