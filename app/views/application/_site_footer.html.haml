@@ -1,8 +1,6 @@
 %footer.site-footer
   .bucket
-    %p= if admin?; link_to "Log out", logout_path; else; link_to "Log in", new_login_path; end
-    %p Built on a <a href="http://www.apple.com/">Mac</a> using <a href="http://rubyonrails.org/">Ruby on Rails</a>. If you're not using <a href="http://www.webkit.org/">Webkit</a>, get on that.
+    %p= if admin?; link_to "Log out", logout_path, title: "Log out"; else; link_to "Log in", new_login_path, title: "Log in"; end
+    %p Built on a <a href="http://www.apple.com/" title="Apple">Mac</a> using <a href="http://rubyonrails.org/" title="Ruby on Rails">Ruby on Rails</a>. Logo by <a href="http://stephanielucido.com/" title="Stephanie Lucido">Stephanie Lucido</a>. If you're not using <a href="http://www.google.com/chrome" title="Google Chrome">a Webkit browser</a>, get on that.
     %small
-      &copy;
-      = Date.today.year.to_s
-      Jimmy Cuadra. All rights reserved.
+      &copy; #{Date.today.year.to_s} Jimmy Cuadra. All rights reserved.
