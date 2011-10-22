@@ -43,10 +43,12 @@ group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'simplecov'
+  gem 'simplecov', require: false
+  gem 'spork', '>= 0.9.0.rc9'
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-process'
+  gem 'guard-spork'
   gem 'rb-fsevent'
   gem 'ruby_gntp'
 end
