@@ -1,14 +1,25 @@
-ENV["RAILS_ENV"] ||= 'test'
+require 'rubygems'
+require 'spork'
 
-require 'simplecov'
-SimpleCov.start "rails"
+Spork.prefork do
+  ENV["RAILS_ENV"] ||= 'test'
 
-require File.expand_path("../../config/environment", __FILE__)
-require 'rspec/rails'
+  require File.expand_path("../../config/environment", __FILE__)
 
-Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+  require 'rspec/rails'
 
-RSpec.configure do |config|
-  config.mock_with :rspec
-  config.use_transactional_fixtures = true
+  Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+
+  RSpec.configure do |config|
+    config.mock_with :rspec
+    config.use_transactional_fixtures = true
+  end
+end
+
+Spork.each_run do
+  require 'simplecov'
+
+  SimpleCov.start "rails"
+
+  FactoryGirl.reload
 end
