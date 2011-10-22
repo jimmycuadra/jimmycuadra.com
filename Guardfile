@@ -1,4 +1,8 @@
-guard 'rspec', :version => 2, :cli => "-f nested" do
+guard 'process', name: "jimmycuadra.com", command: "bundle exec foreman start -p 3000" do
+  watch("Gemfile.lock")
+end
+
+guard 'rspec', cli: "--color" do
   watch('spec/spec_helper.rb') { "spec" }
   watch('config/routes.rb') { "spec/routing" }
   watch('app/controllers/application_controller.rb') { "spec/controllers" }
