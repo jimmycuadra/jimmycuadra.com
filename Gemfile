@@ -49,6 +49,9 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'guard-process'
   gem 'guard-spork'
-  gem 'rb-fsevent'
   gem 'ruby_gntp'
+end
+
+group :darwin do
+  gem 'rb-fsevent'
 end
