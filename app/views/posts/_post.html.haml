@@ -13,7 +13,10 @@
     %a.twitter-share-button{ href: "https://twitter.com/share", data: { url: post_url(post), text: post.title, count: "horizontal", via: "jimmycuadra" } } Tweet
   - if post.youtube_id.present? && params[:action] == "show"
     %object{ width: "640", height: "385", itemprop: "video", itemscope: true, itemtype: "http://schema.org/VideoObject" }
-      %param{ name: "movie", value: "http://www.youtube.com/v/#{post.youtube_id}?fs=1&amp;hl=en_US&amp;rel=0", itemprop: "embedURL" }
+      %meta{ itemprop: "embedURL", content: "http://www.youtube.com/v/#{post.youtube_id}?fs=1&amp;hl=en_US&amp;rel=0" }
+      %meta{ itemprop: "width", content: 640 }
+      %meta{ itemprop: "height", content: 385 }
+      %param{ name: "movie", value: "http://www.youtube.com/v/#{post.youtube_id}?fs=1&amp;hl=en_US&amp;rel=0" }
       %param{ name: "allowFullScreen", value: "true" }
       %param{ name: "allowscriptaccess", value: "always" }
       %embed{ src: "http://www.youtube.com/v/#{post.youtube_id}?fs=1&amp;hl=en_US&amp;rel=0", type: "application/x-shockwave-flash", allowcriptaccess: "always", allowfullscreen: "true", width: "640", height: "385" }
