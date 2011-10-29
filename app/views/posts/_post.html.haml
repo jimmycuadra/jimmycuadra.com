@@ -13,7 +13,7 @@
     %a.twitter-share-button{ href: "https://twitter.com/share", data: { url: post_url(post), text: post.title, count: "horizontal", via: "jimmycuadra" } } Tweet
   - if post.youtube_id.present? && params[:action] == "show"
     %object{ width: "640", height: "385", itemprop: "video", itemscope: true, itemtype: "http://schema.org/VideoObject" }
-      %param{ name: "movie", value: "http://www.youtube.com/v/#{post.youtube_id}?fs=1&amp;hl=en_US&amp;rel=0"}
+      %param{ name: "movie", value: "http://www.youtube.com/v/#{post.youtube_id}?fs=1&amp;hl=en_US&amp;rel=0", itemprop: "embedURL" }
       %param{ name: "allowFullScreen", value: "true" }
       %param{ name: "allowscriptaccess", value: "always" }
       %embed{ src: "http://www.youtube.com/v/#{post.youtube_id}?fs=1&amp;hl=en_US&amp;rel=0", type: "application/x-shockwave-flash", allowcriptaccess: "always", allowfullscreen: "true", width: "640", height: "385" }
@@ -22,7 +22,7 @@
   ~ markdown post.body
   %footer
     - unless params[:action] == "show"
-      %p= link_to pluralize(post.comments.count, 'comment'), post, title: "Comments on #{post.title}", itemprop: "discussionUrl", itemscope: "itemscope", itemtype: "http://schema.org/URL"
+      %p= link_to pluralize(post.comments.count, 'comment'), post, title: "Comments on #{post.title}", itemprop: "discussionUrl"
     - unless post.tags.empty?
       %p
         This post was tagged with #{post.tags.map { |tag| link_to tag.name, tag_path(tag), title: "Writing tagged with #{tag.name}", itemprop: "keywords" }.to_sentence.html_safe }.
