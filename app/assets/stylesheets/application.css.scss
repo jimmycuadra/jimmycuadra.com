@@ -316,6 +316,10 @@ article {
 }
 
 .about {
+  .headline {
+    margin-bottom: 18px;
+  }
+
   figure {
     float: right;
     margin: 0 0 18px 18px;
@@ -326,7 +330,7 @@ article {
   }
 
   ul {
-    margin-left: 18px;
+    margin: 0 0 18px 18px;
   }
 
   li {
