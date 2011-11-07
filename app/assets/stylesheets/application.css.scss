@@ -309,7 +309,7 @@ article {
     }
   }
 
-  .alt {
+  li:nth-child(odd) figure {
     float: right;
     margin: 0 0 36px 36px;
   }
