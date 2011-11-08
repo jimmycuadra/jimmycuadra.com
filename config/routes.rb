@@ -1,21 +1,22 @@
 JimmycuadraCom::Application.routes.draw do
   # default route
-  root :to => "posts#index"
+  root to: "posts#index"
 
   # restful routes
   resources :posts do
-    resources :comments, :only => [:create, :destroy]
+    resources :comments, only: [:create, :destroy]
   end
-  resources :tags, :only => [:index, :show]
+  resources :tags, only: [:index, :show]
 
   # static pages
-  match "projects" => "pages#projects", :as => :projects
-  match "about" => "pages#about", :as => :about
+  match "/projects" => "pages#projects", as: :projects
+  match "/resume" => "pages#resume", as: :resume
+  match "/about" => redirect("/resume")
 
   # sessions
-  match "login" => "sessions#new", :via => :get, :as => :new_login
-  match "login" => "sessions#create", :via => :post, :as => :login
-  match "logout" => "sessions#destroy", :as => :logout
+  match "/login" => "sessions#new", via: :get, as: :new_login
+  match "/login" => "sessions#create", via: :post, as: :login
+  match "/logout" => "sessions#destroy", as: :logout
 
   # legacy routes
   match "screencasts/1-*seo" => redirect("/posts/screencast-equalizing-column-heights-with-jquery")
