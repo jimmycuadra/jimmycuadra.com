@@ -3,10 +3,10 @@ require "spec_helper"
 describe PagesController do
   render_views
 
-  describe "#about" do
-    it "renders the about template" do
-      get :about
-      response.should render_template(:about)
+  describe "#resume" do
+    it "renders the resume template" do
+      get :resume
+      response.should render_template(:resume)
     end
   end
 
