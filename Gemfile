@@ -44,7 +44,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'simplecov', require: false
-  gem 'spork', '>= 0.9.0.rc9'
+  gem 'spork'
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-process'
