@@ -10,7 +10,7 @@ class TagsController < ApplicationController
       return redirect_to tags_path, :notice => "That tag was not found. The full list of tags is displayed below."
     end
 
-    redirect_to tag_path(@tag), :status => :moved_permanently unless @tag.friendly_id_status.best?
+    redirect_to tag_path(@tag), :status => :moved_permanently unless params[:id] == @tag.friendly_id
     @posts = Post.tagged_with(@tag.name)
   end
 end

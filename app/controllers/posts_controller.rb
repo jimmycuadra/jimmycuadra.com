@@ -51,6 +51,6 @@ class PostsController < ApplicationController
   end
 
   def enforce_friendly_url
-    redirect_to @post, :status => :moved_permanently unless @post.friendly_id_status.best?
+    redirect_to @post, :status => :moved_permanently unless params[:id] == @post.friendly_id
   end
 end
