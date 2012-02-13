@@ -7,12 +7,10 @@ class Post < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :title, :use => :slugged
-  acts_as_taggable_on :tags
+  acts_as_taggable
 
   after_validation :enforce_screencast_title, :if => lambda { |record| record.screencast? }
   after_validation :enforce_screencast_tag, :if => lambda { |record| record.screencast? }
-  after_save :destroy_orphaned_tags
-  after_destroy :destroy_orphaned_tags
 
   def screencast?
     youtube_id.blank? ? false : true
@@ -36,9 +34,5 @@ class Post < ActiveRecord::Base
 
   def enforce_screencast_tag
     self.tag_list << "screencast" unless self.tag_list.include? "screencast"
-  end
-
-  def destroy_orphaned_tags
-    ActsAsTaggableOn::Tag.where("id NOT IN (SELECT tag_id FROM taggings)").destroy_all
   end
 end
