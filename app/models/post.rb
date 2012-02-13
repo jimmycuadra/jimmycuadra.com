@@ -23,6 +23,7 @@ class Post < ActiveRecord::Base
   end
 
   def normalize_friendly_id(text)
+    text = "Screencast: #{text}" if screencast? && !title.starts_with?("Screencast: ")
     text.gsub!("_", "-")
     super
   end
