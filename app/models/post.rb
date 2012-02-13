@@ -13,7 +13,7 @@ class Post < ActiveRecord::Base
   after_validation :enforce_screencast_tag, :if => lambda { |record| record.screencast? }
 
   def screencast?
-    youtube_id.blank? ? false : true
+    !youtube_id.blank?
   end
 
   def comments_allowed?
