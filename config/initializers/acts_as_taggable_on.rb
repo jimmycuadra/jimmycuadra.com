@@ -1,7 +1,7 @@
 module ActsAsTaggableOn
   class Tag
     extend FriendlyId
-    friendly_id :name, :use => [:slugged, :history]
+    friendly_id :name, :use => :slugged
 
     def normalize_friendly_id(text)
       text.gsub!("_", "-")

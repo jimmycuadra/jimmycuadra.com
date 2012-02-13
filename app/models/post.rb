@@ -6,7 +6,7 @@ class Post < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
 
   extend FriendlyId
-  friendly_id :title, :use => [:slugged, :history]
+  friendly_id :title, :use => :slugged
   acts_as_taggable_on :tags
 
   after_validation :enforce_screencast_title, :if => lambda { |record| record.screencast? }
