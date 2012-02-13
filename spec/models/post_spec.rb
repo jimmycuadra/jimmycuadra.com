@@ -31,19 +31,19 @@ describe Post do
 
   it "generates a slug when saved" do
     @post.save
-    @post.cached_slug.should_not be_nil
+    @post.slug.should_not be_nil
   end
 
   it "approximates ASCII in generated slugs" do
     @post.title = "My résumé"
     @post.save
-    @post.cached_slug.should == "my-resume"
+    @post.slug.should == "my-resume"
   end
 
   it "converts underscores to dashes in generated slugs" do
     @post.title = "this_has_underscores"
     @post.save
-    @post.cached_slug.should == "this-has-underscores"
+    @post.slug.should == "this-has-underscores"
   end
 
   context "with a video" do
@@ -62,7 +62,7 @@ describe Post do
       end
 
       it "doesn't alter the slug" do
-        @post.cached_slug.should == "screencast-awesome-tutorial"
+        @post.slug.should == "screencast-awesome-tutorial"
       end
     end
 
@@ -77,7 +77,7 @@ describe Post do
       end
 
       it "prepends the slug with \"screencast-\"" do
-        @post.cached_slug.should == "screencast-awesome-tutorial"
+        @post.slug.should == "screencast-awesome-tutorial"
       end
     end
 
