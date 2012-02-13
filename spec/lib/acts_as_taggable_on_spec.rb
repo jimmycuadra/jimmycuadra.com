@@ -19,4 +19,10 @@ describe ActsAsTaggableOn::Tag do
     subject.save
     subject.slug.should == "this-has-underscores"
   end
+
+  it "does not alter underscores in the tag names" do
+    subject.name = "this_has_underscores"
+    subject.save
+    subject.name.should == "this_has_underscores"
+  end
 end
