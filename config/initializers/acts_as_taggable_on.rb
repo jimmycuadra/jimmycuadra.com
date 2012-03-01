@@ -6,8 +6,7 @@ module ActsAsTaggableOn
     self.remove_unused = true
 
     def normalize_friendly_id(text)
-      text.gsub!("_", "-")
-      super
+      super.gsub("_", "-")
     end
   end
 end
