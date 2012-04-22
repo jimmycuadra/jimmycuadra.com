@@ -73,4 +73,12 @@ JimmycuadraCom::Application.configure do
   config.middleware.insert_before(Rack::Lock, Rack::Rewrite) do
     r301 %r{.*}, 'http://jimmycuadra.com$&', if: ->(rack_env) { rack_env['SERVER_NAME'] == 'www.jimmycuadra.com' }
   end
+
+  config.action_dispatch.rack_cache = {
+    metastore: Dalli::Client.new,
+    entitystore: "file:tmp/cache/rack/body",
+    allow_reload: false
+  }
+
+  config.static_cache_control = "public, max-age=2592000"
 end

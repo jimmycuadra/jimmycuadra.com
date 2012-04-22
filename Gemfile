@@ -9,6 +9,9 @@ gem 'thin'
 # Middleware
 gem 'rack-rewrite'
 
+# Caching
+gem 'dalli'
+
 # Model
 gem 'friendly_id'
 gem 'will_paginate'
