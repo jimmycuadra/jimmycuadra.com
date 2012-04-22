@@ -63,5 +63,8 @@ group :development, :test do
   gem 'guard-process'
   gem 'guard-spork'
   gem 'ruby_gntp'
-  gem 'rb-fsevent' if RUBY_PLATFORM.include?("darwin")
+end
+
+group :darwin do
+  gem 'rb-fsevent'
 end
