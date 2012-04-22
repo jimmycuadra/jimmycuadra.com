@@ -43,6 +43,7 @@ end
 
 group :development do
   gem 'pry'
+  gem 'pry-rails'
   gem 'pry-nav'
   gem 'pry-coolline'
 end
