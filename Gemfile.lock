@@ -1,10 +1,3 @@
-GIT
-  remote: git://github.com/mark-moseley/linecache
-  revision: 869c6a65155068415925067e480741bd0a71527e
-  specs:
-    linecache19 (0.5.12)
-      ruby_core_source (>= 0.1.4)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -38,7 +31,6 @@ GEM
     acts-as-taggable-on (2.2.2)
       rails (~> 3.0)
     addressable (2.2.6)
-    archive-tar-minitar (0.5.2)
     arel (3.0.0)
     builder (3.0.0)
     coderay (1.0.5)
@@ -49,7 +41,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.2.0)
-    columnize (0.3.6)
+    coolline (0.2.0)
     daemons (1.1.8)
     dalli (1.1.4)
     diff-lcs (1.1.3)
@@ -92,6 +84,7 @@ GEM
       rake
     hike (1.2.1)
     i18n (0.6.0)
+    io-console (0.3)
     journey (1.0.1)
     jquery-rails (2.0.0)
       railties (>= 3.2.0.beta, < 5.0)
@@ -103,11 +96,21 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    method_source (0.7.1)
     mime-types (1.17.2)
     multi_json (1.0.4)
     nokogiri (1.5.0)
     pg (0.13.1)
     polyglot (0.3.3)
+    pry (0.9.8.4)
+      coderay (~> 1.0.5)
+      method_source (~> 0.7.1)
+      slop (>= 2.4.4, < 3)
+    pry-coolline (0.1.4)
+      coolline (~> 0.2.0)
+      io-console (~> 0.3.0)
+    pry-nav (0.2.0)
+      pry (~> 0.9.8.1)
     rack (1.4.1)
     rack-cache (1.1)
       rack (>= 0.4)
@@ -153,21 +156,6 @@ GEM
       activesupport (>= 3.0)
       railties (>= 3.0)
       rspec (~> 2.8.0)
-    ruby-debug-base19 (0.11.25)
-      columnize (>= 0.3.1)
-      linecache19 (>= 0.5.11)
-      ruby_core_source (>= 0.1.4)
-    ruby-debug-base19x (0.11.30.pre10)
-      columnize (>= 0.3.1)
-      linecache19 (>= 0.5.11)
-      rake (>= 0.8.1)
-      ruby_core_source (>= 0.1.4)
-    ruby-debug19 (0.11.6)
-      columnize (>= 0.3.1)
-      linecache19 (>= 0.5.11)
-      ruby-debug-base19 (>= 0.11.19)
-    ruby_core_source (0.1.5)
-      archive-tar-minitar (>= 0.5.2)
     ruby_gntp (0.3.4)
     rubyzip (0.9.6.1)
     sass (3.1.15)
@@ -179,6 +167,7 @@ GEM
       multi_json (~> 1.0.3)
       simplecov-html (~> 0.5.3)
     simplecov-html (0.5.3)
+    slop (2.4.4)
     spoon (0.0.1)
     spork (0.9.0)
     sprockets (2.1.2)
@@ -221,17 +210,17 @@ DEPENDENCIES
   haml
   heroku_backup_task
   jquery-rails
-  linecache19!
   nokogiri
   pg
+  pry
+  pry-coolline
+  pry-nav
   rack-rewrite
   rails (= 3.2.1)
   rails_autolink
   rb-fsevent
   redcarpet (= 1.17.2)
   rspec-rails
-  ruby-debug-base19x (~> 0.11.30.pre4)
-  ruby-debug19
   ruby_gntp
   sass-rails
   simplecov

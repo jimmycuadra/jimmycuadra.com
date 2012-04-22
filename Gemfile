@@ -41,6 +41,15 @@ group :production do
   gem 'pg'
 end
 
+group :development do
+  gem 'pry'
+  gem 'pry-nav'
+  gem 'pry-coolline'
+end
+
+group :test do
+end
+
 group :development, :test do
   gem 'foreman'
   gem 'sqlite3'
@@ -53,11 +62,5 @@ group :development, :test do
   gem 'guard-process'
   gem 'guard-spork'
   gem 'ruby_gntp'
-  gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
-  gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
-  gem "ruby-debug19"
-end
-
-group :darwin do
-  gem 'rb-fsevent'
+  gem 'rb-fsevent' if RUBY_PLATFORM.include?("darwin")
 end
