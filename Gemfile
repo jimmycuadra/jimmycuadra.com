@@ -57,7 +57,7 @@ group :test do
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-process'
-  gem 'guard-spork', github: 'jimmycuadra/guard-spork'
+  gem 'guard-spork'
   gem 'ruby_gntp'
 end
 

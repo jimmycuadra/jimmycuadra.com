@@ -1,11 +1,3 @@
-GIT
-  remote: git://github.com/jimmycuadra/guard-spork.git
-  revision: 8c43316c1a267a057391ad0b3d5ca4af0fe4a248
-  specs:
-    guard-spork (0.6.1)
-      guard (>= 0.10.0)
-      spork (>= 0.8.4)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -89,6 +81,9 @@ GEM
       spoon (~> 0.0.1)
     guard-rspec (0.6.0)
       guard (>= 0.10.0)
+    guard-spork (0.7.0)
+      guard (>= 0.10.0)
+      spork (>= 0.8.4)
     haml (3.1.4)
     heroku (2.20.0)
       launchy (>= 0.3.2)
@@ -242,7 +237,7 @@ DEPENDENCIES
   guard
   guard-process
   guard-rspec
-  guard-spork!
+  guard-spork
   haml
   heroku_backup_task
   jquery-rails
