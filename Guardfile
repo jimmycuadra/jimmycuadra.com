@@ -2,7 +2,7 @@ guard 'process', name: "jimmycuadra.com", command: "bundle exec foreman start -p
   watch("Gemfile.lock")
 end
 
-guard 'spork', rspec_env: { 'RAILS_ENV' => 'test' } do
+guard 'spork', rspec_env: { 'RAILS_ENV' => 'test' }, foreman: true do
   watch('config/application.rb')
   watch('config/environment.rb')
   watch(%r{^config/environments/.+\.rb$})
