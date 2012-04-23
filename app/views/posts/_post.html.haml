@@ -11,6 +11,8 @@
   .social
     .g-plusone{ data: { size: "medium", href: post_url(post) } }
     %a.twitter-share-button{ href: "https://twitter.com/share", data: { url: post_url(post), text: post.title, count: "horizontal", via: "jimmycuadra" } } Tweet
+  - unless post.published
+    .unpublished This post is currently unpublished.
   - if post.youtube_id.present? && params[:action] == "show"
     %object{ width: "640", height: "385", itemprop: "video", itemscope: true, itemtype: "http://schema.org/VideoObject" }
       %meta{ itemprop: "embedURL", content: "http://www.youtube.com/v/#{post.youtube_id}?fs=1&amp;hl=en_US&amp;rel=0" }

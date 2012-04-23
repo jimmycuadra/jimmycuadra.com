@@ -4,7 +4,9 @@ class PostsController < ApplicationController
   before_filter :enforce_friendly_url, :only => :show
 
   def index
-    @posts = Post.order('created_at desc')
+    @posts = Post.scoped
+    @posts = @posts.where(published: true) unless admin?
+    @posts = @posts.order('created_at desc')
 
     respond_to do |format|
       format.html { @posts = @posts.paginate(:page => params[:page], :per_page => 3) }
@@ -47,7 +49,9 @@ class PostsController < ApplicationController
   private
 
   def retrieve_record
-    @post = Post.find(params[:id])
+    @post = Post.scoped
+    @post = Post.where(published: true) unless admin?
+    @post = @post.find(params[:id])
   end
 
   def enforce_friendly_url

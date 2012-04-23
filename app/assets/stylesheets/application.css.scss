@@ -395,3 +395,8 @@ article {
     border: 0;
   }
 }
+
+.unpublished {
+  @include bubble;
+  margin-bottom: 18px;
+}

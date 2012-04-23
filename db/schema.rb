@@ -11,37 +11,39 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120213100241) do
+ActiveRecord::Schema.define(:version => 20120423043105) do
 
   create_table "comments", :force => true do |t|
-    t.string    "name"
-    t.string    "email"
-    t.string    "url"
-    t.text      "comment"
-    t.integer   "post_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-  end
-
-  create_table "posts", :force => true do |t|
-    t.string   "title",      :null => false
-    t.text     "body",       :null => false
-    t.string   "youtube_id"
-    t.string   "slug"
+    t.string   "name"
+    t.string   "email"
+    t.string   "url"
+    t.text     "comment"
+    t.integer  "post_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  create_table "posts", :force => true do |t|
+    t.string   "title",                         :null => false
+    t.text     "body",                          :null => false
+    t.string   "youtube_id"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "published",  :default => false, :null => false
+  end
+
+  add_index "posts", ["published"], :name => "index_posts_on_published"
   add_index "posts", ["slug"], :name => "index_posts_on_cached_slug", :unique => true
 
   create_table "taggings", :force => true do |t|
-    t.integer   "tag_id"
-    t.integer   "taggable_id"
-    t.string    "taggable_type"
-    t.integer   "tagger_id"
-    t.string    "tagger_type"
-    t.string    "context"
-    t.timestamp "created_at"
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context"
+    t.datetime "created_at"
   end
 
   add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"

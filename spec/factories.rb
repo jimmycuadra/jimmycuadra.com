@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :post do
     title "Blog post title"
     body "This is a blog post about something"
+    published true
   end
 
   factory :comment do
