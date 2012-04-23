@@ -31,5 +31,5 @@
     - unless post.tags.empty?
       %p
         This post was tagged with #{post.tags.map { |tag| link_to tag.name, tag_path(tag), title: "Writing tagged with #{tag.name}", itemprop: "keywords" }.to_sentence.html_safe }.
-      %p
-        Find more content by #{link_to "browsing by tags", tags_path, title: "Browse writing by tags"}.
+    %p
+      Find more content by #{link_to "browsing by tags", tags_path, title: "Browse writing by tags"}.
