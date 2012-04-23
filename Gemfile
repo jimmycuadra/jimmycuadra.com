@@ -49,13 +49,9 @@ group :development do
 end
 
 group :test do
-end
-
-group :development, :test do
   gem 'foreman'
-  gem 'sqlite3'
-  gem 'rspec-rails'
-  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'poltergeist'
   gem 'simplecov', require: false
   gem 'spork'
   gem 'guard'
@@ -63,6 +59,12 @@ group :development, :test do
   gem 'guard-process'
   gem 'guard-spork'
   gem 'ruby_gntp'
+end
+
+group :development, :test do
+  gem 'sqlite3'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
 
 group :darwin do
