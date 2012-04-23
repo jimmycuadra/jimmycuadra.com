@@ -162,7 +162,7 @@ GEM
     rb-fsevent (0.9.1)
     rdoc (3.12)
       json (~> 1.4)
-    redcarpet (1.17.2)
+    redcarpet (2.1.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rspec (2.9.0)
@@ -251,7 +251,7 @@ DEPENDENCIES
   rails (= 3.2.3)
   rails_autolink
   rb-fsevent
-  redcarpet (= 1.17.2)
+  redcarpet
   rspec-rails
   ruby_gntp
   sass-rails

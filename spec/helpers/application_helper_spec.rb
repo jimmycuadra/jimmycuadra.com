@@ -2,16 +2,26 @@ require 'spec_helper'
 
 describe ApplicationHelper do
   describe "#markdown" do
-    it "processes input with Markdown" do
-      markdown("# Hello world").should =~ %r{<h1>Hello world</h1>}
+    it "uses hard wraps" do
+      markdown("foo\nbar").should =~ %r{<br>}
     end
 
-    it "highlights code blocks with CodeRay" do
+    it "autolinks URLs" do
+      markdown("http://foo.com/").should =~ %r{href}
+    end
+
+    it "should not add emphasis in Ruby method names" do
+      markdown("foo_bar_baz").should_not =~ %r{em}
+    end
+
+    it "highlights fenced code blocks with CodeRay" do
       markdown("``` ruby\nclass Foo; end\n```").should =~ /CodeRay/
     end
 
-    it "uses additional options for safety when parsing comments" do
-      markdown("<script>alert('lol');</script>", :safe => true).should_not =~ /script/
+    context "with the :safe option" do
+      it "removes HTML" do
+        markdown("<b>lololol</b>", safe: true).should_not =~ /<b>/
+      end
     end
   end
 end

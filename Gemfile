@@ -21,7 +21,7 @@ gem 'acts-as-taggable-on'
 gem 'haml'
 gem 'formtastic'
 gem 'coderay'
-gem 'redcarpet', '1.17.2'
+gem 'redcarpet'
 gem 'nokogiri'
 gem 'rails_autolink'
 
