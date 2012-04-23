@@ -4,8 +4,8 @@ describe CommentsController do
   render_views
 
   it "requires an admin for #destroy" do
-    @post = Factory(:post)
-    @comment = @post.comments.create(Factory.attributes_for(:comment))
+    @post = FactoryGirl.create(:post)
+    @comment = @post.comments.create(FactoryGirl.attributes_for(:comment))
     delete :destroy, :post_id => @post.to_param, :id => @comment.to_param
     response.should redirect_to(root_path)
     flash[:notice].should include("not authorized")
@@ -13,8 +13,8 @@ describe CommentsController do
 
   describe "#create" do
     before do
-      @post = Factory(:post)
-      @comment_attributes = Factory.attributes_for(:comment)
+      @post = FactoryGirl.create(:post)
+      @comment_attributes = FactoryGirl.attributes_for(:comment)
     end
 
     context "with valid attributes" do
@@ -53,8 +53,8 @@ describe CommentsController do
   describe "#destroy" do
     before do
       controller.stub(:admin?).and_return(true)
-      @post = Factory(:post)
-      @comment = @post.comments.create(Factory.attributes_for(:comment))
+      @post = FactoryGirl.create(:post)
+      @comment = @post.comments.create(FactoryGirl.attributes_for(:comment))
     end
 
     it "destroys the comment" do

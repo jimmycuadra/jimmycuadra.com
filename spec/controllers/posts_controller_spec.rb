@@ -18,7 +18,7 @@ describe PostsController do
     end
 
     it "displays the 3 most recent posts in descending order" do
-      recent_posts = [Factory(:post), Factory(:post), Factory(:post), Factory(:post)]
+      recent_posts = [FactoryGirl.create(:post), FactoryGirl.create(:post), FactoryGirl.create(:post), FactoryGirl.create(:post)]
       get :index
       assigns(:posts).should == recent_posts.tap { |o| o.shift }.reverse
     end
@@ -26,7 +26,7 @@ describe PostsController do
     context "when the atom format is requested" do
       it "displays the 10 most recent posts in descending order" do
         recent_posts = []
-        11.times { |n| recent_posts.push Factory(:post) }
+        11.times { |n| recent_posts.push FactoryGirl.create(:post) }
         get :index, :format => :atom
         assigns(:posts).should == recent_posts.tap { |o| o.shift }.reverse
       end
@@ -35,7 +35,7 @@ describe PostsController do
 
   describe "#show" do
     before do
-      Factory(:post)
+      FactoryGirl.create(:post)
     end
 
     it "renders the show template" do
@@ -70,14 +70,14 @@ describe PostsController do
       context "with valid parameters" do
         it "increases the post count by 1" do
           expect {
-            post :create, { :post => Factory.attributes_for(:post) }
+            post :create, { :post => FactoryGirl.attributes_for(:post) }
           }.to change {
             Post.count
           }.from(0).to(1)
         end
 
         it "redirects to the new post with flash" do
-          post :create, { :post => Factory.attributes_for(:post) }
+          post :create, { :post => FactoryGirl.attributes_for(:post) }
           response.should redirect_to assigns(:post)
           flash[:notice].should include("created")
         end
@@ -93,7 +93,7 @@ describe PostsController do
 
     describe "#edit" do
       before do
-        Factory(:post)
+        FactoryGirl.create(:post)
         get :edit, :id => Post.first.id
       end
 
@@ -108,7 +108,7 @@ describe PostsController do
 
     describe "#update" do
       before do
-        @post = Factory(:post)
+        @post = FactoryGirl.create(:post)
       end
 
       context "with valid parameters" do
@@ -132,7 +132,7 @@ describe PostsController do
 
     describe "#destroy" do
       before do
-        Factory(:post)
+        FactoryGirl.create(:post)
       end
 
       it "destroys the post" do

@@ -4,7 +4,7 @@ describe Notification do
   describe "#new_comment" do
     before do
       ENV['ADMIN_EMAIL'] = 'admin@example.com'
-      @comment = Factory(:comment)
+      @comment = FactoryGirl.create(:comment)
       @email = Notification.new_comment(@comment).deliver
     end
 

@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Comment do
   before do
-    @post = Factory(:post)
-    @comment = @post.comments.build(Factory.attributes_for(:comment))
+    @post = FactoryGirl.create(:post)
+    @comment = @post.comments.build(FactoryGirl.attributes_for(:comment))
   end
 
   it "saves valid records" do
