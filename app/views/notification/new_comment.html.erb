@@ -1,0 +1,4 @@
+Post: <%= link_to @comment.post.title, post_url(@comment.post, host: "jimmycuadra.com") %><br />
+Author: <%= link_to @comment.name, "mailto:#{@comment.email}" %><br />
+<br />
+<%= @comment.comment %>

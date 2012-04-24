@@ -1,0 +1,4 @@
+Post: <%= @comment.post.title %> (<%= post_url(@comment.post, host: "jimmycuadra.com") %>)
+Author: <%= @comment.name %> (<%= @comment.email %>)
+
+<%= @comment.comment %>
