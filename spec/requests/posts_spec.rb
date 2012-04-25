@@ -3,9 +3,7 @@ require "spec_helper"
 feature "Post publishing" do
   context "as an admin" do
     background do
-      visit login_path
-      fill_in "Password", with: ENV["ADMIN_PASSWORD"]
-      click_on "Log in"
+      login!
     end
 
     scenario "saving a new post without publishing it" do
@@ -14,7 +12,7 @@ feature "Post publishing" do
       fill_in "Body", with: "Only the admin can see this for now!"
       click_on "Create Post"
       page.should have_selector(".unpublished")
-      click_on "Log out"
+      logout!
       page.should_not have_content("Only the admin can see this for now!")
     end
 
@@ -25,7 +23,7 @@ feature "Post publishing" do
       check "Publish"
       click_on "Create Post"
       page.should have_content("Everyone can see this!")
-      click_on "Log out"
+      logout!
       page.should have_content("Everyone can see this!")
       click_on "Published post"
       page.should have_content("Everyone can see this!")
