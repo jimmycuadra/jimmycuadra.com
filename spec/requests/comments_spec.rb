@@ -30,4 +30,15 @@ end
     page.should have_content("Bongo commented")
     page.should have_content("This blog totally sucks")
   end
+
+  scenario "previewing a comment", js: true do
+    visit post_path(post)
+    fill_in "Name", with: "Bongo"
+    fill_in "Email", with: "bongo@example.com"
+    fill_in "URL", with: "example.com"
+    fill_in "Comment", with: comment_body
+    click_on "Preview comment"
+    page.should_not have_content("Bongo commented")
+    page.should have_selector(".CodeRay")
+  end
 end

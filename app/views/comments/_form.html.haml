@@ -6,4 +6,8 @@
       = f.input :url, label: "URL"
     = f.input :comment
   = f.actions do
-    = f.submit "Add comment"
+    %li#comment_preview_action.action.input_action
+      = f.button "Preview comment", name: "preview", id: "preview-comment", type: nil
+    = f.action :submit, label: "Add comment"
+
+#comment-preview-frame
