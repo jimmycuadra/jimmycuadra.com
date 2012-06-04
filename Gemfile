@@ -1,69 +1,117 @@
-source :rubygems
+source "https://rubygems.org"
 
-# Rails
-gem 'rails', '3.2.3'
+gem "rails"
 
-# Server
-gem 'thin'
+server = -> do
+  gem "thin"
+end
 
-# Middleware
-gem 'rack-rewrite'
+postgres = -> do
+  gem "pg"
+end
 
-# Caching
-gem 'dalli'
+sqlite = -> do
+  gem "sqlite3"
+end
 
-# Model
-gem 'friendly_id'
-gem 'will_paginate'
-gem 'acts-as-taggable-on'
+middleware = -> do
+  gem "rack-rewrite"
+end
 
-# View
-gem 'haml'
-gem 'formtastic'
-gem 'coderay'
-gem 'redcarpet'
-gem 'nokogiri'
-gem 'rails_autolink'
+caching = -> do
+  gem "dalli"
+end
 
-# Rake tasks
-gem 'heroku_backup_task'
+model = -> do
+  gem "friendly_id"
+  gem "will_paginate"
+  gem "acts-as-taggable-on"
+end
 
-# jQuery
-gem 'jquery-rails'
+view = -> do
+  gem "haml"
+  gem 'jquery-rails'
+  gem "formtastic"
+  gem "coderay"
+  gem "redcarpet"
+  gem "nokogiri"
+  gem "rails_autolink"
+end
 
-group :assets do
+tasks = -> do
+  gem "heroku_backup_task"
+end
+
+assets = -> do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
 end
 
-group :production do
-  gem 'pg'
-end
-
-group :test do
-  gem 'foreman'
-  gem 'capybara'
-  gem 'poltergeist'
-  gem 'simplecov', require: false
-  gem 'spork'
-  gem 'guard'
-  gem 'guard-rspec'
-  gem 'guard-process'
-  gem 'guard-spork'
-  gem 'ruby_gntp'
-end
-
-group :development, :test do
-  gem 'sqlite3'
-  gem 'rspec-rails'
-  gem 'factory_girl_rails'
+pry = -> do
   gem 'pry'
   gem 'pry-rails'
   gem 'pry-nav'
   gem 'pry-coolline'
 end
 
-group :darwin do
-  gem 'rb-fsevent'
+testing = -> do
+  gem "capybara"
+  gem "poltergeist"
+  gem "simplecov", require: false
+  gem "rspec-rails"
+end
+
+factories = -> do
+  gem "factory_girl_rails"
+end
+
+workflow = -> do
+  gem "foreman"
+  gem "spork"
+end
+
+guard = -> do
+  gem "guard"
+  gem "guard-rspec"
+  gem "guard-process"
+  gem "guard-spork"
+  gem "ruby_gntp"
+  gem "rb-fsevent"
+end
+
+#####
+
+common = -> do
+  server.call
+  middleware.call
+  caching.call
+  model.call
+  view.call
+end
+
+#####
+
+group :production do
+  common.call
+  postgres.call
+  tasks.call
+end
+
+group :development do
+  common.call
+  sqlite.call
+  assets.call
+  pry.call
+end
+
+group :test do
+  common.call
+  sqlite.call
+  assets.call
+  pry.call
+  testing.call
+  factories.call
+  workflow.call
+  guard.call
 end
