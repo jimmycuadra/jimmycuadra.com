@@ -31,7 +31,7 @@ end
     page.should have_content("This blog totally sucks")
   end
 
-  scenario "previewing a comment", js: true do
+  xit "previewing a comment", js: true do
     visit post_path(post)
     fill_in "Name", with: "Bongo"
     fill_in "Email", with: "bongo@example.com"
