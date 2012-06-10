@@ -57,8 +57,7 @@ module JimmycuadraCom
     # Configure generators
     config.generators do |g|
       g.view_specs false
-      g.fixture true
-      g.fixture_replacement :factory_girl, :dir => "spec/factories"
+      g.fixture false
     end
   end
 end
