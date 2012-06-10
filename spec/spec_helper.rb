@@ -1,34 +1,23 @@
-require 'rubygems'
-require 'spork'
+require "securerandom"
 
-simplecov = -> do
-  require "simplecov"
-  SimpleCov.start "rails"
-end
+ENV["RAILS_ENV"] ||= "test"
+ENV["SECRET_TOKEN"] ||= SecureRandom.hex(64)
+ENV["ADMIN_EMAIL"] ||= "admin@example.com"
 
-Spork.prefork do
-  ENV["RAILS_ENV"] ||= 'test'
+require "simplecov"
+SimpleCov.start "rails"
 
-  simplecov.call unless ENV["DRB"]
+require File.expand_path("../../config/environment", __FILE__)
 
-  require File.expand_path("../../config/environment", __FILE__)
+require 'rspec/rails'
+require 'capybara/rspec'
 
-  require 'rspec/rails'
-  require 'capybara/rspec'
-  Capybara.javascript_driver = :webkit
+Capybara.javascript_driver = :webkit
 
-  Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+Dir[Rails.root.join("spec/support/**/*.rb")].each { |file| require file }
 
-  RSpec.configure do |config|
-    config.mock_with :rspec
-    config.use_transactional_fixtures = true
+RSpec.configure do |config|
+  config.use_transactional_fixtures = true
 
-    config.include CapybaraHelper
-  end
-end
-
-Spork.each_run do
-  simplecov.call if ENV["DRB"]
-
-  FactoryGirl.reload
+  config.include CapybaraHelper
 end

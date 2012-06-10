@@ -64,10 +64,6 @@ subgroup :sqlite do
   gem "sqlite3"
 end
 
-subgroup :tasks do
-  gem "heroku_backup_task"
-end
-
 subgroup :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
@@ -94,27 +90,16 @@ end
 
 subgroup :workflow do
   gem "foreman"
-  gem "spork"
-end
-
-subgroup :guard do
-  gem "guard"
-  gem "guard-rspec"
-  gem "guard-process"
-  gem "guard-spork"
-  gem "ruby_gntp"
-  gem "rb-fsevent"
 end
 
 
 ## Groups
 
 compose_group :production,
-              :postgres, :tasks
-
+              :postgres
 
 compose_group :development,
               :sqlite, :assets, :pry
 
 compose_group :test,
-              :sqlite, :assets, :pry, :testing, :factories, :workflow, :guard
+              :sqlite, :assets, :pry, :testing, :factories, :workflow
