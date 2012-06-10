@@ -53,8 +53,13 @@ gem "redcarpet"
 gem "nokogiri"
 gem "rails_autolink"
 
+# Assets
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier'
 
-# Subgroups
+
+## Subgroups
 
 subgroup :postgres do
   gem "pg"
@@ -62,12 +67,6 @@ end
 
 subgroup :sqlite do
   gem "sqlite3"
-end
-
-subgroup :assets do
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'uglifier'
 end
 
 subgroup :pry do
@@ -99,7 +98,7 @@ compose_group :production,
               :postgres
 
 compose_group :development,
-              :sqlite, :assets, :pry
+              :sqlite, :pry
 
 compose_group :test,
-              :sqlite, :assets, :pry, :testing, :factories, :workflow
+              :sqlite, :pry, :testing, :factories, :workflow
