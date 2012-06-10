@@ -1,77 +1,103 @@
 source "https://rubygems.org"
 
-gem "rails"
+# Internal: A Hash of Procs containing subgroup code.
+@subgroups = {}
 
-server = -> do
-  gem "thin"
+# Public: Defines a subgroup for later inclusion in an environment-based group.
+#
+#   name  - A Symbol name for the group.
+#   block - A Proc to be called when the subgroup is included.
+#
+# Returns nothing.
+def subgroup(name, &block)
+  @subgroups[name] = block
 end
 
-postgres = -> do
+# Public: Includes gems in a group by evaluating stored Procs within an environment-based group.
+#
+#   group_name      - The Symbol name of the group to compose.
+#   subgroup_names  - One or more Symbol names of the subgroup(s) to include.
+#
+# Returns nothing.
+def compose_group(group_name, *subgroup_names)
+  group(group_name) do
+    subgroup_names.each { |name| @subgroups[name].call }
+  end
+end
+
+
+## Default gems
+
+gem "rails"
+
+# Server
+gem "thin"
+
+#Middleware
+gem "rack-rewrite"
+
+# Caching
+gem "dalli"
+
+# Model
+gem "friendly_id"
+gem "will_paginate"
+gem "acts-as-taggable-on"
+
+# View
+gem "haml"
+gem 'jquery-rails'
+gem "formtastic"
+gem "coderay"
+gem "redcarpet"
+gem "nokogiri"
+gem "rails_autolink"
+
+
+# Subgroups
+
+subgroup :postgres do
   gem "pg"
 end
 
-sqlite = -> do
+subgroup :sqlite do
   gem "sqlite3"
 end
 
-middleware = -> do
-  gem "rack-rewrite"
-end
-
-caching = -> do
-  gem "dalli"
-end
-
-model = -> do
-  gem "friendly_id"
-  gem "will_paginate"
-  gem "acts-as-taggable-on"
-end
-
-view = -> do
-  gem "haml"
-  gem 'jquery-rails'
-  gem "formtastic"
-  gem "coderay"
-  gem "redcarpet"
-  gem "nokogiri"
-  gem "rails_autolink"
-end
-
-tasks = -> do
+subgroup :tasks do
   gem "heroku_backup_task"
 end
 
-assets = -> do
+subgroup :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
 end
 
-pry = -> do
+subgroup :pry do
   gem 'pry'
   gem 'pry-rails'
   gem 'pry-nav'
   gem 'pry-coolline'
 end
 
-testing = -> do
+subgroup :testing do
   gem "capybara"
-  gem "poltergeist"
+  gem "capybara-webkit"
   gem "simplecov", require: false
   gem "rspec-rails"
 end
 
-factories = -> do
+subgroup :factories do
   gem "factory_girl_rails"
 end
 
-workflow = -> do
+subgroup :workflow do
   gem "foreman"
   gem "spork"
 end
 
-guard = -> do
+subgroup :guard do
   gem "guard"
   gem "guard-rspec"
   gem "guard-process"
@@ -80,38 +106,15 @@ guard = -> do
   gem "rb-fsevent"
 end
 
-#####
 
-common = -> do
-  server.call
-  middleware.call
-  caching.call
-  model.call
-  view.call
-end
+## Groups
 
-#####
+compose_group :production,
+              :postgres, :tasks
 
-group :production do
-  common.call
-  postgres.call
-  tasks.call
-end
 
-group :development do
-  common.call
-  sqlite.call
-  assets.call
-  pry.call
-end
+compose_group :development,
+              :sqlite, :assets, :pry
 
-group :test do
-  common.call
-  sqlite.call
-  assets.call
-  pry.call
-  testing.call
-  factories.call
-  workflow.call
-  guard.call
-end
+compose_group :test,
+              :sqlite, :assets, :pry, :testing, :factories, :workflow, :guard

@@ -1,20 +1,21 @@
 require 'rubygems'
 require 'spork'
 
-unless ENV["DRB"]
-  require 'simplecov'
+simplecov = -> do
+  require "simplecov"
   SimpleCov.start "rails"
 end
 
 Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
 
+  simplecov.call unless ENV["DRB"]
+
   require File.expand_path("../../config/environment", __FILE__)
 
   require 'rspec/rails'
   require 'capybara/rspec'
-  require 'capybara/poltergeist'
-  Capybara.javascript_driver = :poltergeist
+  Capybara.javascript_driver = :webkit
 
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
@@ -27,9 +28,7 @@ Spork.prefork do
 end
 
 Spork.each_run do
-  require 'simplecov'
-
-  SimpleCov.start "rails"
+  simplecov.call if ENV["DRB"]
 
   FactoryGirl.reload
 end
