@@ -69,7 +69,8 @@ subgroup :sqlite do
   gem "sqlite3"
 end
 
-subgroup :pry do
+subgroup :debugging do
+  gem "debugger"
   gem 'pry'
   gem 'pry-rails'
   gem 'pry-nav'
@@ -98,7 +99,7 @@ compose_group :production,
               :postgres
 
 compose_group :development,
-              :sqlite, :pry
+              :sqlite, :debugging
 
 compose_group :test,
-              :sqlite, :pry, :testing, :factories, :workflow
+              :sqlite, :debugging, :testing, :factories, :workflow
