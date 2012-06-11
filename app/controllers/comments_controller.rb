@@ -18,4 +18,8 @@ class CommentsController < ApplicationController
     @comment.destroy
     redirect_to @post, :notice => "The comment was destroyed."
   end
+
+  def preview
+    render inline: JimmycuadraCom::Markdown.render(params[:comment], safe: true)
+  end
 end

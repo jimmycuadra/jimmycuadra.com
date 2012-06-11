@@ -6,11 +6,13 @@ $(function () {
   $("#flash").delay(1250).fadeOut("slow");
 
   $("#preview-comment").on("click", function (event) {
-    var $form = $(event.currentTarget);
+    var $form = $(event.currentTarget).closest("form");
 
     event.preventDefault();
 
-    $.get("/comments/preview", $form.find("textarea").val(), function (html) {
+    $.get("/comments/preview", {
+      comment: $form.find("textarea").val()
+    }, function (html) {
       $commentPreviewFrame.html(html);
     }, "html");
   })

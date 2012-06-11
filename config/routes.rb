@@ -6,6 +6,9 @@ JimmycuadraCom::Application.routes.draw do
   resources :posts do
     resources :comments, only: [:create, :destroy]
   end
+
+  get "comments/preview" => "comments#preview", as: :preview
+
   resources :tags, only: [:index, :show]
 
   # static pages
