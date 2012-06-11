@@ -8,7 +8,7 @@ jQuery ->
   $commentPreviewFrame = $("#comment-preview-frame")
 
   commentPreviewCallback = (html) ->
-    $commentPreviewFrame.html(html)
+    $commentPreviewFrame.find(".preview-content").html(html).end().removeClass("hidden")
 
   $("#preview-comment").on "click", (event) ->
     event.preventDefault()
