@@ -69,14 +69,6 @@ subgroup :sqlite do
   gem "sqlite3"
 end
 
-subgroup :debugging do
-  gem "debugger"
-  gem 'pry'
-  gem 'pry-rails'
-  gem 'pry-nav'
-  gem 'pry-coolline'
-end
-
 subgroup :testing do
   gem "capybara"
   gem "capybara-webkit"
@@ -99,7 +91,7 @@ compose_group :production,
               :postgres
 
 compose_group :development,
-              :sqlite, :debugging
+              :sqlite
 
 compose_group :test,
-              :sqlite, :debugging, :testing, :factories, :workflow
+              :sqlite, :testing, :factories, :workflow
