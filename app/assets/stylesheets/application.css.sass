@@ -6,7 +6,7 @@
 // reusable colors
 
 $darkblue: #003366
-$paleblue: #e7ebf0
+$paleblue: lighten(#e7ebf0, 5%)
 $green: #30b041
 $purple: #660f57
 $mediumblue: #405f85
@@ -19,7 +19,7 @@ body
   color: $darkblue
   font-family: "Lucida Grande", Arial, sans-serif
   font-size: 14px
-  line-height: 18px
+  line-height: 20px
 
 a, a:active, a:visited, a:hover
   color: $purple
@@ -63,7 +63,7 @@ th
 .bucket
   padding: 20px 0
   margin: 0 auto
-  width: 80%
+  width: 620px
 
 .pull-right
   float: right
@@ -85,10 +85,10 @@ th
   border-bottom: 1px solid $mediumblue
   color: $paleblue
   font:
-    family: Times, serif
-    size: 24px
+    family: "MS Sans Serif", Arial, sans-serif
+    size: 20px
     weight: bold
-  line-height: 30px
+  line-height: 24px
   text-shadow: rgb(0, 0, 0) 1px 1px 1px
   .logo
     border: 1px solid $periwinkle
@@ -101,8 +101,8 @@ th
     color: $green
 
 .main-title
-  font-size: 36px
-  line-height: 40px
+  font-size: 28px
+  line-height: 36px
   margin-top: 4px
 
 // site footer
@@ -154,7 +154,6 @@ nav
 
 .content
   background-color: $paleblue
-  background-image: url("/assets/content_texture.png")
   box-shadow: inset 0 5px 6px #6c6c6c
 
 article
