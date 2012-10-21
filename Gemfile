@@ -71,7 +71,7 @@ end
 
 subgroup :testing do
   gem "capybara"
-  gem "capybara-webkit"
+  gem "poltergeist"
   gem "simplecov", require: false
   gem "rspec-rails"
 end
