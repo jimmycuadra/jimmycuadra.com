@@ -33,9 +33,6 @@ gem "rails"
 # Server
 gem "thin"
 
-#Middleware
-gem "rack-rewrite"
-
 # Caching
 gem "dalli"
 

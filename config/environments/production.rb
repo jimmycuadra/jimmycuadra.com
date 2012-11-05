@@ -69,11 +69,6 @@ JimmycuadraCom::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  # Rack::Rewrite to strip www subdomain
-  config.middleware.insert_before(Rack::Lock, Rack::Rewrite) do
-    r301 %r{.*}, 'http://jimmycuadra.com$&', if: ->(rack_env) { rack_env['SERVER_NAME'] == 'www.jimmycuadra.com' }
-  end
-
   config.action_dispatch.rack_cache = {
     metastore: Dalli::Client.new,
     entitystore: "file:tmp/cache/rack/body",
