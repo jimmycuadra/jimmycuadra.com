@@ -69,7 +69,7 @@ GEM
       thor (>= 0.13.6)
     formtastic (2.2.1)
       actionpack (>= 3.0)
-    friendly_id (4.0.7)
+    friendly_id (4.0.9)
     haml (3.1.6)
     hike (1.2.1)
     http_parser.rb (0.5.3)
