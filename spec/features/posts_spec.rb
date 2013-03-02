@@ -25,7 +25,7 @@ feature "Post publishing" do
       page.should have_content("Everyone can see this!")
       logout!
       page.should have_content("Everyone can see this!")
-      click_on "Published post"
+      find("a", text: "Published post").click
       page.should have_content("Everyone can see this!")
     end
   end

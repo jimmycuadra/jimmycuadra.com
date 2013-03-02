@@ -32,6 +32,7 @@ end
 
 group :development, :test do
   gem "sqlite3"
+  gem "debugger"
 end
 
 group :test do

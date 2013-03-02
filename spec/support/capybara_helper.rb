@@ -2,7 +2,7 @@ module CapybaraHelper
   def login!
     visit login_path
     fill_in "Password", with: ENV["ADMIN_PASSWORD"]
-    click_on "Log in"
+    click_button "Log in"
   end
 
   def logout!
