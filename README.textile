@@ -1,3 +1,0 @@
-h1. jimmycuadra.com
-
-This is the source code for jimmycuadra.com, my professional site on the web.
