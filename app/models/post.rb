@@ -1,6 +1,4 @@
 class Post < ActiveRecord::Base
-  attr_accessible :title, :body, :youtube_id, :tag_list, :published
-
   validates_presence_of :title, :body
 
   has_many :comments, :dependent => :destroy

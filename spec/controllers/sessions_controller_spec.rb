@@ -5,7 +5,7 @@ describe SessionsController do
 
   [:new, :create].each do |action|
     it "requires no admin for ##{action}" do
-      controller.stub(:admin?).and_return(true)
+      allow(controller).to receive(:admin?).and_return(true)
       get action
       response.should redirect_to(root_path)
       flash[:notice].should include("already logged in")

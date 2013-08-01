@@ -38,7 +38,7 @@ describe CommentsController do
     end
 
     it "marks comments as admin comments if the admin is logged in" do
-      controller.stub(:admin?).and_return(true)
+      allow(controller).to receive(:admin?).and_return(true)
       expect {
         post :create, :post_id => blog_post.to_param, :comment => { :comment => "I'm an admin!" }
       }.to change {
@@ -49,7 +49,7 @@ describe CommentsController do
 
   describe "#destroy" do
     before do
-      controller.stub(:admin?).and_return(true)
+      allow(controller).to receive(:admin?).and_return(true)
     end
 
     it "destroys the comment" do

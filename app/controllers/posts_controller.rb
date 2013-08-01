@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   before_filter :enforce_friendly_url, :only => :show
 
   def index
-    @posts = Post.scoped
+    @posts = Post.all
     @posts = @posts.where(published: true) unless admin?
     @posts = @posts.order('created_at desc')
 
@@ -21,7 +21,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(params[:post])
+    @post = Post.new(post_params)
     if @post.save
       redirect_to @post, :notice => "The post was created."
     else
@@ -34,7 +34,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @post.update_attributes(params[:post])
+    if @post.update_attributes(post_params)
       redirect_to @post, :notice => "The post was updated."
     else
       render :edit
@@ -48,10 +48,19 @@ class PostsController < ApplicationController
 
   private
 
+  def post_params
+    params[:post] && params[:post].permit(
+      %i{title body youtube_id tag_list published}
+    )
+  end
+
   def retrieve_record
-    @post = Post.scoped
-    @post = Post.where(published: true) unless admin?
-    @post = @post.find(params[:id])
+    posts = if admin?
+      Post.all
+    else
+      Post.where(published: true)
+    end
+    @post = posts.friendly.find(params[:id])
   end
 
   def enforce_friendly_url

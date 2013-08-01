@@ -63,4 +63,20 @@ describe Comment do
     @comment.admin!
     @comment.should be_valid
   end
+
+  it "triggers the notification mailer after a new comment is created" do
+    @comment = FactoryGirl.build(:comment)
+    message = double("Mail::Message").as_null_object
+    expect(Notification).to receive(:new_comment).with(@comment).and_return(
+      message
+    )
+    @comment.save
+  end
+
+  it "does not trigger the notification mailer if the comment was made by the admin" do
+    ENV['ADMIN_EMAIL'] = "admin@example.com"
+    @comment = FactoryGirl.build(:comment, :email => ENV['ADMIN_EMAIL'])
+    expect(Notification).not_to receive(:new_comment)
+    @comment.save
+  end
 end

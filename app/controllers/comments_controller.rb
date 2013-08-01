@@ -2,8 +2,8 @@ class CommentsController < ApplicationController
   before_filter :require_admin, :only => :destroy
 
   def create
-    @post = Post.find(params[:post_id])
-    @comment = @post.comments.build(params[:comment])
+    @post = Post.friendly.find(params[:post_id])
+    @comment = @post.comments.build(comment_params)
     @comment.admin! if admin?
     if @comment.save
       redirect_to @post, :notice => "Thanks for your comment!"
@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:post_id])
+    @post = Post.friendly.find(params[:post_id])
     @comment = Comment.find(params[:id])
     @comment.destroy
     redirect_to @post, :notice => "The comment was destroyed."
@@ -21,5 +21,11 @@ class CommentsController < ApplicationController
 
   def preview
     render inline: JimmycuadraCom::Markdown.render(params[:comment], safe: true)
+  end
+
+  private
+
+  def comment_params
+    params[:comment] && params[:comment].permit(%i{name email url comment})
   end
 end

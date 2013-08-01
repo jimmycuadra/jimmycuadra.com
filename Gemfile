@@ -1,26 +1,21 @@
 source "https://rubygems.org"
 
-## Default gems
-
 gem "rails"
 gem "thin"
 gem "dalli"
-gem "friendly_id"
+gem "friendly_id", github: "FriendlyId/friendly_id"
 gem "will_paginate"
 gem "acts-as-taggable-on"
 gem "haml"
 gem 'jquery-rails'
-gem "formtastic"
+gem "formtastic", ">= 2.3.0.rc"
 gem "coderay"
 gem "redcarpet"
 gem "nokogiri"
 gem "rails_autolink"
-
-group :assets do
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'uglifier'
-end
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier'
 
 group :production do
   gem "pg"

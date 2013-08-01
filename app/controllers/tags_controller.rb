@@ -5,7 +5,7 @@ class TagsController < ApplicationController
 
   def show
     begin
-      @tag = ActsAsTaggableOn::Tag.find(params[:id])
+      @tag = ActsAsTaggableOn::Tag.friendly.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       return redirect_to tags_path, :notice => "That tag was not found. The full list of tags is displayed below."
     end

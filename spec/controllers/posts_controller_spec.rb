@@ -56,7 +56,7 @@ describe PostsController do
 
   context "as an admin" do
     before do
-      controller.stub(:admin?).and_return(true)
+      allow(controller).to receive(:admin?).and_return(true)
     end
 
     describe "#new" do
