@@ -18,9 +18,11 @@ gem "rails_autolink"
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
+gem "rack-cache"
 
 group :production do
   gem "pg"
+  gem "rails_12factor"
 end
 
 group :development do
