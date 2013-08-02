@@ -1,4 +1,4 @@
-JimmycuadraCom::Application.routes.draw do
+JimmyCuadra::Application.routes.draw do
   # default route
   root to: "posts#index"
 

@@ -6,6 +6,6 @@ module ApplicationHelper
   end
 
   def markdown(text, options = {})
-    JimmycuadraCom::Markdown.render(text, options)
+    JimmyCuadra::Markdown.render(text, options)
   end
 end

@@ -6,7 +6,7 @@ require "action_mailer/railtie"
 require "sprockets/railtie"
 Bundler.require(:default, Rails.env)
 
-module JimmycuadraCom
+module JimmyCuadra
   class Application < Rails::Application
     config.cache_store = :dalli_store
     config.autoload_paths += %W(#{config.root}/lib)

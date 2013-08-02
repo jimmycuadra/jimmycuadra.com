@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
   end
 
   def preview
-    render inline: JimmycuadraCom::Markdown.render(params[:comment], safe: true)
+    render inline: JimmyCuadra::Markdown.render(params[:comment], safe: true)
   end
 
   private

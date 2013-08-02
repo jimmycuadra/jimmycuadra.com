@@ -1,4 +1,4 @@
-module JimmycuadraCom
+module JimmyCuadra
   module Markdown
     extend self
 
