@@ -4,4 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
-JimmycuadraCom::Application.load_tasks
+JimmyCuadra::Application.load_tasks
