@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
-  before_filter :require_admin, :except => [:index, :show]
-  before_filter :retrieve_record, :only => [:show, :update, :destroy]
-  before_filter :enforce_friendly_url, :only => :show
+  before_filter :require_admin, except: [:index, :show]
+  before_filter :retrieve_record, only: [:show, :update, :destroy]
+  before_filter :enforce_friendly_url, only: :show
 
   def index
     @posts = Post.all
@@ -9,7 +9,7 @@ class PostsController < ApplicationController
     @posts = @posts.order('created_at desc')
 
     respond_to do |format|
-      format.html { @posts = @posts.paginate(:page => params[:page], :per_page => 3) }
+      format.html { @posts = @posts.paginate(page: params[:page], per_page: 3) }
       format.atom { @posts = @posts.limit(10) }
     end
   end
@@ -23,7 +23,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save
-      redirect_to @post, :notice => "The post was created."
+      redirect_to @post, notice: "The post was created."
     else
       render :new
     end
@@ -35,7 +35,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update_attributes(post_params)
-      redirect_to @post, :notice => "The post was updated."
+      redirect_to @post, notice: "The post was updated."
     else
       render :edit
     end
@@ -43,7 +43,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to posts_path, :notice => "The post was destroyed."
+    redirect_to posts_path, notice: "The post was destroyed."
   end
 
   private
@@ -64,6 +64,6 @@ class PostsController < ApplicationController
   end
 
   def enforce_friendly_url
-    redirect_to @post, :status => :moved_permanently unless params[:id] == @post.friendly_id
+    redirect_to @post, status: :moved_permanently unless params[:id] == @post.friendly_id
   end
 end

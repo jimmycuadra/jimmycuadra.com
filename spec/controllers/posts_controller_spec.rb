@@ -5,7 +5,7 @@ describe PostsController do
 
   [:new, :create, :edit, :update, :destroy].each do |action|
     it "requires an admin for ##{action}" do
-      get action, :id => 1
+      get action, id: 1
       response.should redirect_to(root_path)
       flash[:notice].should include("not authorized")
     end
@@ -27,7 +27,7 @@ describe PostsController do
       it "displays the 10 most recent posts in descending order" do
         recent_posts = []
         11.times { |n| recent_posts.push FactoryGirl.create(:post) }
-        get :index, :format => :atom
+        get :index, format: :atom
         assigns(:posts).should == recent_posts.tap { |o| o.shift }.reverse
       end
     end
@@ -39,17 +39,17 @@ describe PostsController do
     end
 
     it "renders the show template" do
-      get :show, :id => Post.first.to_param
+      get :show, id: Post.first.to_param
       response.should render_template(:show)
     end
 
     it "displays the post" do
-      get :show, :id => Post.first.to_param
+      get :show, id: Post.first.to_param
       assigns(:post).should == Post.first
     end
 
     it "enforces friendly URLs" do
-      get :show, :id => Post.first.id
+      get :show, id: Post.first.id
       response.status.should == 301
     end
   end
@@ -70,14 +70,14 @@ describe PostsController do
       context "with valid parameters" do
         it "increases the post count by 1" do
           expect {
-            post :create, { :post => FactoryGirl.attributes_for(:post) }
+            post :create, { post: FactoryGirl.attributes_for(:post) }
           }.to change {
             Post.count
           }.from(0).to(1)
         end
 
         it "redirects to the new post with flash" do
-          post :create, { :post => FactoryGirl.attributes_for(:post) }
+          post :create, { post: FactoryGirl.attributes_for(:post) }
           response.should redirect_to assigns(:post)
           flash[:notice].should include("created")
         end
@@ -94,7 +94,7 @@ describe PostsController do
     describe "#edit" do
       before do
         FactoryGirl.create(:post)
-        get :edit, :id => Post.first.id
+        get :edit, id: Post.first.id
       end
 
       it "renders the edit template" do
@@ -113,7 +113,7 @@ describe PostsController do
 
       context "with valid parameters" do
         before do
-          put :update, :id => @post.id, :post => { :body => "Updated body" }
+          put :update, id: @post.id, post: { body: "Updated body" }
         end
 
         it "redirects to the updated post with flash" do
@@ -124,7 +124,7 @@ describe PostsController do
 
       context "with invalid parameters" do
         it "renders :edit" do
-          put :update, :id => @post.id, :post => { :body => nil }
+          put :update, id: @post.id, post: { body: nil }
           response.should render_template(:edit)
         end
       end
@@ -137,12 +137,12 @@ describe PostsController do
 
       it "destroys the post" do
         post_id = Post.first.id
-        delete :destroy, :id => post_id
+        delete :destroy, id: post_id
         expect { Post.find(post_id) }.to raise_error(ActiveRecord::RecordNotFound)
       end
 
       it "redirects to :index with flash" do
-        delete :destroy, :id => Post.first.id
+        delete :destroy, id: Post.first.id
         response.should redirect_to posts_path
         flash[:notice].should include("destroyed")
       end

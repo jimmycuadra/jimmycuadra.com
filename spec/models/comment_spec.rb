@@ -59,7 +59,7 @@ describe Comment do
   end
 
   it "autofills fields if the commenter is the admin" do
-    @comment = @post.comments.build(:comment => "I'm an admin!")
+    @comment = @post.comments.build(comment: "I'm an admin!")
     @comment.admin!
     @comment.should be_valid
   end
@@ -75,7 +75,7 @@ describe Comment do
 
   it "does not trigger the notification mailer if the comment was made by the admin" do
     ENV['ADMIN_EMAIL'] = "admin@example.com"
-    @comment = FactoryGirl.build(:comment, :email => ENV['ADMIN_EMAIL'])
+    @comment = FactoryGirl.build(:comment, email: ENV['ADMIN_EMAIL'])
     expect(Notification).not_to receive(:new_comment)
     @comment.save
   end

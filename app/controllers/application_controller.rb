@@ -9,10 +9,10 @@ class ApplicationController < ActionController::Base
   private
 
   def require_admin
-    redirect_to root_path, :notice => "You are not authorized." unless admin?
+    redirect_to root_path, notice: "You are not authorized." unless admin?
   end
 
   def require_no_admin
-    redirect_to root_path, :notice => "You are already logged in." if admin?
+    redirect_to root_path, notice: "You are already logged in." if admin?
   end
 end

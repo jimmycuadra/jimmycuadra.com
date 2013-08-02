@@ -8,7 +8,7 @@ describe CommentsController do
   let(:comment) { blog_post.comments.create(comment_attributes) }
 
   it "requires an admin for #destroy" do
-    delete :destroy, :post_id => blog_post.to_param, :id => comment.to_param
+    delete :destroy, post_id: blog_post.to_param, id: comment.to_param
     response.should redirect_to(root_path)
     flash[:notice].should include("not authorized")
   end
@@ -17,14 +17,14 @@ describe CommentsController do
     context "with valid attributes" do
       it "increase's the post's comment count" do
         expect {
-          post :create, :post_id => blog_post.to_param, :comment => comment_attributes
+          post :create, post_id: blog_post.to_param, comment: comment_attributes
         }.to change {
           blog_post.comments.count
         }.from(0).to(1)
       end
 
       it "redirects to the post" do
-        post :create, :post_id => blog_post.to_param, :comment => comment_attributes
+        post :create, post_id: blog_post.to_param, comment: comment_attributes
         response.should redirect_to(blog_post)
         flash[:notice].should include("Thanks")
       end
@@ -32,7 +32,7 @@ describe CommentsController do
 
     context "with invalid attributes" do
       it "renders the post's show" do
-        post :create, :post_id => blog_post.to_param
+        post :create, post_id: blog_post.to_param
         response.should render_template('posts/show')
       end
     end
@@ -40,7 +40,7 @@ describe CommentsController do
     it "marks comments as admin comments if the admin is logged in" do
       allow(controller).to receive(:admin?).and_return(true)
       expect {
-        post :create, :post_id => blog_post.to_param, :comment => { :comment => "I'm an admin!" }
+        post :create, post_id: blog_post.to_param, comment: { comment: "I'm an admin!" }
       }.to change {
         blog_post.comments.count
       }.from(0).to(1)
@@ -53,12 +53,12 @@ describe CommentsController do
     end
 
     it "destroys the comment" do
-      delete :destroy, :post_id => blog_post.to_param, :id => comment.to_param
+      delete :destroy, post_id: blog_post.to_param, id: comment.to_param
       expect { Comment.find(comment.to_param) }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
     it "redirects to the post with flash" do
-      delete :destroy, :post_id => blog_post.to_param, :id => comment.to_param
+      delete :destroy, post_id: blog_post.to_param, id: comment.to_param
       response.should redirect_to(blog_post)
       flash[:notice].should include("destroyed")
     end

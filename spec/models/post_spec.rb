@@ -24,7 +24,7 @@ describe Post do
 
   it "destroys associated comments when destroyed" do
     @post.save
-    FactoryGirl.create(:comment, :post_id => @post.id)
+    FactoryGirl.create(:comment, post_id: @post.id)
     @post.reload.destroy
     Comment.count.should == 0
   end
@@ -122,7 +122,7 @@ describe Post do
     end
 
     it "destroys orphaned tags when the post is destroyed" do
-      FactoryGirl.create(:post, :tag_list => "ruby")
+      FactoryGirl.create(:post, tag_list: "ruby")
       @post.reload.destroy
       ActsAsTaggableOn::Tag.count.should == 1
     end
@@ -131,7 +131,7 @@ describe Post do
 
   describe "#comments_allowed?" do
     it "returns false if the post is older than 2 weeks" do
-      @post = FactoryGirl.build(:post, :created_at => 3.weeks.ago)
+      @post = FactoryGirl.build(:post, created_at: 3.weeks.ago)
       @post.comments_allowed?.should == false
     end
 

@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_filter :require_no_admin, :only => [:new, :create]
+  before_filter :require_no_admin, only: [:new, :create]
 
   def new
   end
@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
   def create
     if password_match?(params[:password])
       session[:admin] = true
-      redirect_to root_path, :notice => "You are now logged in."
+      redirect_to root_path, notice: "You are now logged in."
     else
       flash.now[:notice] = "Invalid password."
       render :new
@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
 
   def destroy
     reset_session
-    redirect_to root_path, :notice => "You are now logged out."
+    redirect_to root_path, notice: "You are now logged out."
   end
 
   private

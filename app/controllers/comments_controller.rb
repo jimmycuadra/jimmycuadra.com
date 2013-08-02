@@ -1,14 +1,14 @@
 class CommentsController < ApplicationController
-  before_filter :require_admin, :only => :destroy
+  before_filter :require_admin, only: :destroy
 
   def create
     @post = Post.friendly.find(params[:post_id])
     @comment = @post.comments.build(comment_params)
     @comment.admin! if admin?
     if @comment.save
-      redirect_to @post, :notice => "Thanks for your comment!"
+      redirect_to @post, notice: "Thanks for your comment!"
     else
-      render 'posts/show', :layout => 'application'
+      render 'posts/show', layout: 'application'
     end
   end
 
@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
     @post = Post.friendly.find(params[:post_id])
     @comment = Comment.find(params[:id])
     @comment.destroy
-    redirect_to @post, :notice => "The comment was destroyed."
+    redirect_to @post, notice: "The comment was destroyed."
   end
 
   def preview

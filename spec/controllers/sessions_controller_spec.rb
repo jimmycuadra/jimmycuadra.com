@@ -23,7 +23,7 @@ describe SessionsController do
     context "with a valid password" do
       before do
         ENV['ADMIN_PASSWORD'] = 'password'
-        post :create, :password => 'password'
+        post :create, password: 'password'
       end
 
       it "logs in as an admin" do
@@ -39,7 +39,7 @@ describe SessionsController do
     context "with an invalid password" do
       it "renders the new template with a flash" do
         ENV['ADMIN_PASSWORD'] = 'password'
-        post :create, :password => 'foo'
+        post :create, password: 'foo'
         response.should render_template(:new)
         flash[:notice].should include("Invalid")
       end
