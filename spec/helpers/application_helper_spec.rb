@@ -3,24 +3,24 @@ require 'spec_helper'
 describe ApplicationHelper do
   describe "#markdown" do
     it "uses hard wraps" do
-      markdown("foo\nbar").should =~ %r{<br>}
+      expect(markdown("foo\nbar")).to match(%r{<br>})
     end
 
     it "autolinks URLs" do
-      markdown("http://foo.com/").should =~ %r{href}
+      expect(markdown("http://foo.com/")).to match(%r{href})
     end
 
     it "should not add emphasis in Ruby method names" do
-      markdown("foo_bar_baz").should_not =~ %r{em}
+      expect(markdown("foo_bar_baz")).not_to match(%r{em})
     end
 
     it "highlights fenced code blocks with CodeRay" do
-      markdown("``` ruby\nclass Foo; end\n```").should =~ /CodeRay/
+      expect(markdown("``` ruby\nclass Foo; end\n```")).to match(/CodeRay/)
     end
 
     context "with the :safe option" do
       it "removes HTML" do
-        markdown("<b>lololol</b>", safe: true).should_not =~ /<b>/
+        expect(markdown("<b>lololol</b>", safe: true)).not_to match(/<b>/)
       end
     end
   end

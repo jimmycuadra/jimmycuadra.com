@@ -8,16 +8,18 @@ describe Notification do
     end
 
     it "queues a message for new comments" do
-      ActionMailer::Base.deliveries.should_not be_empty
+      expect(ActionMailer::Base.deliveries).not_to be_empty
     end
 
     it "sends email to and from the admin" do
-      @email.to.should == [ENV['ADMIN_EMAIL']]
-      @email.from.should == [ENV['ADMIN_EMAIL']]
+      expect(@email.to).to eq([ENV['ADMIN_EMAIL']])
+      expect(@email.from).to eq([ENV['ADMIN_EMAIL']])
     end
 
     it "sets an appropriate subject" do
-      @email.subject.should == "New comment from #{@comment.name} on #{@comment.post.title}"
+      expect(@email.subject).to eq <<-SUBJECT.chomp
+New comment from #{@comment.name} on #{@comment.post.title}
+SUBJECT
     end
   end
 end

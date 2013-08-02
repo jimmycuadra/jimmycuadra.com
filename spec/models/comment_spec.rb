@@ -7,61 +7,61 @@ describe Comment do
   end
 
   it "saves valid records" do
-    @comment.should be_valid
+    expect(@comment).to be_valid
   end
 
   it "requires a name" do
     @comment.name = nil
     @comment.valid?
-    @comment.should have(1).error_on(:name)
+    expect(@comment).to have(1).error_on(:name)
   end
 
   it "requires an email address" do
     @comment.email = nil
     @comment.valid?
-    @comment.should have(1).error_on(:email)
+    expect(@comment).to have(1).error_on(:email)
   end
 
   it "requires email addresses are a valid format" do
     @comment.email = "not an email address"
     @comment.valid?
-    @comment.should have(1).error_on(:email)
+    expect(@comment).to have(1).error_on(:email)
   end
 
   it "prepends http:// to the URL before saving if a URL is provided" do
     @comment.url = "example.com"
     @comment.save
-    @comment.url.should =~ /^http:\/\//
+    expect(@comment.url).to match(%r{^http://})
   end
 
   it "doesn't prepend http:// if the URL already has it" do
     original_url = @comment.url
     @comment.save
-    @comment.url.should == original_url
+    expect(@comment.url).to eq(original_url)
   end
 
   it "doesn't prepend http:// if the URL starts with https://" do
     original_url = @comment.url = "https://example.com/"
     @comment.save
-    @comment.url.should == original_url
+    expect(@comment.url).to eq(original_url)
   end
 
   it "doesn't prepend http:// to the URL if no URL is provided" do
     @comment.url = nil
     @comment.save
-    @comment.url.should be_blank
+    expect(@comment.url).to be_blank
   end
 
   it "requires a comment" do
     @comment.comment = nil
     @comment.valid?
-    @comment.should have(1).error_on(:comment)
+    expect(@comment).to have(1).error_on(:comment)
   end
 
   it "autofills fields if the commenter is the admin" do
     @comment = @post.comments.build(comment: "I'm an admin!")
     @comment.admin!
-    @comment.should be_valid
+    expect(@comment).to be_valid
   end
 
   it "triggers the notification mailer after a new comment is created" do

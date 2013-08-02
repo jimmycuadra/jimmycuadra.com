@@ -9,8 +9,8 @@ describe CommentsController do
 
   it "requires an admin for #destroy" do
     delete :destroy, post_id: blog_post.to_param, id: comment.to_param
-    response.should redirect_to(root_path)
-    flash[:notice].should include("not authorized")
+    expect(response).to redirect_to(root_path)
+    expect(flash[:notice]).to include("not authorized")
   end
 
   describe "#create" do
@@ -25,15 +25,15 @@ describe CommentsController do
 
       it "redirects to the post" do
         post :create, post_id: blog_post.to_param, comment: comment_attributes
-        response.should redirect_to(blog_post)
-        flash[:notice].should include("Thanks")
+        expect(response).to redirect_to(blog_post)
+        expect(flash[:notice]).to include("Thanks")
       end
     end
 
     context "with invalid attributes" do
       it "renders the post's show" do
         post :create, post_id: blog_post.to_param
-        response.should render_template('posts/show')
+        expect(response).to render_template('posts/show')
       end
     end
 
@@ -59,20 +59,20 @@ describe CommentsController do
 
     it "redirects to the post with flash" do
       delete :destroy, post_id: blog_post.to_param, id: comment.to_param
-      response.should redirect_to(blog_post)
-      flash[:notice].should include("destroyed")
+      expect(response).to redirect_to(blog_post)
+      expect(flash[:notice]).to include("destroyed")
     end
   end
 
   describe "#preview" do
     it "generates an HTML preview of the comment" do
       get :preview, post_id: blog_post.to_param, comment: %{Foo `bar` *baz*!}
-      response.body.should =~ %r{<code>bar</code>}
+      expect(response.body).to match(%r{<code>bar</code>})
     end
 
     it "uses safe Markdown options to prevent injection" do
       get :preview, post_id: blog_post.to_param, comment: %{<script>alert("lol");</script>}
-      response.body.should_not =~ %r{<script>}
+      expect(response.body).not_to match(%r{<script>})
     end
   end
 end

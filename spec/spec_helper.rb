@@ -19,6 +19,6 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |file| require file }
 
 RSpec.configure do |config|
   config.use_transactional_fixtures = true
-
+  config.expect_with(:rspec) { |c| c.syntax = :expect }
   config.include CapybaraHelper
 end

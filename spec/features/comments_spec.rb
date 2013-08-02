@@ -27,15 +27,15 @@ end
     fill_in "URL", with: "example.com"
     fill_in "Comment", with: comment_body
     click_on "Add comment"
-    page.should have_content("Bongo commented")
-    page.should have_content("This blog totally sucks")
+    expect(page).to have_content("Bongo commented")
+    expect(page).to have_content("This blog totally sucks")
   end
 
   scenario "previewing a comment", js: true do
     visit post_path(post)
     fill_in "Comment", with: comment_body
     click_on "Preview comment"
-    page.should_not have_content("Bongo commented")
-    page.should have_selector(".CodeRay")
+    expect(page).not_to have_content("Bongo commented")
+    expect(page).to have_selector(".CodeRay")
   end
 end
