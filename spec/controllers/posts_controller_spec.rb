@@ -93,7 +93,7 @@ describe PostsController do
     describe "#edit" do
       before do
         FactoryGirl.create(:post)
-        get :edit, id: Post.first.id
+        get :edit, id: Post.first.slug
       end
 
       it "renders the edit template" do
