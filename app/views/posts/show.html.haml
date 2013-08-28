@@ -6,13 +6,3 @@
   - unless comments.empty?
     %h2 Comments
     = render comments
-  - if @post.comments_allowed?
-    %h2 Add a comment
-    %p
-      %em Comments are rendered with Markdown.
-    = render "comments/form"
-  - else
-    %h2 Comments are closed
-
-    %p
-      Comments are automatically closed 2 weeks after publication. If you still have something to say about the article, feel free to #{link_to "contact me", about_path}.
