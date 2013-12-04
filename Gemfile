@@ -2,10 +2,10 @@ source "https://rubygems.org"
 
 ruby "2.0.0"
 
-gem "rails"
+gem "rails", "4.0.2"
 gem "thin"
 gem "dalli"
-gem "friendly_id", github: "FriendlyId/friendly_id"
+gem "friendly_id"
 gem "will_paginate"
 gem "acts-as-taggable-on"
 gem "haml"
