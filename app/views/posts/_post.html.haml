@@ -9,7 +9,7 @@
       \ -
       = link_to "Delete post", post, method: :delete, data: { confirm: "Are you sure you want to delete this post?" }
   .social
-    .g-plusone{ data: { size: "medium", href: post_url(post) } }
+    .g-plus{ data: { action: "share", annotation: "bubble", href: post_url(post) } }
     %a.twitter-share-button{ href: "https://twitter.com/share", data: { url: post_url(post), text: post.title, count: "horizontal", via: "jimmycuadra" } } Tweet
   - unless post.published
     .unpublished This post is currently unpublished.
