@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby File.read(File.expand_path("../.ruby-version", __FILE__)).chomp
 
-gem "rails", "4.0.4"
+gem "rails", "4.0.8"
 gem "thin"
 gem "dalli"
 gem "friendly_id"
