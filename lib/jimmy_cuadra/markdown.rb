@@ -17,6 +17,7 @@ module JimmyCuadra
       doc.css("pre").each do |pre|
         codeblock = pre.children.first
         lang = codeblock[:class]
+        next if lang.nil?
         pre.replace CodeRay.scan(codeblock.text, lang).div(css: :class)
       end
 
