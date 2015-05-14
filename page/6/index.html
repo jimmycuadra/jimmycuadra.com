@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      
+      Jimmy Cuadra
+    </title>
+    <link href="/stylesheets/application-58ac5912.css" rel="stylesheet" type="text/css" />
+    <link href='http://feeds.feedburner.com/jimmycuadra' rel='alternate' title='RSS' type='application/rss+xml'>
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-5500916-1');ga('send', 'pageview');</script>
+  </head>
+  <body>
+    <header class='site-header'>
+      <div class='bucket'>
+        <a class='title-link' href='/' title='Jimmy Cuadra'>
+          <img width="75" height="75" alt="Jimmy Cuadra" class="logo" src="/images/logo-3e3e6b15.png" />
+          <hgroup>
+            <h1 class='main-title'>I'm Jimmy Cuadra.</h1>
+            <p>I write about programming and open source software.</p>
+          </hgroup>
+          <div class='clear'></div>
+        </a>
+      </div>
+    </header>
+    <nav>
+      <div class='bucket'>
+        <ul>
+          <li><a title="Writing" href="/">Writing</a></li>
+          <li><a class="sub-nav" title="Writing by tags" href="/tags/">by tags</a></li>
+          <li><a title="Jimmy Cuadra's Résumé" href="/resume/">Résumé</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class='content'>
+      <div class='bucket'>
+        <article itemscope itemtype='http://schema.org/BlogPosting'>
+          <meta content='Jimmy Cuadra' itemprop='author'>
+          <header>
+            <h1 class='post-title' itemprop='headline'><a title="jquery-tmpl-rails: jQuery Templates for the Rails asset pipeline" href="/posts/jquery-tmpl-rails-jquery-templates-for-the-rails-asset-pipeline/">jquery-tmpl-rails: jQuery Templates for the Rails asset pipeline</a></h1>
+            <data itemprop='datePublished' value='2011-09-09'>September 09, 2011</data>
+          </header>
+          <div class='social'>
+            <div class='g-plus' data-action='share' data-annotation='bubble' data-href='/posts/jquery-tmpl-rails-jquery-templates-for-the-rails-asset-pipeline/'></div>
+            <a class='twitter-share-button' data-count='horizontal' data-text='jquery-tmpl-rails: jQuery Templates for the Rails asset pipeline' data-url='/posts/jquery-tmpl-rails-jquery-templates-for-the-rails-asset-pipeline/' data-via='jimmycuadra' href='https://twitter.com/share'>Tweet</a>
+          </div>
+          <p>There are myriad of JavaScript templating libraries available. The one officially adopted by jQuery is the <a href="http://api.jquery.com/category/plugins/templates/">jQuery Templates plugin</a>. I have released <a href="https://github.com/jimmycuadra/jquery-tmpl-rails">jquery-tmpl-rails</a>, a gem which adds the plugin and a corresponding <a href="https://github.com/sstephenson/sprockets">Sprockets</a> engine to the <a href="http://guides.rubyonrails.org/asset_pipeline.html">asset pipeline</a> for Rails 3.1 applications.</p>
+          
+          <h2 id="installation">Installation</h2>
+          
+          <p>Install it the usual way by adding it to your Gemfile:</p>
+          
+          <pre><code class="language-ruby">gem "jquery-tmpl-rails"&#x000A;</code></pre>
+          
+          <p>Then run the <code>bundle</code> command from the shell.</p>
+          
+          <h2 id="usage">Usage</h2>
+          
+          <p>Place individual jQuery templates in their own files with the <code>.tmpl</code> extension:</p>
+          
+          <pre><code class="language-html">&lt;!-- app/assets/javascripts/tmpl/author.tmpl --&gt;&#x000A;&lt;div class="author"&gt;${name}&lt;/div&gt;&#x000A;</code></pre>
+          
+          <p>In your manifest file, require the plugin followed by your individual templates. The templates are compiled and named with their Sprockets logical path:</p>
+          
+          <pre><code class="language-javascript">//= require jquery-tmpl&#x000A;//= require tmpl/author&#x000A;&#x000A;$.tmpl("tmpl/author", { name: "Jimmy" }).appendTo("#author");&#x000A;</code></pre>
+          
+          <p>Feedback is appreciated! Happy templating!</p>
+          <footer>
+            <p>
+              This post was tagged with <a title="Writing tagged with jquery" itemprop="keywords" href="/posts/tags/jquery/">jquery</a> and <a title="Writing tagged with ruby on rails" itemprop="keywords" href="/posts/tags/ruby-on-rails/">ruby on rails</a>.
+            </p>
+            <p>
+              Find more content by <a title="Browse writing by tags" href="/tags/">browsing by tags</a>.
+            </p>
+          </footer>
+        </article>
+        <article itemscope itemtype='http://schema.org/BlogPosting'>
+          <meta content='Jimmy Cuadra' itemprop='author'>
+          <header>
+            <h1 class='post-title' itemprop='headline'><a title="ECMAScript 5: Tamper proofing objects" href="/posts/ecmascript-5-tamper-proofing-objects/">ECMAScript 5: Tamper proofing objects</a></h1>
+            <data itemprop='datePublished' value='2011-06-19'>June 19, 2011</data>
+          </header>
+          <div class='social'>
+            <div class='g-plus' data-action='share' data-annotation='bubble' data-href='/posts/ecmascript-5-tamper-proofing-objects/'></div>
+            <a class='twitter-share-button' data-count='horizontal' data-text='ECMAScript 5: Tamper proofing objects' data-url='/posts/ecmascript-5-tamper-proofing-objects/' data-via='jimmycuadra' href='https://twitter.com/share'>Tweet</a>
+          </div>
+          <aside>This is the second in a series of three posts about ECMAScript 5. If you missed the [first part](/posts/ecmascript-5-object-creation-and-property-definition), be sure to check it out.</aside>
+          
+          <p>In the <a href="/posts/ecmascript-5-object-creation-and-property-definition">first part</a> of this series, we took a look at some of the new features offered by the latest edition of JavaScript, ECMAScript 5. In particular, we looked at new methods for object creation and property definition. In this article, we will look at a few ways of protecting objects against unwanted tampering.</p>
+          
+          <h2 id="preventing-extensions">Preventing extensions</h2>
+          
+          <p>The first and simplest method to discuss is <code>Object.preventExtensions</code>. By default, any object can have new properties added to it simply by assigning a new property a value. There may be cases where you want to to prevent this, and that's what <code>Object.preventExtensions</code> does:</p>
+          
+          <pre><code class="language-javascript">var o = {&#x000A;  foo: "bar"&#x000A;};&#x000A;&#x000A;// adding a new property normally:&#x000A;o.hey = "guys";&#x000A;&#x000A;// preventing further extensions:&#x000A;Object.preventExtensions(o);&#x000A;&#x000A;// silent error, or TypeError under strict mode:&#x000A;o.anotherProp = "This will fail!";&#x000A;&#x000A;// existing properties can still be changed:&#x000A;o.hey = "gals";&#x000A;</code></pre>
+          
+          <p>Note that <code>Object.preventExtensions</code> only prevents adding new properties to the object. It's still possible to change the values of existing properties, or even reconfigure or delete properties.</p>
+          
+          <h2 id="preventing-configuration">Preventing configuration</h2>
+          
+          <p>Recall from the <a href="/posts/ecmascript-5-object-creation-and-property-definition">first part</a> of this series that when a property is defined as configurable, it can be deleted from the object, and its attribute description record can be modified. If we want to prevent extensions to an object and also want to prevent configuration of its properties, we can use the <code>Object.seal</code> method. <code>Object.seal</code> does everything that <code>Object.preventExtensions</code> does, but also sets its properties to be <em>non-configurable</em>. This means that properties cannot be deleted, their enumerability cannot change, and they cannot be changed between data properties and accessor properties. <code>Object.seal</code> does not, however, change the state of a property's <em>writability</em>, so the value of existing data properties can continue to be changed if the property was <em>writable</em> when the object was sealed. To illustrate:</p>
+          
+          <pre><code class="language-javascript">var o = {&#x000A;  foo: "bar"&#x000A;};&#x000A;&#x000A;// adding a new property normally:&#x000A;o.hey = "guys";&#x000A;&#x000A;// deleting a property normally:&#x000A;delete o.hey;&#x000A;&#x000A;// sealing the object:&#x000A;Object.seal(o);&#x000A;&#x000A;// silent failure, or TypeError under strict mode:&#x000A;o.anotherProp = "This will fail!";&#x000A;&#x000A;// existing properties can still be changed if they were writable:&#x000A;o.foo = "baz";&#x000A;&#x000A;// silent failure, or TypeError under strict mode:&#x000A;delete o.foo;&#x000A;</code></pre>
+          
+          <h2 id="preventing-writability">Preventing writability</h2>
+          
+          <p>We can do everything <code>Object.seal</code> does, but also protect data properties from being overwritten by using the <code>Object.freeze</code> method.</p>
+          
+          <pre><code class="language-javascript">var o = {&#x000A;  foo: "bar"&#x000A;};&#x000A;&#x000A;// adding a new property normally:&#x000A;o.hey = "guys";&#x000A;&#x000A;// deleting a property normally:&#x000A;delete o.hey;&#x000A;&#x000A;// sealing the object:&#x000A;Object.freeze(o);&#x000A;&#x000A;// silent failures, or TypeErrors under strict mode:&#x000A;o.anotherProp = "This will fail!";&#x000A;o.foo = "baz";&#x000A;delete o.foo;&#x000A;</code></pre>
+          
+          <p>Keep in mind that this only works for data properties, as accessor properties (ones that use getter and setter functions) do not use the <em>writable</em> descriptor property. It's also important to note that these new methods do not prevent extensions, seal, or freeze the values of properties – only the properties themselves. If it is necessary to protect data at a deeper level, manual traversal is required.</p>
+          
+          <h2 id="determining-an-objects-current-state">Determining an object's current state</h2>
+          
+          <p>ECMAScript 5 also supplies us with convenient functions to check whether any of the previously discussed methods have been applied to an object:</p>
+          
+          <ul>
+            <li><code>Object.isExtensible(o)</code> – <code>true</code> if extensions have not been prevented</li>
+            <li><code>Object.isSealed(o)</code> – <code>true</code> if the object is effectively sealed</li>
+            <li><code>Object.isFrozen(o)</code> – <code>true</code> if the object is effectively frozen</li>
+          </ul>
+          
+          <p>For <code>Object.isSealed</code> and <code>Object.isFrozen</code>, I write that these methods check for "effective" sealing and freezing because they simply check that the state of the object matches what the built-in methods would have done. For example, an object can be frozen without ever passing it to <code>Object.freeze</code>:</p>
+          
+          <pre><code class="language-javascript">var o = { foo: "bar" };&#x000A;Object.preventExtensions(o);&#x000A;Object.defineProperty(o, "foo", {&#x000A;  writable: false,&#x000A;  configurable: false&#x000A;});&#x000A;&#x000A;// Object.isFrozen(o) === true&#x000A;</code></pre>
+          
+          <h2 id="a-chart-to-remember-all-this">A chart to remember all this</h2>
+          
+          <table>
+            <tr>
+              <th></th>
+              <th>Object.preventExtensions</th>
+              <th>Object.seal</th>
+              <th>Object.freeze</th>
+            </tr>
+            <tr>
+              <th>Prevents new properties?</th>
+              <td>Yes</td>
+              <td>Yes</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <th>Prevents configuration of existing properties?</th>
+              <td>No</td>
+              <td>Yes</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <th>Prevents assigning existing data properties?</th>
+              <td>No</td>
+              <td>No</td>
+              <td>Yes</td>
+            </tr>
+          </table>
+          
+          <p>In the third and final part of this series, we will look into the new Array methods that have been added with ECMAScript 5.</p>
+          <footer>
+            <p>
+              This post was tagged with <a title="Writing tagged with javascript" itemprop="keywords" href="/posts/tags/javascript/">javascript</a>.
+            </p>
+            <p>
+              Find more content by <a title="Browse writing by tags" href="/tags/">browsing by tags</a>.
+            </p>
+          </footer>
+        </article>
+        <article itemscope itemtype='http://schema.org/BlogPosting'>
+          <meta content='Jimmy Cuadra' itemprop='author'>
+          <header>
+            <h1 class='post-title' itemprop='headline'><a title="ECMAScript 5: Object creation and property definition" href="/posts/ecmascript-5-object-creation-and-property-definition/">ECMAScript 5: Object creation and property definition</a></h1>
+            <data itemprop='datePublished' value='2011-06-08'>June 08, 2011</data>
+          </header>
+          <div class='social'>
+            <div class='g-plus' data-action='share' data-annotation='bubble' data-href='/posts/ecmascript-5-object-creation-and-property-definition/'></div>
+            <a class='twitter-share-button' data-count='horizontal' data-text='ECMAScript 5: Object creation and property definition' data-url='/posts/ecmascript-5-object-creation-and-property-definition/' data-via='jimmycuadra' href='https://twitter.com/share'>Tweet</a>
+          </div>
+          <aside>This is the first in a series of three posts about ECMAScript 5.</aside>
+          
+          <p>The newest version of JavaScript, ECMAScript 5, is now available in the latest browsers, and brings with it a slew of new features. One of the most significant of these features is a group of functions that offer new and powerful ways to create objects and manipulate their properties. "But creating objects and changing their properties is something I could already do in JavaScript," you say. This is true, but ECMAScript 5 addresses some subtleties that were previously not possible.</p>
+          
+          <h2 id="object-creation">Object creation</h2>
+          
+          <p>JavaScript is a prototypal language, but as the wise <a href="http://www.crockford.com/">Douglas Crockford</a> has said, JavaScript itself is ambivalent about its prototypal nature. It has traditionally used a strange inheritance model based on C/Java syntax to mask what it's really doing. Previously, if you had a <code>Parent</code> object and wanted to create a new <code>Child</code> object which inherits from the <code>Parent</code>, you'd have to take multiple steps including assigning an instance of <code>Parent</code> to the <code>Child</code> object's prototype. In ECMAScript 5, this is simplified with the <code>Object.create</code> method. It works like this:</p>
+          
+          <pre><code class="language-javascript">function Parent() { }&#x000A;var parent = new Parent();&#x000A;var child = Object.create(parent);&#x000A;</code></pre>
+          
+          <p>This creates a new object, <code>child</code>, which inherits from <code>parent</code> in one easy step. The argument to <code>Object.create</code> is the object to be used as the child's prototype. It can either be an object or <code>null</code>, if you don't want the new object to inherit from anything. <code>Object.create</code> is handy for creating a simple object which inherits from another, but its hidden power comes from its optional second argument.</p>
+          
+          <h2 id="property-definition">Property definition</h2>
+          
+          <p>Up until now, there were certain subtleties of native objects that could not be emulated by pure JavaScript:</p>
+          
+          <ul>
+            <li>It was not possible for a property to react to assignment by engaging in behavior. An example of this is setting the <code>innerHTML</code> property of a DOM node. Assigning a string to this property would not only change the value of the property, but it would alter the contents of the element in the DOM.</li>
+            <li>Certain native object properties, such as <code>toString</code>, do not show up when iterating through the properties of a child object using a <code>for...in</code> loop. There was no way to create a property in JavaScript that behaved this way, forcing all <code>for...in</code> loops to use <code>hasOwnProperty</code> to restrict the loop to the child's objects non-inherited properties.</li>
+          </ul>
+          
+          <p>The optional second argument to <code>Object.create</code> is a set of <strong>property descriptors</strong>, which allow you to control the above behaviors and more. There are now two types of properties: data properties and accessor properties. Data properties are given an explicit value as we're used to, but accessor properties are given two functions to act as getter and setter methods instead. Here is what they look like:</p>
+          
+          <pre><code class="language-javascript">var child = Object.create(parent, {&#x000A;  dataDescriptor: { value: "This property uses this string as its value." },&#x000A;  accessorDescriptor: {&#x000A;    get: function () { return "I am returning: " + accessorDescriptor; },&#x000A;    set: function (val) { accessorDescriptor = val; }&#x000A;  }&#x000A;});&#x000A;</code></pre>
+          
+          <p>Here we are defining two properties for the <code>child</code> object, <code>dataDescriptor</code> and <code>accessorDescriptor</code>. The <code>dataDescriptor</code> property in this case behaves almost the same as a traditional object property, and except for one subtlety which we'll explore in a moment, it is accessed and set like usual. The <code>accessorDescriptor</code> property, however, uses the supplied functions to get and set its value. Assigning a new value to the property calls the <code>set</code> function and passes in the value being assigned as the parameter. Accessing the property with the usual syntax actually runs the <code>get</code> function and the value returned is whatever the function returns. This allows the value of a property to have arbitrarily complex logic behind it.</p>
+          
+          <p>There are three additional aspects of a property we can control, each given a boolean value:</p>
+          
+          <ol>
+            <li><code>writable</code>: Controls whether or not the property can be assigned. If true, attempts at assignment will fail. Only applies to data descriptors.</li>
+            <li><code>enumerable</code>: Controls whether or not this property will appear in <code>for...in</code> loops.</li>
+            <li><code>configurable</code>: Controls whether or not the property can be deleted, and whether its property descriptor (other than <code>writable</code>) can be changed.</li>
+          </ol>
+          
+          <p>Each of these defaults to <code>false</code> if not supplied. Here is the last code example again with various values for these fields:</p>
+          
+          <pre><code class="language-javascript">var child = Object.create(parent, {&#x000A;  dataDescriptor: {&#x000A;    value: "This property uses this string as its value.",&#x000A;    writable: true,&#x000A;    enumerable: true&#x000A;  },&#x000A;  accessorDescriptor: {&#x000A;    get: function () { return "I am returning: " + accessorDescriptor; },&#x000A;    set: function (val) { accessorDescriptor = val; },&#x000A;    configurable: true&#x000A;  }&#x000A;});&#x000A;</code></pre>
+          
+          <p>In this version, the <code>dataDescriptor</code> property can be assigned and will show up in <code>for...in</code> loops, but it cannot be deleted and its property descriptor cannot be altered further. <code>accessorDescriptor</code>, however, can be deleted and its property descriptor can be altered. The difference between defining a data property with <code>Object.create</code> and a property descriptor rather than simply writing <code>child.dataDescriptor = "This property uses this string as its value";</code> is in the defaults for the three fields. When using <code>Object.create</code>, all three fields default to <code>false</code>, whereas using the classic style they all default to <code>true</code>.</p>
+          
+          <p>It is, of course, possible to use property descriptors to create or alter properties after the creation of the object itself. To do this, you can use the new methods <code>Object.defineProperty</code> and <code>Object.defineProperties</code>. <code>Object.defineProperty</code> takes the object in question, the name of the property, and a single property descriptor as its arguments. <code>Object.defineProperties</code> lets you define multiple properties at once by passing the object in question and an object whose keys are each properties, just as we did with <code>Object.create</code>.</p>
+          
+          <p>These new features in JavaScript offer power previously unattainable in creating and manipulating objects. In the <a href="/posts/ecmascript-5-tamper-proofing-objects">next part</a>, we will take a look at sealing and freezing objects.</p>
+          <footer>
+            <p>
+              This post was tagged with <a title="Writing tagged with javascript" itemprop="keywords" href="/posts/tags/javascript/">javascript</a>.
+            </p>
+            <p>
+              Find more content by <a title="Browse writing by tags" href="/tags/">browsing by tags</a>.
+            </p>
+          </footer>
+        </article>
+        <p class='pagination'>
+          <span><a rel="prev" href="/page/5/">← Previous</a></span>
+          <span>Page 6</span>
+          <span><a rel="next" href="/page/7/">Next →</a></span>
+        </p>
+      </div>
+    </div>
+    <footer class='site-footer'>
+      <div class='bucket'>
+        <p>Logo by <a href="http://stephanielucido.com/" title="Stephanie Lucido">Stephanie Lucido</a>.</p>
+        <small>
+          &copy; 2015 Jimmy Cuadra. All rights reserved.
+        </small>
+      </div>
+    </footer>
+    <script src="/javascripts/application-f844c8db.js" type="text/javascript"></script>
+    <script>
+    (function() {
+      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      po.src = 'https://apis.google.com/js/platform.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+    (function(d, t) {
+      var e = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      e.type = 'text/javascript'; e.async = true; e.src = '//platform.twitter.com/widgets.js';
+      s.parentNode.insertBefore(e, s);
+    })(document, 'script');
+    </script>
+  </body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      Understanding jQuery 1.4's $.proxy() method |
+      Jimmy Cuadra
+    </title>
+    <link href="/stylesheets/application-58ac5912.css" rel="stylesheet" type="text/css" />
+    <link href='http://feeds.feedburner.com/jimmycuadra' rel='alternate' title='RSS' type='application/rss+xml'>
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-5500916-1');ga('send', 'pageview');</script>
+  </head>
+  <body>
+    <header class='site-header'>
+      <div class='bucket'>
+        <a class='title-link' href='/' title='Jimmy Cuadra'>
+          <img width="75" height="75" alt="Jimmy Cuadra" class="logo" src="/images/logo-3e3e6b15.png" />
+          <hgroup>
+            <h1 class='main-title'>I'm Jimmy Cuadra.</h1>
+            <p>I write about programming and open source software.</p>
+          </hgroup>
+          <div class='clear'></div>
+        </a>
+      </div>
+    </header>
+    <nav>
+      <div class='bucket'>
+        <ul>
+          <li><a title="Writing" href="/">Writing</a></li>
+          <li><a class="sub-nav" title="Writing by tags" href="/tags/">by tags</a></li>
+          <li><a title="Jimmy Cuadra's Résumé" href="/resume/">Résumé</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class='content'>
+      <div class='bucket'>
+        <article itemscope itemtype='http://schema.org/BlogPosting'>
+          <meta content='Jimmy Cuadra' itemprop='author'>
+          <header>
+            <h1 class='post-title' itemprop='headline'><a title="Understanding jQuery 1.4's $.proxy() method" href="/posts/understanding-jquery-14s-proxy-method/">Understanding jQuery 1.4's $.proxy() method</a></h1>
+            <data itemprop='datePublished' value='2010-01-15'>January 15, 2010</data>
+          </header>
+          <div class='social'>
+            <div class='g-plus' data-action='share' data-annotation='bubble' data-href='/posts/understanding-jquery-14s-proxy-method/'></div>
+            <a class='twitter-share-button' data-count='horizontal' data-text="Understanding jQuery 1.4's $.proxy() method" data-url='/posts/understanding-jquery-14s-proxy-method/' data-via='jimmycuadra' href='https://twitter.com/share'>Tweet</a>
+          </div>
+          <p>No sooner than I wrote about how to control a JavaScript function's context with the <a href="http://www.prototypejs.org/">Prototype</a> <code>Function.prototype.bind</code>, <a href="http://jquery.com/">jQuery 1.4</a> is released and one of its new tricks is <code>jQuery.proxy</code>, which we can use for exactly the same purpose.</p>
+          
+          <p>To refresh you, the problem that needed solving was how to preserve a reference to the calling object when the value of <code>this</code> is changed. Consider the following:</p>
+          
+          <pre><code class="language-javascript">MyModule = function() {&#x000A;  this.$div = $('#testdiv');&#x000A;  this.myString = "Hi! I'm an object property!";&#x000A;  &#x000A;  this.$div.click(this.handleClick);&#x000A;};&#x000A;&#x000A;MyModule.prototype.handleClick = function() {&#x000A;  console.log(this.myString); // undefined&#x000A;};&#x000A;&#x000A;var m = new MyModule();&#x000A;</code></pre>
+          
+          <p>When you click on the div, we are given <code>undefined</code>, because <code>this</code> now refers to the DOM element that triggered the event and not the instance of <code>MyModule</code> we've stored in the variable <code>m</code>. The element does not have a <code>myString</code> property, and hence, it is undefined. So how do we access the <code>myString</code> we want? The solution I wrote about previously was to use <code>Function.prototype.bind</code> from the Prototype library, which allows us to control what <code>this</code> will refer to inside the function we're calling. But now in version 1.4 of jQuery, we can handle this situation with the new <code>jQuery.proxy</code> method. The method has two signatures:</p>
+          
+          <pre><code class="language-javascript">jQuery.proxy( function, scope )&#x000A;jQuery.proxy( scope, name )&#x000A;</code></pre>
+          
+          <p>In the first form, the <code>function</code> argument is the function we're calling, and the <code>scope</code> argument sets the context the function should be called in. In the second form, the scope comes first, and the <code>name</code> argument is a string that gives the name of the function we're calling. Note that the function provided in <code>name</code> should be a property of whatever object we're using as the scope. Let's look at an example to make this more clear.</p>
+          
+          <pre><code class="language-javascript">MyModule = function() {&#x000A;  this.$div = $('#testdiv');&#x000A;  this.myString = "Hi! I'm an object property!";&#x000A;  &#x000A;  this.$div.click($.proxy(this.handleClick, this));&#x000A;};&#x000A;&#x000A;MyModule.prototype.handleClick = function() {&#x000A;  console.log(this.myString); // Hi! I'm an object property!&#x000A;};&#x000A;&#x000A;var m = new MyModule();&#x000A;</code></pre>
+          
+          <p>Now when we click on the div, we see the result we want, because <code>this</code> is now bound to our <code>m</code> object, which is an instance of <code>MyModule</code>. This uses <code>jQuery.proxy</code>'s first signature. We could achieve exactly the same effect using the second signature by using this line instead:</p>
+          
+          <pre><code class="language-javascript">this.$div.click($.proxy(this, "handleClick"));&#x000A;</code></pre>
+          
+          <p>The small "gotcha" that remains is how to access the DOM element that triggered the event, now that we've changed the value of <code>this</code> within our function. The good news is that, like before, all event handling functions are passed an <code>event</code> object with details about the event that occurred. Within that event object is a property called <code>currentTarget</code>, which holds exactly what we're looking for: the DOM element that triggered the event. Here is an example of how to access it:</p>
+          
+          <pre><code class="language-javascript">MyModule.prototype.handleClick = function(event) {&#x000A;  console.log(this.myString); // Hi! I'm an object property!&#x000A;  console.log(event.currentTarget); // &lt;div id="testdiv"&gt;&#x000A;};&#x000A;</code></pre>
+          
+          <p>Thanks to <code>jQuery.proxy</code>, we now have the ability to control function scope with jQuery alone. To read more about all the new features in jQuery 1.4, check out John Resig's overview on <a href="http://jquery14.com/day-01/jquery-14">The 14 Days of jQuery</a>.</p>
+          <footer>
+            <p>
+              This post was tagged with <a title="Writing tagged with javascript" itemprop="keywords" href="/posts/tags/javascript/">javascript</a> and <a title="Writing tagged with jquery" itemprop="keywords" href="/posts/tags/jquery/">jquery</a>.
+            </p>
+            <p>
+              Find more content by <a title="Browse writing by tags" href="/tags/">browsing by tags</a>.
+            </p>
+          </footer>
+        </article>
+      </div>
+    </div>
+    <footer class='site-footer'>
+      <div class='bucket'>
+        <p>Logo by <a href="http://stephanielucido.com/" title="Stephanie Lucido">Stephanie Lucido</a>.</p>
+        <small>
+          &copy; 2015 Jimmy Cuadra. All rights reserved.
+        </small>
+      </div>
+    </footer>
+    <script src="/javascripts/application-f844c8db.js" type="text/javascript"></script>
+    <script>
+    (function() {
+      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      po.src = 'https://apis.google.com/js/platform.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+    (function(d, t) {
+      var e = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      e.type = 'text/javascript'; e.async = true; e.src = '//platform.twitter.com/widgets.js';
+      s.parentNode.insertBefore(e, s);
+    })(document, 'script');
+    </script>
+  </body>
+</html>

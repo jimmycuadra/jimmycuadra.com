@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      Organizing JavaScript with Namespaces and Function Prototypes |
+      Jimmy Cuadra
+    </title>
+    <link href="/stylesheets/application-58ac5912.css" rel="stylesheet" type="text/css" />
+    <link href='http://feeds.feedburner.com/jimmycuadra' rel='alternate' title='RSS' type='application/rss+xml'>
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-5500916-1');ga('send', 'pageview');</script>
+  </head>
+  <body>
+    <header class='site-header'>
+      <div class='bucket'>
+        <a class='title-link' href='/' title='Jimmy Cuadra'>
+          <img width="75" height="75" alt="Jimmy Cuadra" class="logo" src="/images/logo-3e3e6b15.png" />
+          <hgroup>
+            <h1 class='main-title'>I'm Jimmy Cuadra.</h1>
+            <p>I write about programming and open source software.</p>
+          </hgroup>
+          <div class='clear'></div>
+        </a>
+      </div>
+    </header>
+    <nav>
+      <div class='bucket'>
+        <ul>
+          <li><a title="Writing" href="/">Writing</a></li>
+          <li><a class="sub-nav" title="Writing by tags" href="/tags/">by tags</a></li>
+          <li><a title="Jimmy Cuadra's Résumé" href="/resume/">Résumé</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class='content'>
+      <div class='bucket'>
+        <article itemscope itemtype='http://schema.org/BlogPosting'>
+          <meta content='Jimmy Cuadra' itemprop='author'>
+          <header>
+            <h1 class='post-title' itemprop='headline'><a title="Organizing JavaScript with Namespaces and Function Prototypes" href="/posts/organizing-javascript-with-namespaces-and-function-prototypes/">Organizing JavaScript with Namespaces and Function Prototypes</a></h1>
+            <data itemprop='datePublished' value='2010-01-10'>January 10, 2010</data>
+          </header>
+          <div class='social'>
+            <div class='g-plus' data-action='share' data-annotation='bubble' data-href='/posts/organizing-javascript-with-namespaces-and-function-prototypes/'></div>
+            <a class='twitter-share-button' data-count='horizontal' data-text='Organizing JavaScript with Namespaces and Function Prototypes' data-url='/posts/organizing-javascript-with-namespaces-and-function-prototypes/' data-via='jimmycuadra' href='https://twitter.com/share'>Tweet</a>
+          </div>
+          <p>Keeping your JavaScript code organized and readable can be a bit of a task. Since I started with jQuery, most of the JavaScript for my applications has just been inside a giant <code>$(function() { })</code> block, and as the code grows longer and more complex, it becomes much harder to find the thing you're looking for and edit it later. I was searching for a design pattern that would help me organize my code in a way such that I wouldn't dread looking at my JavaScript files in the future. My solution came in the form of <strong>namespacing</strong> and building modules with <strong>function prototypes</strong>.</p>
+          
+          <h2 id="namespaces">Namespaces</h2>
+          
+          <p>A <strong>namespace</strong> is a context in which variables can exist without conflicting with other variables of the same name elsewhere. For example, say I write a function called <code>insert</code> for inserting some text into a page. Then I include a 3rd party library that also defines a function called <code>insert</code> (and for the sake of argument, is not namespaced). My original <code>insert</code> function has now been overridden by the library's version. This type of collision is rarely what you want and can introduce some major headaches. You can get around this by encapsulating your code in an object that is unlikely to collide with other libraries and then accessing it with <code>MyObject.function</code>. It's a good idea to put all the code for your project under one main object (named after your project) and then separate the different sections of your code into modules within that object. Start with this at the very beginning of all your JavaScript code (I'll be using my upcoming <strong>More Things Need To</strong> project as an example):</p>
+          
+          <pre><code class="language-javascript">// file: main.js&#x000A;if (typeof MTNT == 'undefined') {&#x000A;  MTNT = {};&#x000A;}&#x000A;</code></pre>
+          
+          <p>This creates a new empty object called <code>MTNT</code>, but does not overwrite it if for some reason it already exists. Now, you can write your code in modules (that are themselves further namespaces) that exist as properties of the global namespace object. It is a good idea to also put these modules in separate files to keep things clean. For example:</p>
+          
+          <pre><code class="language-javascript">// file: mtnt.form-validator.js&#x000A;MTNT.FormValidator = function() {&#x000A;  // code for form validation goes here&#x000A;}&#x000A;</code></pre>
+          
+          <p>Now, instead of adding more spaghetti code to your <em>main.js</em> JavaScript file, you can simply instantiate your module: <code>new MTNT.FormValidator()</code>.</p>
+          
+          <h2 id="function-prototypes">Function prototypes</h2>
+          
+          <p>This brings us to the second part of organizing your code, which is to split up different behaviors into <strong>prototype functions</strong> within each module. JavaScript does not use classical inheritance patterns in its object orientation – it uses a technique called <em>prototyping</em>. While the explanation of this is really beyond the scope of this article, in a nutshell, the <em>prototype</em> property of a function <code>myFunction</code> exists only once in memory and is shared by every instance of <code>myFunction</code>. This will become more clear in an example (I'm using jQuery here):</p>
+          
+          <pre><code class="language-javascript">// file: mtnt.form-validator.js&#x000A;MTNT.FormValidator = function(myProperty, form) {&#x000A;  // initialize some variables&#x000A;  this.myProperty = myProperty;&#x000A;  this.form = form;&#x000A;  // ...&#x000A;  &#x000A;  // call a function to valid the form data&#x000A;  this.form.submit(this.validate); // "submit" is jQuery's submit&#x000A;}&#x000A;&#x000A;MTNT.FormValidator.prototype.validate = function() {&#x000A;  // validate the form data&#x000A;  // ...&#x000A;}&#x000A;</code></pre>
+          
+          <p>Using this technique, all instances of <code>MTNT.FormValidator</code> will have a <code>validate</code> method. This allows us to separate the methods within our module like this without nesting functions inside functions. It also saves memory because each method only exists in the <em>function prototype</em> and a new copy of the method is not created for each instance of <code>MTNT.FormValidator</code>.</p>
+          
+          <h2 id="a-very-serious-gotcha">A very serious "gotcha"</h2>
+          
+          <p>This introduces a new complication, however. By separating our methods in this way, we change the <em>context</em> of each. Consider the value of <code>this</code> inside <code>MTNT.FormValidator</code>. It refers to the current instance of that module. But inside <code>MTNT.FormValidator.validate</code>, the value of <code>this</code> has been changed by jQuery's <code>submit</code> method to refer to the DOM element that triggered the event. This means that we won't be able to access <code>myProperty</code> from <code>MTNT.FormValidator</code> because <code>this.myProperty</code> will refer to a non-existent property on a DOM element from within the <code>validate</code> method. How do we solve this?</p>
+          
+          <h2 id="functionprototypebind">Function.prototype.bind</h2>
+          
+          <p>The solution is a function we will extract from the <a href="http://www.prototypejs.org/">Prototype</a> JavaScript library: <code>bind</code>. Let's take a look at it and then I will explain what it does. Include this at the top of your main JavaScript file, along with the code that initializes your main namespace:</p>
+          
+          <pre><code class="language-javascript">if (typeof Function.prototype.bind == 'undefined') {&#x000A;  Function.prototype.bind = function() {&#x000A;    var __method = this, args = Array.prototype.slice.call(arguments), object = args.shift();&#x000A;    return function() {&#x000A;      var local_args = args.concat(Array.prototype.slice.call(arguments));&#x000A;      if (this !== window) local_args.push(this);&#x000A;      return __method.apply(object, local_args);&#x000A;    }&#x000A;  }&#x000A;}&#x000A;</code></pre>
+          
+          <p>Without getting into too much detail, <code>bind</code> uses the magic of JavaScript's <code>call</code> and <code>apply</code> functions to create a function call forced into a particular context. The first parameter to <code>bind</code> is the context you wish to call the function in. Any additional parameters are passed on as parameters to the function you're calling. We can now replace this line:</p>
+          
+          <pre><code class="language-javascript">this.form.submit(this.validate);&#x000A;</code></pre>
+          
+          <p>with this:</p>
+          
+          <pre><code class="language-javascript">this.form.submit(this.validate.bind(this));&#x000A;</code></pre>
+          
+          <p>Now when <code>validate</code> is called, <code>this</code> will still refer to the instance of <code>MTNT.FormValidator</code> and we can access <code>myProperty</code> with <code>this.myProperty</code>.</p>
+          
+          <h2 id="where-did-my-parameters-go">Where did my parameters go?</h2>
+          
+          <p>While we're now able to access the original <code>this</code> from our object, the reference to the DOM element that jQuery normally provides is gone. Or is it? Are we simply trading one <code>this</code> for another? The answer is no. The original <code>this</code> is still there, but it's been moved into a parameter. Let's change the signature of our <code>validate</code> method to take this into account:</p>
+          
+          <pre><code class="language-javascript">MTNT.FormValidator.prototype.validate = function(event, form) {&#x000A;  // "event" is the event object that is normally passed into event handlers by jQuery&#x000A;  // "form" is the original value of "this" that jQuery would have set&#x000A;  &#x000A;  // validate the form data&#x000A;  // ...&#x000A;}&#x000A;</code></pre>
+          
+          <p>Now we have the best of both worlds. We can control the context our methods are called in, and we still have access to everything that was originally provided to them.</p>
+          
+          <h2 id="ugh-mixing-prototype-into-jquery">Ugh, mixing Prototype into jQuery?</h2>
+          
+          <p>When it was first suggested to me to use Prototype's <code>bind</code> as a solution for this context problem, I was hesitant. It seemed like a pretty nasty hack, for a couple of reasons. One reason is the same reason many people criticize the Prototype library in the first place: that it overrides built-in JavaScripts objects like <code>Function</code>, which very strongly violates the namespacing idea discussed at the beginning of this article.</p>
+          
+          <p>While this is a very valid concern, it is worth noting that this particular usage of <code>Function.prototype.bind</code> has become so common and is so well accepted that it is even part of the recently released <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMAScript 5 specification</a>, meaning that <code>bind</code> will be built into future versions of JavaScript itself, and as such, the namespacing considerations of adding <code>bind</code> to JavaScript's <code>Function</code> prototype are nearly moot.</p>
+          
+          <p>The other thing that bothered me about this solution was just the idea of needing something extra in order to make jQuery behave. I looked around for a "jQuery equivalent" way of doing this, and my conclusion is that there really is no direct equivalent. jQuery encourages use of the <a href="http://www.yuiblog.com/blog/2007/06/12/module-pattern/">JavaScript module pattern</a> instead of the prototype pattern I describe here. This is not so much an equivalent as it is an entirely different approach altogether. I've experimented with the module pattern a bit, but for the moment I feel using function prototypes fits my style better. The choice, of course, is entirely up to you.</p>
+          
+          <h2 id="conclusion">Conclusion</h2>
+          
+          <p>What I present here is simply one way to organize your code. As with most decisions you make when writing JavaScript, there is no one right way, and that's part of what's so great about JavaScript: it's expressive and allows you to write things in a way that works best for you. That said, the ideas I present here are very common, solid solutions to making your JavaScript more modular and readable. This promotes better maintainability and code reuse, which is something all developers should strive for.</p>
+          <footer>
+            <p>
+              This post was tagged with <a title="Writing tagged with javascript" itemprop="keywords" href="/posts/tags/javascript/">javascript</a>.
+            </p>
+            <p>
+              Find more content by <a title="Browse writing by tags" href="/tags/">browsing by tags</a>.
+            </p>
+          </footer>
+        </article>
+      </div>
+    </div>
+    <footer class='site-footer'>
+      <div class='bucket'>
+        <p>Logo by <a href="http://stephanielucido.com/" title="Stephanie Lucido">Stephanie Lucido</a>.</p>
+        <small>
+          &copy; 2015 Jimmy Cuadra. All rights reserved.
+        </small>
+      </div>
+    </footer>
+    <script src="/javascripts/application-f844c8db.js" type="text/javascript"></script>
+    <script>
+    (function() {
+      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      po.src = 'https://apis.google.com/js/platform.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+    (function(d, t) {
+      var e = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      e.type = 'text/javascript'; e.async = true; e.src = '//platform.twitter.com/widgets.js';
+      s.parentNode.insertBefore(e, s);
+    })(document, 'script');
+    </script>
+  </body>
+</html>

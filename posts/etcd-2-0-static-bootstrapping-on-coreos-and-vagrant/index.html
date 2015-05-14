@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      etcd 2.0 static bootstrapping on CoreOS and Vagrant |
+      Jimmy Cuadra
+    </title>
+    <link href="/stylesheets/application-58ac5912.css" rel="stylesheet" type="text/css" />
+    <link href='http://feeds.feedburner.com/jimmycuadra' rel='alternate' title='RSS' type='application/rss+xml'>
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-5500916-1');ga('send', 'pageview');</script>
+  </head>
+  <body>
+    <header class='site-header'>
+      <div class='bucket'>
+        <a class='title-link' href='/' title='Jimmy Cuadra'>
+          <img width="75" height="75" alt="Jimmy Cuadra" class="logo" src="/images/logo-3e3e6b15.png" />
+          <hgroup>
+            <h1 class='main-title'>I'm Jimmy Cuadra.</h1>
+            <p>I write about programming and open source software.</p>
+          </hgroup>
+          <div class='clear'></div>
+        </a>
+      </div>
+    </header>
+    <nav>
+      <div class='bucket'>
+        <ul>
+          <li><a title="Writing" href="/">Writing</a></li>
+          <li><a class="sub-nav" title="Writing by tags" href="/tags/">by tags</a></li>
+          <li><a title="Jimmy Cuadra's Résumé" href="/resume/">Résumé</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class='content'>
+      <div class='bucket'>
+        <article itemscope itemtype='http://schema.org/BlogPosting'>
+          <meta content='Jimmy Cuadra' itemprop='author'>
+          <header>
+            <h1 class='post-title' itemprop='headline'><a title="etcd 2.0 static bootstrapping on CoreOS and Vagrant" href="/posts/etcd-2-0-static-bootstrapping-on-coreos-and-vagrant/">etcd 2.0 static bootstrapping on CoreOS and Vagrant</a></h1>
+            <data itemprop='datePublished' value='2015-02-05'>February 05, 2015</data>
+          </header>
+          <div class='social'>
+            <div class='g-plus' data-action='share' data-annotation='bubble' data-href='/posts/etcd-2-0-static-bootstrapping-on-coreos-and-vagrant/'></div>
+            <a class='twitter-share-button' data-count='horizontal' data-text='etcd 2.0 static bootstrapping on CoreOS and Vagrant' data-url='/posts/etcd-2-0-static-bootstrapping-on-coreos-and-vagrant/' data-via='jimmycuadra' href='https://twitter.com/share'>Tweet</a>
+          </div>
+          <h2 id="the-problem">The problem</h2>
+          
+          <p><a href="https://coreos.com/">CoreOS</a> provides a pretty good setup for running a cluster of machines with <a href="https://www.vagrantup.com/">Vagrant</a>. You can find this setup at <a href="https://github.com/coreos/coreos-vagrant">coreos/coreos-vagrant</a>. Something I've found annoying, however, is that whenever you start a new cluster, you need to get a new discovery token from CoreOS's <a href="https://coreos.com/docs/cluster-management/setup/cluster-discovery/">hosted discovery service</a>. This is necessary for the <a href="https://github.com/coreos/etcd">etcd</a> instances running on each machine to find each other and form a quorum. The discovery token is written to the machines on initial boot via the cloud-config file named <code>user-data</code>. If you destroy the machines and recreate them, you need to use a fresh discovery token. This didn't sit right with me, as I want to check everything into version control, and didn't want to have a lot of useless commits changing the discovery token every time I recreated the cluster.</p>
+          
+          <h2 id="the-solution">The solution</h2>
+          
+          <p>Fortunately, etcd doesn't rely on the hosted discovery service. You can also bootstrap etcd statically if you know the IPs and ports everything will be running on in advance. It turns out that CoreOS's Vagrantfile is already configured to provide a static IP to each machine, so these IPs can simply be hardcoded into the cloud-config. There's one more snag, which is that etcd 0.4.6 (the one that currently ships in CoreOS) gets confused if the list of IPs you include when bootstrapping includes the current machine. That would mean that the cloud-config for each machine would have to be slightly different because it'd have to include the whole list, minus itself. Without introducing an additional layer of abstraction of your own, there isn't an easy way to provide a dynamic cloud-config file that would do this. Fortunately, the <a href="https://coreos.com/blog/etcd-2.0-release-first-major-stable-release/">newly released etcd 2.0.0</a> improves on the static bootstrapping story by allowing you to provide the full list of IPs on every machine. Because etcd 2.0 doesn't ship with CoreOS yet, we'll run it in a container.</p>
+          
+          <p>For this example, we'll use a cluster of three machines, just to keep the cloud-config a bit shorter. Five machines is the recommended size for most uses. Assuming you already have Vagrant and VirtualBox installed, clone the <a href="https://github.com/coreos/coreos-vagrant">coreos/coreos-vagrant</a> repository and copy <code>config.rb.sample</code> to <code>config.rb</code>. Open <code>config.rb</code> and uncomment <code>$num_instances</code>, setting its value to <code>3</code>.</p>
+          
+          <pre><code class="language-ruby"># Size of the CoreOS cluster created by Vagrant&#x000A;$num_instances = 3&#x000A;</code></pre>
+          
+          <p>Next, create a new file called <code>user-data</code> with the following contents:</p>
+          
+          <pre><code class="language-yaml">#cloud-config&#x000A;&#x000A;coreos:&#x000A;  fleet:&#x000A;    etcd-servers: http://$private_ipv4:2379&#x000A;    public-ip: $private_ipv4&#x000A;  units:&#x000A;    - name: etcd.service&#x000A;      command: start&#x000A;      content: |&#x000A;        Description=etcd 2.0&#x000A;        After=docker.service&#x000A;&#x000A;        [Service]&#x000A;        EnvironmentFile=/etc/environment&#x000A;        TimeoutStartSec=0&#x000A;        SyslogIdentifier=writer_process&#x000A;        ExecStartPre=-/usr/bin/docker kill etcd&#x000A;        ExecStartPre=-/usr/bin/docker rm etcd&#x000A;        ExecStartPre=/usr/bin/docker pull quay.io/coreos/etcd:v2.0.0&#x000A;        ExecStart=/bin/bash -c "/usr/bin/docker run \&#x000A;          -p 2379:2379 \&#x000A;          -p 2380:2380 \&#x000A;          --name etcd \&#x000A;          -v /opt/etcd:/opt/etcd \&#x000A;          -v /usr/share/ca-certificates/:/etc/ssl/certs \&#x000A;          quay.io/coreos/etcd:v2.0.0 \&#x000A;          -data-dir /opt/etcd \&#x000A;          -name %H \&#x000A;          -listen-client-urls http://0.0.0.0:2379 \&#x000A;          -advertise-client-urls http://$COREOS_PRIVATE_IPV4:2379 \&#x000A;          -listen-peer-urls http://0.0.0.0:2380 \&#x000A;          -initial-advertise-peer-urls http://$COREOS_PRIVATE_IPV4:2380 \&#x000A;          -initial-cluster core-01=http://172.17.8.101:2380,core-02=http://172.17.8.102:2380,core-03=http://172.17.8.103:2380\&#x000A;          -initial-cluster-state new"&#x000A;        ExecStop=/usr/bin/docker kill etcd&#x000A;&#x000A;        [X-Fleet]&#x000A;        Conflicts=etcd*&#x000A;    - name: fleet.service&#x000A;      command: start&#x000A;</code></pre>
+          
+          <p>Now just run <code>vagrant up</code> and in a few minutes you'll have a cluster of three CoreOS machines running etcd 2.0 with no discovery token needed!</p>
+          
+          <p>If you want to run <code>fleetctl</code> inside one of the CoreOS VMs, you'll need to set the default etcd endpoint, because the current fleet still expects etcd to be on port 4001:</p>
+          
+          <pre><code class="language-bash">export FLEETCTL_ENDPOINT=http://127.0.0.1:2379&#x000A;</code></pre>
+          
+          <p>If you don't care about how that all works and just want a working cluster, you can stop here. If you want to understand the guts of that cloud-config more, keep reading.</p>
+          
+          <h2 id="the-details">The details</h2>
+          
+          <p>One of the changes in CoreOS 2.0 is that it now uses port 2379 and 2380 (as opposed to etcd 0.4.6 which used 4001 and 7001.) The <code>fleet</code> section of the cloud-config tells fleet how to connect to etcd. This is necessary because the version of fleet that ships with CoreOS now still defaults to port 4001. Once etcd 2.0 is shipping in CoreOS, I'm sure fleet will be updated to match.</p>
+          
+          <p>The <code>units</code> section of the cloud-config creates systemd units that will be placed in <code>/etc/systemd/system/</code> on each machine. CoreOS ships with a default unit file for etcd, but we overwrite it here (simply by using the same service name, etcd.service) to use etcd 2.0 with our own configuration.</p>
+          
+          <p>The bulk of the cloud-config is the etcd.service unit file. Most of it is the same as a standard CoreOS unit file for a Docker container. The interesting bits are the arguments to the etcd process that runs in the container:</p>
+          
+          <ul>
+            <li><code>-listen-client-urls</code>: This is the interface and port that the current machine's etcd should bind to for the client API, e.g. etcdctl. It's set to 0.0.0.0 to bind it to all interfaces, and it uses port 2379 which is the standard port, beginning in etcd 2.0.</li>
+            <li><code>-advertise-client-urls</code>: This is the list of URLs etcd will announce as available for clients to contact.</li>
+            <li><code>-listen-peer-urls</code>: Similar to the client URL version, this defines how the peer service should bind to the network. Again, we bind it to all interfaces and use the standard peer port of 2380.</li>
+            <li><code>-initial-advertise-peer-urls</code>: Similar to the client version, this defines how etcd will announce its peer service to other etcd processes on other machines.</li>
+            <li><code>-initial-cluster</code>: This is the secret sauce that keeps us from having to use a discovery token. We provide a list of each etcd service running in our cluster, mapping each machine's hostname to its etcd peer URL. Because we know which IP addresses Vagrant is going to use, we can simply enumerate them here. If you were running a cluster of a different size, this is where you would add or remove machines from the list.</li>
+            <li><code>-initial-cluster-state</code>: A value of <code>new</code> here tells etcd that it's joining a brand new cluster. If you were to later add another machine to the existing cluster, you'd change the value here in that machine's cloud-config.</li>
+          </ul>
+          
+          <p>It's worth noting that the arguments that begin with "initial" are just that: data that etcd needs in order to boot the first time. Once the cluster has booted once and formed a quorum, these arguments will be ignored on subsequent boots, because everything etcd needs to know will have been stored in its data directory (<code>/opt/etcd</code>) in this case.</p>
+          
+          <p>This is all pretty complicated, but it will get easier once etcd 2.0 and a compatible fleet are shipped with CoreOS itself. Then the built-in etcd.service unit can be used again, and all the configuration options can be written in YAML format just like the <code>fleet</code> section in this particular cloud-config.</p>
+          <footer>
+            <p>
+              This post was tagged with <a title="Writing tagged with coreos" itemprop="keywords" href="/posts/tags/coreos/">coreos</a>, <a title="Writing tagged with devops" itemprop="keywords" href="/posts/tags/devops/">devops</a>, <a title="Writing tagged with etcd" itemprop="keywords" href="/posts/tags/etcd/">etcd</a>, and <a title="Writing tagged with vagrant" itemprop="keywords" href="/posts/tags/vagrant/">vagrant</a>.
+            </p>
+            <p>
+              Find more content by <a title="Browse writing by tags" href="/tags/">browsing by tags</a>.
+            </p>
+          </footer>
+        </article>
+      </div>
+    </div>
+    <footer class='site-footer'>
+      <div class='bucket'>
+        <p>Logo by <a href="http://stephanielucido.com/" title="Stephanie Lucido">Stephanie Lucido</a>.</p>
+        <small>
+          &copy; 2015 Jimmy Cuadra. All rights reserved.
+        </small>
+      </div>
+    </footer>
+    <script src="/javascripts/application-f844c8db.js" type="text/javascript"></script>
+    <script>
+    (function() {
+      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      po.src = 'https://apis.google.com/js/platform.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+    (function(d, t) {
+      var e = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      e.type = 'text/javascript'; e.async = true; e.src = '//platform.twitter.com/widgets.js';
+      s.parentNode.insertBefore(e, s);
+    })(document, 'script');
+    </script>
+  </body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      
+      Jimmy Cuadra
+    </title>
+    <link href="/stylesheets/application-58ac5912.css" rel="stylesheet" type="text/css" />
+    <link href='http://feeds.feedburner.com/jimmycuadra' rel='alternate' title='RSS' type='application/rss+xml'>
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-5500916-1');ga('send', 'pageview');</script>
+  </head>
+  <body>
+    <header class='site-header'>
+      <div class='bucket'>
+        <a class='title-link' href='/' title='Jimmy Cuadra'>
+          <img width="75" height="75" alt="Jimmy Cuadra" class="logo" src="/images/logo-3e3e6b15.png" />
+          <hgroup>
+            <h1 class='main-title'>I'm Jimmy Cuadra.</h1>
+            <p>I write about programming and open source software.</p>
+          </hgroup>
+          <div class='clear'></div>
+        </a>
+      </div>
+    </header>
+    <nav>
+      <div class='bucket'>
+        <ul>
+          <li><a title="Writing" href="/">Writing</a></li>
+          <li><a class="sub-nav" title="Writing by tags" href="/tags/">by tags</a></li>
+          <li><a title="Jimmy Cuadra's Résumé" href="/resume/">Résumé</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class='content'>
+      <div class='bucket'>
+        <article itemscope itemtype='http://schema.org/BlogPosting'>
+          <meta content='Jimmy Cuadra' itemprop='author'>
+          <header>
+            <h1 class='post-title' itemprop='headline'><a title="Contributing to guard-rspec" href="/posts/contributing-to-guard-rspec/">Contributing to guard-rspec</a></h1>
+            <data itemprop='datePublished' value='2011-03-01'>March 01, 2011</data>
+          </header>
+          <div class='social'>
+            <div class='g-plus' data-action='share' data-annotation='bubble' data-href='/posts/contributing-to-guard-rspec/'></div>
+            <a class='twitter-share-button' data-count='horizontal' data-text='Contributing to guard-rspec' data-url='/posts/contributing-to-guard-rspec/' data-via='jimmycuadra' href='https://twitter.com/share'>Tweet</a>
+          </div>
+          <p>As is probably apparent from my <a href="http://jimmycuadra.com/posts/the-challenge-of-asset-packaging-on-heroku">last post</a>, I'm interested in improving the front end parts of my Rails apps and smoothing out the rough edges of working with Heroku. Some big changes are coming in Rails 3.1, but in the meantime I've been looking at ways to make the process of asset compilation and packaging easier. The recent rewrite of this site is the first time I used <a href="http://sass-lang.com/">Sass</a>, and it's great, but it adds another step to getting CSS ready for deployment. The Sass gem has a command line tool to compile a Sass file into CSS. It allows you to watch a directory for changes and compile them automatically. Sadly, if it doesn't have access to FSEvents through RubyCocoa, it will constantly poll your disk for changes, and since I use Ruby 1.9.2 with RVM, this is the case I found myself in. As it turns out, wanting to improve the process for Sass led me to something entirely different.</p>
+          
+          <p>I looked around for a better way to listen for file system events with Ruby 1.9.2 and discovered <a href="https://github.com/mynyml/watchr">Watchr</a>, which, when coupled with <a href="http://github.com/sandro/ruby-fsevent">ruby-fsevent</a>, allows a generic mechanism for running scripts in response to file system events. While reading about Watchr, I started to notice people mentioning a slightly newer alternative called <a href="https://github.com/guard/guard">Guard</a>, which uses the confusingly not-identical <a href="https://github.com/thibaudgg/rb-fsevent">rb-fsevent</a>. The nice thing about Guard is that it runs gem extensions which encapsulate the logic for a particular task. The "Guardfile" simply invokes such a gem and tells it which paths to watch.</p>
+          
+          <p>Guard has quite a few of these gems already, and the first to catch my eye was <a href="https://github.com/guard/guard-rspec">guard-rspec</a>, a flexible alternative to ZenTest/autotest. I tried it out and discovered that it was a bit restrictive in which command line options you could pass to RSpec. Instead of allowing you to pass arbitrary arguments, it allowed only a few of RSpec's options via its own API. These options were then redundantly curried to RSpec. I prefer my RSpec output in the nested format, and because of this restriction guard-rspec wasn't ideal for me. I added a feature request for it on the GitHub issue tracker, but then I remembered <a href="http://zachholman.com/">Zach Holman's</a> recent tweet: "Marginal programmers +1 an issue. Real programmers patch the issue." So that's exactly what I did.</p>
+          
+          <p>I'd made a few minor contributions to other projects before, but this time I spent some decent time working on a revised API for guard-rspec which allows you to pass arbitrary arguments to RSpec. It took a few days discussing my changes with the two authors, and ultimately they refactored a lot of my code to their liking, but it felt great to be a part of a significant improvement to a project that lots of other people use. And as always, my Ruby skills are that much more deadly after sharpening them on the open source grindstone.</p>
+          
+          <p>My changes are included in the just-released <a href="https://github.com/guard/guard-rspec/tree/v0.2.0">guard-rspec 0.2.0</a>. Check it out!</p>
+          <footer>
+            <p>
+              This post was tagged with <a title="Writing tagged with ruby" itemprop="keywords" href="/posts/tags/ruby/">ruby</a>.
+            </p>
+            <p>
+              Find more content by <a title="Browse writing by tags" href="/tags/">browsing by tags</a>.
+            </p>
+          </footer>
+        </article>
+        <article itemscope itemtype='http://schema.org/BlogPosting'>
+          <meta content='Jimmy Cuadra' itemprop='author'>
+          <header>
+            <h1 class='post-title' itemprop='headline'><a title="The challenge of asset packaging on Heroku" href="/posts/the-challenge-of-asset-packaging-on-heroku/">The challenge of asset packaging on Heroku</a></h1>
+            <data itemprop='datePublished' value='2011-02-15'>February 15, 2011</data>
+          </header>
+          <div class='social'>
+            <div class='g-plus' data-action='share' data-annotation='bubble' data-href='/posts/the-challenge-of-asset-packaging-on-heroku/'></div>
+            <a class='twitter-share-button' data-count='horizontal' data-text='The challenge of asset packaging on Heroku' data-url='/posts/the-challenge-of-asset-packaging-on-heroku/' data-via='jimmycuadra' href='https://twitter.com/share'>Tweet</a>
+          </div>
+          <p>Page load time is an important consideration in web application development. Users have an expectation that navigating a website should be fast, and many people will simply leave if it takes too long to load a page. Two ways to improve it are to minimize the number of HTTP requests and to minimize the amount of data transferred. Both of these can be improved by concatenating, minifying, and caching CSS and JavaScript files.</p>
+          
+          <p>Rails has a handy feature that helps with part of this: the <code>stylesheet_link_tag</code> and <code>javascript_include_tag</code> helper methods accept a <code>cache</code> option, which will take all files passed to them and concatenate them into a single file (and single HTTP request) in the production environment. This is a big improvement, but it could be better. In addition to combining the files, we want to reduce the data transferred by running them through a so-called minifier, which removes whitespace, comments, and makes various optimizations like variable name substitution and function inlining. Lastly, the big challenge: we want to be able to do this on platforms like Heroku, where our ability to write to disk is highly restricted.</p>
+          
+          <h2 id="read-only-file-systems">Read only file systems</h2>
+          
+          <p>The biggest issue for asset packaging when deploying a Rails app to Heroku is that, with the exception of the <code>tmp</code> folder, we only have read access to the disk. This means that the <code>cache</code> option for the asset helper methods will not work, because the concatenated files are written to disk the first time they're needed. The Rails helpers also don't offer the ability to minify the output file, so we'll need to look into a plugin-based solution for asset packaging.</p>
+          
+          <p>There are quite a few asset packaging plugins out there, including <a href="https://github.com/sbecker/asset_packager">asset_packager</a>, <a href="https://github.com/amasses/heroku_asset_packager">heroku_asset_packager</a>, <a href="https://github.com/mgomes/heroku_asset_cacher">heroku_asset_cacher</a>, and <a href="https://github.com/documentcloud/jammit/">Jammit</a>. If you Google around on the subject, you'll also find a multitude of blog posts and discussions where people have written Rake and Capistrano tasks to jury rig a solution for this problem. Clearly there is no ideal approach yet. I think Jammit has come pretty close, but it still comes up against a brick wall on Heroku's read only file system.</p>
+          
+          <h2 id="precaching">Precaching</h2>
+          
+          <p>The most common suggestion I've seen is to precache the asset files, i.e., to generate them all on the local machine and commit them to the repository before deploying. With this approach, nothing needs to be written to disk in the production environment. The downside is that we now have artifacts from our build process in our repository's history, which is far less than ideal. Still, some find this to be an acceptable compromise, and all the Rake and Capistrano based solutions you'll see automate the committing of assets before deployment to make it a little less painful. If having your history dirtied doesn't bother you, you can probably stop there. Personally, I'm not satisfied yet.</p>
+          
+          <h2 id="caching-or-precaching-to-tmp">Caching or precaching to <code>tmp</code></h2>
+          
+          <p>Unlike the built in Rails helper methods, Jammit writes the cached asset files to a special directory at <code>public/assets</code>. Using Jammit's helper <code>include_javascripts :some_package</code>, for example, will create a script tag linking to <code>example.com/assets/some_package.js</code>. On the first request to this address, the request will be routed to a special Jammit controller that will figure out which raw files need to be packaged. It will run them through either the YUI Compressor or the Google Closure Compiler, with options we specify in configuration, serve the response to the client directly, and cache the output by writing it to <code>assets/some_package.js</code>. The next time the address is requested, Rack will see that the cached file exists, and serve that instead of routing to the Jammit controller.</p>
+          
+          <p>We are faced with two problems with this process on Heroku. The first is that we can only write to <code>tmp</code>. The second is that Heroku lacks a JVM, which is used by both the YUI Compressor and the Google Closure Compiler. Currently, Jammit doesn't offer a workaround for either of these issues. It would require a configuration option to change the full file path for the cached assets, and an alternative minifier which works without a JVM. One possible solution is <a href="https://github.com/mishoo/UglifyJS">UglifyJS</a>, which runs on <a href="https://github.com/joyent/node">Node.js</a>, and is already being used for projects like jQuery. An interface to UglifyJS and Node might be provided by <a href="https://github.com/aler/therubyracer-heroku">therubyracer-heroku</a> and <a href="https://github.com/lautis/uglifier">Uglifier</a>.</p>
+          
+          <p>Even if Jammit could write the cached assets to <code>tmp</code>, it's still not the best approach. <code>tmp</code> is not really intended for this purpose, as Heroku states in their documentation:</p>
+          
+          <blockquote>
+            <p>If you wish to drop a file temporarily for the duration of the request, you can write to a filename like <code>#{RAILS_ROOT}/tmp/myfile_#{Process.pid}</code>. There is no guarantee that this file will be there on subsequent requests (although it might be), so this should not be used for any kind of permanent storage.</p>
+          </blockquote>
+          
+          <p>The good news is that Heroku provides Varnish as an HTTP cache, so we should be able to use that instead of writing to disk at all. The first request for an asset package will hit the Jammit controller, which would add HTTP caching headers to the response. The next user that requests the packaged asset file will be served directly from Varnish, completely bypassing the application stack. And when the same user loads another page that includes the same asset package, the browser won't even request the file from the server because of the HTTP caching headers that have been set. Now that's efficient.</p>
+          
+          <h2 id="busting-the-cache">Busting the cache</h2>
+          
+          <p>Okay, we've got a good plan for caching asset files, but what happens when we update the content in those files? Without some intervention, the user will be served outdated content from the cache. The Rails and Jammit helpers solve this by adding a timestamp to the query string, created from the mtime of the file. After deployment, the old cached files are removed, and new ones are generated with a new cache busting string. The user's browser and Varnish will both see this as a new file, and request the new content. This is a pretty good solution, but still not totally ideal.</p>
+          
+          <p>Because the cached assets are being recreated on every deployment, the mtime (and therefore the cache busting string) changes even if the contents of the files themselves don't change. Users are forced to redownload all the assets on the entire site again after each deploy, even if only one of them has changed. A better approach would be to use an MD5 hash of the file's contents as the cache busting string, so the query string only changes when the contents of the file change, and the asset files can stay cached across deployments. We'd probably also want some mechanism for remembering the MD5 for a particular asset file, or we'd have to get the MD5 every time a script tag was generated with one of the helper methods.</p>
+          
+          <h2 id="its-a-tough-problem">It's a tough problem</h2>
+          
+          <p>As evidenced by the multitude of plugins and scripts which attempt to solve this problem, it's a tough nut to crack. I think the current tools are good, but still not quite up to par. I will continue to investigate this myself, and will hopefully be able to whip up some code to contribute, but I hope the Rails and Heroku communities can really work together to find a solution for asset packaging and caching on Heroku that makes things as efficient and painless as possible.</p>
+          <footer>
+            <p>
+              This post was tagged with <a title="Writing tagged with heroku" itemprop="keywords" href="/posts/tags/heroku/">heroku</a>, <a title="Writing tagged with performance" itemprop="keywords" href="/posts/tags/performance/">performance</a>, and <a title="Writing tagged with ruby on rails" itemprop="keywords" href="/posts/tags/ruby-on-rails/">ruby on rails</a>.
+            </p>
+            <p>
+              Find more content by <a title="Browse writing by tags" href="/tags/">browsing by tags</a>.
+            </p>
+          </footer>
+        </article>
+        <article itemscope itemtype='http://schema.org/BlogPosting'>
+          <meta content='Jimmy Cuadra' itemprop='author'>
+          <header>
+            <h1 class='post-title' itemprop='headline'><a title="Chrome Web Store" href="/posts/chrome-web-store/">Chrome Web Store</a></h1>
+            <data itemprop='datePublished' value='2011-02-08'>February 08, 2011</data>
+          </header>
+          <div class='social'>
+            <div class='g-plus' data-action='share' data-annotation='bubble' data-href='/posts/chrome-web-store/'></div>
+            <a class='twitter-share-button' data-count='horizontal' data-text='Chrome Web Store' data-url='/posts/chrome-web-store/' data-via='jimmycuadra' href='https://twitter.com/share'>Tweet</a>
+          </div>
+          <p>I just attended a talk by <a href="http://sethladd.com/">Seth Ladd</a> from Google at <a href="http://refreshsd.org/">RefreshSD</a>. The first part was a general overview of new technologies associated with HTML5, including the new markup, CSS 3, offline storage, websockets, etc. None of that was news to me, but the second half, about the <a href="https://chrome.google.com/webstore">Chrome Web Store</a>, was new and awesome.</p>
+          
+          <p>The Chrome Web Store is an app marketplace similar to the familiar App Store from Apple, but it's for web applications. Every app is built entirely with open web technologies: HTML, CSS, and JavaScript. The idea of building desktop-caliber applications on the web is nothing new, but there hasn't been a central place for people to go to find them. The Chrome Web Store, surely the first of what will be many similar stores, changes that.</p>
+          
+          <p>The store allows developers to add their web applications for other people to install and use easily. It even includes a payment and licensing system that allows developers to charge for their apps. If you use Google Chrome as your browser, the store is easier to use through the tight integrations with the browser. Since all the apps are web-based, it's perfectly possible to browse the store and use the apps in other modern browsers, though the experience is not ideal.</p>
+          
+          <p>I expect that it won't be long before we see Apple, Microsoft, and possibly other big tech companies creating their own equivalents of the Chrome Web Store. I'm curious to see how interoperability between them will play out. Obviously the web apps themselves will be usable in multiple browsers, but I'm hoping it will be easy to register the same app with multiple stores, giving the user the option which they prefer for installation and payment. Seth imagines that, in the future, web apps will identify themselves with <a href="http://ogp.me/">Open Graph</a> style data in meta tags, allowing auto discovery for inclusion in multiple stores.</p>
+          
+          <p>This is an exciting development in the web for me, since the explosive success of Apple's App Store(s) has largely excluded web apps. Now those of us who are not interested in Objective-C or Java development can really start to get in on the fun.</p>
+          <footer>
+            <p>
+              Find more content by <a title="Browse writing by tags" href="/tags/">browsing by tags</a>.
+            </p>
+          </footer>
+        </article>
+        <p class='pagination'>
+          <span><a rel="prev" href="/page/7/">← Previous</a></span>
+          <span>Page 8</span>
+          <span><a rel="next" href="/page/9/">Next →</a></span>
+        </p>
+      </div>
+    </div>
+    <footer class='site-footer'>
+      <div class='bucket'>
+        <p>Logo by <a href="http://stephanielucido.com/" title="Stephanie Lucido">Stephanie Lucido</a>.</p>
+        <small>
+          &copy; 2015 Jimmy Cuadra. All rights reserved.
+        </small>
+      </div>
+    </footer>
+    <script src="/javascripts/application-f844c8db.js" type="text/javascript"></script>
+    <script>
+    (function() {
+      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      po.src = 'https://apis.google.com/js/platform.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+    (function(d, t) {
+      var e = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      e.type = 'text/javascript'; e.async = true; e.src = '//platform.twitter.com/widgets.js';
+      s.parentNode.insertBefore(e, s);
+    })(document, 'script');
+    </script>
+  </body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      Bang: text snippets on the command line with Node.js |
+      Jimmy Cuadra
+    </title>
+    <link href="/stylesheets/application-58ac5912.css" rel="stylesheet" type="text/css" />
+    <link href='http://feeds.feedburner.com/jimmycuadra' rel='alternate' title='RSS' type='application/rss+xml'>
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-5500916-1');ga('send', 'pageview');</script>
+  </head>
+  <body>
+    <header class='site-header'>
+      <div class='bucket'>
+        <a class='title-link' href='/' title='Jimmy Cuadra'>
+          <img width="75" height="75" alt="Jimmy Cuadra" class="logo" src="/images/logo-3e3e6b15.png" />
+          <hgroup>
+            <h1 class='main-title'>I'm Jimmy Cuadra.</h1>
+            <p>I write about programming and open source software.</p>
+          </hgroup>
+          <div class='clear'></div>
+        </a>
+      </div>
+    </header>
+    <nav>
+      <div class='bucket'>
+        <ul>
+          <li><a title="Writing" href="/">Writing</a></li>
+          <li><a class="sub-nav" title="Writing by tags" href="/tags/">by tags</a></li>
+          <li><a title="Jimmy Cuadra's Résumé" href="/resume/">Résumé</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class='content'>
+      <div class='bucket'>
+        <article itemscope itemtype='http://schema.org/BlogPosting'>
+          <meta content='Jimmy Cuadra' itemprop='author'>
+          <header>
+            <h1 class='post-title' itemprop='headline'><a title="Bang: text snippets on the command line with Node.js" href="/posts/bang-text-snippets-on-the-command-line-with-nodejs/">Bang: text snippets on the command line with Node.js</a></h1>
+            <data itemprop='datePublished' value='2011-11-14'>November 14, 2011</data>
+          </header>
+          <div class='social'>
+            <div class='g-plus' data-action='share' data-annotation='bubble' data-href='/posts/bang-text-snippets-on-the-command-line-with-nodejs/'></div>
+            <a class='twitter-share-button' data-count='horizontal' data-text='Bang: text snippets on the command line with Node.js' data-url='/posts/bang-text-snippets-on-the-command-line-with-nodejs/' data-via='jimmycuadra' href='https://twitter.com/share'>Tweet</a>
+          </div>
+          <p>There's a great Ruby gem called <a href="https://github.com/holman/boom">Boom</a> by <a href="https://github.com/holman">Zach Holman</a> for managing text snippets via the command line. I've used it since it was released and have even contributed to it a few times. But after using it for a long time, I realize that I don't really need the "lists" feature – the ability to store snippets with keys two levels deep. Because of Boom's syntax, I often accidentally create lists because I can't quite remember the name of the key I'm looking for.</p>
+          
+          <p>I decided this was a good prompt for a new program, so I created <a href="https://github.com/jimmycuadra/bang">Bang</a>. Bang is a module for <a href="http://nodejs.org">Node</a> that gives you a very simple key value store with one level of depth. I use it to store all sorts of things: articles I refer to often, simple code snippets, Imgur links to animated GIFs, and strings with Unicode characters that are a pain to type.</p>
+          
+          <p>For those, like me, who are experimenting with Node, <a href="http://coffeescript.org">CoffeeScript</a>, testing using <a href="http://pivotal.github.com/jasmine/">Jasmine</a>, and annotated source using <a href="http://jashkenas.github.com/docco/">Docco</a>, you will want to check out the source on GitHub to see some examples of all of these.</p>
+          
+          <h2 id="install-bang">Install Bang</h2>
+          
+          <p>Install <a href="http://nodejs.org/">Node</a> and <a href="http://npmjs.org/">npm</a>.</p>
+          
+          <pre><code class="language-text">$ npm install -g bang&#x000A;</code></pre>
+          
+          <h2 id="set-a-key">Set a key</h2>
+          
+          <pre><code class="language-text">$ bang apples oranges&#x000A;</code></pre>
+          
+          <h2 id="get-a-key">Get a key</h2>
+          
+          <pre><code class="language-text">$ bang apples&#x000A;oranges&#x000A;</code></pre>
+          
+          <p>"oranges" is now copied to your clipboard.</p>
+          
+          <h2 id="delete-a-key">Delete a key</h2>
+          
+          <pre><code class="language-text">$ bang -d apples&#x000A;</code></pre>
+          
+          <h2 id="list-keys">List keys</h2>
+          
+          <pre><code class="language-text">$ bang&#x000A;  foo: bar&#x000A; blah: bleh&#x000A;jimmy: cuadra&#x000A; bang: is rad&#x000A;</code></pre>
+          
+          <h2 id="feedback">Feedback</h2>
+          
+          <p>I hope you enjoy Bang and find it useful. If you have a problem or suggestion, feel free to open an issue or send a pull request.</p>
+          
+          <h2 id="tldr">TL;DR</h2>
+          
+          <ul>
+            <li><code>npm install -g bang</code></li>
+            <li>Check out <a href="https://github.com/jimmycuadra/bang">Bang</a> on GitHub</li>
+            <li>Read the <a href="http://jimmycuadra.github.com/bang/">annotated source code</a></li>
+          </ul>
+          <footer>
+            <p>
+              This post was tagged with <a title="Writing tagged with bang" itemprop="keywords" href="/posts/tags/bang/">bang</a>, <a title="Writing tagged with coffeescript" itemprop="keywords" href="/posts/tags/coffeescript/">coffeescript</a>, <a title="Writing tagged with jasmine" itemprop="keywords" href="/posts/tags/jasmine/">jasmine</a>, <a title="Writing tagged with javascript" itemprop="keywords" href="/posts/tags/javascript/">javascript</a>, and <a title="Writing tagged with node.js" itemprop="keywords" href="/posts/tags/node-js/">node.js</a>.
+            </p>
+            <p>
+              Find more content by <a title="Browse writing by tags" href="/tags/">browsing by tags</a>.
+            </p>
+          </footer>
+        </article>
+      </div>
+    </div>
+    <footer class='site-footer'>
+      <div class='bucket'>
+        <p>Logo by <a href="http://stephanielucido.com/" title="Stephanie Lucido">Stephanie Lucido</a>.</p>
+        <small>
+          &copy; 2015 Jimmy Cuadra. All rights reserved.
+        </small>
+      </div>
+    </footer>
+    <script src="/javascripts/application-f844c8db.js" type="text/javascript"></script>
+    <script>
+    (function() {
+      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      po.src = 'https://apis.google.com/js/platform.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+    (function(d, t) {
+      var e = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      e.type = 'text/javascript'; e.async = true; e.src = '//platform.twitter.com/widgets.js';
+      s.parentNode.insertBefore(e, s);
+    })(document, 'script');
+    </script>
+  </body>
+</html>

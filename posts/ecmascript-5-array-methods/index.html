@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      ECMAScript 5: Array methods |
+      Jimmy Cuadra
+    </title>
+    <link href="/stylesheets/application-58ac5912.css" rel="stylesheet" type="text/css" />
+    <link href='http://feeds.feedburner.com/jimmycuadra' rel='alternate' title='RSS' type='application/rss+xml'>
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-5500916-1');ga('send', 'pageview');</script>
+  </head>
+  <body>
+    <header class='site-header'>
+      <div class='bucket'>
+        <a class='title-link' href='/' title='Jimmy Cuadra'>
+          <img width="75" height="75" alt="Jimmy Cuadra" class="logo" src="/images/logo-3e3e6b15.png" />
+          <hgroup>
+            <h1 class='main-title'>I'm Jimmy Cuadra.</h1>
+            <p>I write about programming and open source software.</p>
+          </hgroup>
+          <div class='clear'></div>
+        </a>
+      </div>
+    </header>
+    <nav>
+      <div class='bucket'>
+        <ul>
+          <li><a title="Writing" href="/">Writing</a></li>
+          <li><a class="sub-nav" title="Writing by tags" href="/tags/">by tags</a></li>
+          <li><a title="Jimmy Cuadra's Résumé" href="/resume/">Résumé</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class='content'>
+      <div class='bucket'>
+        <article itemscope itemtype='http://schema.org/BlogPosting'>
+          <meta content='Jimmy Cuadra' itemprop='author'>
+          <header>
+            <h1 class='post-title' itemprop='headline'><a title="ECMAScript 5: Array methods" href="/posts/ecmascript-5-array-methods/">ECMAScript 5: Array methods</a></h1>
+            <data itemprop='datePublished' value='2011-10-12'>October 12, 2011</data>
+          </header>
+          <div class='social'>
+            <div class='g-plus' data-action='share' data-annotation='bubble' data-href='/posts/ecmascript-5-array-methods/'></div>
+            <a class='twitter-share-button' data-count='horizontal' data-text='ECMAScript 5: Array methods' data-url='/posts/ecmascript-5-array-methods/' data-via='jimmycuadra' href='https://twitter.com/share'>Tweet</a>
+          </div>
+          <aside>This is the third part in a series of posts about ECMAScript 5. Be sure to check out the [first part](/posts/ecmascript-5-object-creation-and-property-definition), and [second part](/posts/ecmascript-5-tamper-proofing-objects) if you missed them.</aside>
+          
+          <p>This is the third and final part of my series on ECMAScript 5. In <a href="/posts/ecmascript-5-object-creation-and-property-definition">part one</a>, we looked at new methods for object creation and property definition. <a href="/posts/ecmascript-5-tamper-proofing-objects">Part two</a> focused on tamper proofing objects. I'll now provide a quick overview of the new high level array methods.</p>
+          
+          <p>Unlike the new methods discussed in the first two parts, the methods here are all reproducible using JavaScript itself. Native implementations are simply faster and more convenient. Having a uniform API for these operations also promotes their usage, making code clearer when shared between developers.</p>
+          
+          <h2 id="search-methods">Search methods</h2>
+          
+          <h3 id="arrayprototypeindexof">Array.prototype.indexOf</h3>
+          
+          <p><code>indexOf</code> provides an easy way to determine whether or not an object is in an array. It returns the first index at which the item was found, or <code>-1</code> if it was not found at all. Strict equality is used to determine that an item is present in the array. An optional second argument can start the search at an index other than <code>0</code>.</p>
+          
+          <pre><code class="language-javascript">var arr = ["apple", "banana", "carrot", "apple"];&#x000A;&#x000A;arr.indexOf("apple"); // 0&#x000A;arr.indexOf("daikon"); // -1&#x000A;</code></pre>
+          
+          <h3 id="arrayprototypelastindexof">Array.prototype.lastIndexOf</h3>
+          
+          <p>Identical to <code>indexOf</code>, but returns the last index at which an item is found, if at all.</p>
+          
+          <pre><code class="language-javascript">var arr = ["apple", "banana", "carrot", "apple"];&#x000A;&#x000A;arr.lastIndexOf("apple"); // 3&#x000A;</code></pre>
+          
+          <h2 id="iteration-methods">Iteration methods</h2>
+          
+          <h3 id="arrayprototypeforeach">Array.prototype.forEach</h3>
+          
+          <p>Ever seen this before?</p>
+          
+          <pre><code class="language-javascript">for (var i = 0, l = arr.length; i &lt; l; i++) {&#x000A;  doSomething(arr[i], i, arr);&#x000A;}&#x000A;</code></pre>
+          
+          <p>There is now a clean, high level way to do this with <code>forEach</code>. The method accepts a callback which will be executed once for each item in the array. The callback receives three arguments: the value of the current iteration, the index of the current iteration, and the array itself. The following is equivalent to the above:</p>
+          
+          <pre><code class="language-javascript">arr.forEach(doSomething);&#x000A;</code></pre>
+          
+          <p>An optional second argument specifies the value of <code>this</code> within the callback.</p>
+          
+          <h3 id="arrayprototypeevery">Array.prototype.every</h3>
+          
+          <p><code>every</code> checks every element in an array against a condition, by means of a passed in function. If any of the items in the array cause the function to return a falsy value, <code>every</code> returns <code>false</code>. If they all return truthy values, <code>every</code> returns <code>true</code>.  Like <code>forEach</code>, an optional second argument supplies a value for the callback's <code>this</code>, and the callback itself will receive the same three arguments.</p>
+          
+          <pre><code class="language-javascript">var arr = ["apple", "banana", "carrot", "apple"];&#x000A;&#x000A;arr.every(function (value, index, array) { return value.length &gt; 1; }); // true&#x000A;arr.every(function (value, index, array) { return value.length &lt; 6; }); // false&#x000A;</code></pre>
+          
+          <h3 id="arrayprototypesome">Array.prototype.some</h3>
+          
+          <p><code>some</code> is similar to <code>every</code>, but the passing condition is that <em>at least one</em> callback returns true, rather than all of them.</p>
+          
+          <pre><code class="language-javascript">var arr = ["apple", "banana", "carrot", "apple"];&#x000A;&#x000A;arr.some(function (value, index, array) { return value.length &lt; 6; }); // true&#x000A;</code></pre>
+          
+          <h2 id="transformation-methods">Transformation methods</h2>
+          
+          <h3 id="arrayprototypemap">Array.prototype.map</h3>
+          
+          <p>Mapping is the most common transformation. It loops through an array, running a function and creating a new array built from the return values of each iteration. <code>map</code> takes the same optional second argument and receives the same callback arguments as the iteration methods.</p>
+          
+          <pre><code class="language-javascript">var names = ["Abigail", "Bongo", "Carlitos"];&#x000A;&#x000A;names.map(function (value, index, array) {&#x000A;  return value + " Jones";&#x000A;});&#x000A;// ["Abigal Jones", "Bongo Jones", "Carlitos Jones"]&#x000A;</code></pre>
+          
+          <h3 id="arrayprototypefilter">Array.prototype.filter</h3>
+          
+          <p>Filtering is like mapping, but creates a new array containing only the items of the original array that return a truthy value from the callback. <code>filter</code> takes the familiar optional argument and its callback receives the usual suspects.</p>
+          
+          <pre><code class="language-javascript">var names = ["Abigail", "Bongo", "Carlitos"];&#x000A;&#x000A;names.filter(function (value, index, array) {&#x000A;  return value.length &gt; 5&#x000A;});&#x000A;// ["Abigail", "Carlitos"]&#x000A;</code></pre>
+          
+          <h3 id="arrayprototypereduce">Array.prototype.reduce</h3>
+          
+          <p><code>reduce</code> is used to melt the items in an array down to a single value by the operations performed in its callback function. The callback takes the usual three iteration arguments, but is prepended with an extra argument, the value of the previous iteration's result. By default, the first iteration is effectively a no-op, so the calculation begins with the array's first value as the accumulated result and the array's second value as the current iteration. This is probably best illustrated with an example:</p>
+          
+          <pre><code class="language-javascript">[10, 20, 30, 40, 50].reduce(function (accum, value, index, array) {&#x000A;  return accum + value;&#x000A;});&#x000A;// 150&#x000A;</code></pre>
+          
+          <p>On the first iteration, <code>accum</code> is <code>10</code> and <code>value</code> is <code>20</code>. The return value of <code>accum + value</code> becomes <code>accum</code> on the next iteration of the loop.</p>
+          
+          <p><code>reduce</code> can also take an initial value for <code>accum</code> as a second argument. When invoked this way, the first <code>value</code> in the callback is the first item in the array:</p>
+          
+          <pre><code class="language-javascript">[10, 20, 30, 40, 50].reduce(function (accum, value, index, array) {&#x000A;  return accum + value;&#x000A;}, 50);&#x000A;// 200&#x000A;</code></pre>
+          
+          <h3 id="arrayprototypereduceright">Array.prototype.reduceRight</h3>
+          
+          <p><code>reduce</code>'s sibling, which performs the same behavior and accepts the same arguments, except it iterates beginning with the rightmost item in the array and moves left. If not specified with a argument, the initial value of <code>accum</code> is the last value in the array, and the initial iteration value is the second to last.</p>
+          
+          <pre><code class="language-javascript">[10, 20, 30, 40, 50].reduceRight(function (accum, value, index, array) {&#x000A;  return accum - value;&#x000A;});&#x000A;// -50&#x000A;</code></pre>
+          
+          <h2 id="ecmascript-5-is-full-of-goodness">ECMAScript 5 is full of goodness</h2>
+          
+          <p>ECMAScript 5 packs lots of new, useful features into JavaScript which speed up both development and performance of code. The new APIs are implented in the most recent versions of Chrome, Firefox, Safari, and (<em>gasp!</em>) Internet Explorer, so I encourage you to start using these new APIs today!</p>
+          <footer>
+            <p>
+              This post was tagged with <a title="Writing tagged with javascript" itemprop="keywords" href="/posts/tags/javascript/">javascript</a>.
+            </p>
+            <p>
+              Find more content by <a title="Browse writing by tags" href="/tags/">browsing by tags</a>.
+            </p>
+          </footer>
+        </article>
+      </div>
+    </div>
+    <footer class='site-footer'>
+      <div class='bucket'>
+        <p>Logo by <a href="http://stephanielucido.com/" title="Stephanie Lucido">Stephanie Lucido</a>.</p>
+        <small>
+          &copy; 2015 Jimmy Cuadra. All rights reserved.
+        </small>
+      </div>
+    </footer>
+    <script src="/javascripts/application-f844c8db.js" type="text/javascript"></script>
+    <script>
+    (function() {
+      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      po.src = 'https://apis.google.com/js/platform.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+    (function(d, t) {
+      var e = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      e.type = 'text/javascript'; e.async = true; e.src = '//platform.twitter.com/widgets.js';
+      s.parentNode.insertBefore(e, s);
+    })(document, 'script');
+    </script>
+  </body>
+</html>

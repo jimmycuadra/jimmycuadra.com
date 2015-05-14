@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      CoffeeScript classes: under the hood |
+      Jimmy Cuadra
+    </title>
+    <link href="/stylesheets/application-58ac5912.css" rel="stylesheet" type="text/css" />
+    <link href='http://feeds.feedburner.com/jimmycuadra' rel='alternate' title='RSS' type='application/rss+xml'>
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-5500916-1');ga('send', 'pageview');</script>
+  </head>
+  <body>
+    <header class='site-header'>
+      <div class='bucket'>
+        <a class='title-link' href='/' title='Jimmy Cuadra'>
+          <img width="75" height="75" alt="Jimmy Cuadra" class="logo" src="/images/logo-3e3e6b15.png" />
+          <hgroup>
+            <h1 class='main-title'>I'm Jimmy Cuadra.</h1>
+            <p>I write about programming and open source software.</p>
+          </hgroup>
+          <div class='clear'></div>
+        </a>
+      </div>
+    </header>
+    <nav>
+      <div class='bucket'>
+        <ul>
+          <li><a title="Writing" href="/">Writing</a></li>
+          <li><a class="sub-nav" title="Writing by tags" href="/tags/">by tags</a></li>
+          <li><a title="Jimmy Cuadra's Résumé" href="/resume/">Résumé</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class='content'>
+      <div class='bucket'>
+        <article itemscope itemtype='http://schema.org/BlogPosting'>
+          <meta content='Jimmy Cuadra' itemprop='author'>
+          <header>
+            <h1 class='post-title' itemprop='headline'><a title="CoffeeScript classes: under the hood" href="/posts/coffeescript-classes-under-the-hood/">CoffeeScript classes: under the hood</a></h1>
+            <data itemprop='datePublished' value='2011-10-14'>October 14, 2011</data>
+          </header>
+          <div class='social'>
+            <div class='g-plus' data-action='share' data-annotation='bubble' data-href='/posts/coffeescript-classes-under-the-hood/'></div>
+            <a class='twitter-share-button' data-count='horizontal' data-text='CoffeeScript classes: under the hood' data-url='/posts/coffeescript-classes-under-the-hood/' data-via='jimmycuadra' href='https://twitter.com/share'>Tweet</a>
+          </div>
+          <p>CoffeeScript has a very elegant mechanism for creating classes. If you're new to JavaScript, you may not be aware that there are no native classes, and that CoffeeScript classes are actually syntactic sugar for JavaScript's constructor functions and object prototypes. Most people are more familiar with the syntax offered by CoffeeScript, but it's a good idea to know what's happening behind the scenes.</p>
+          
+          <h2 id="the-prototypal-model">The prototypal model</h2>
+          
+          <p>In JavaScript, there are no classes, in the classical sense. Objects are created and inherit directly from other objects. Functions are a type of object, and when invoked with the <code>new</code> operator, create a new object which use the function as a constructor. This new object has a hidden link to the <strong>prototype</strong> property of the constructor function that establishes its inheritance. If you attempt to access a property on the new object that doesn't exist, JavaScript will follow the inheritance chain to the constructor's prototype and use the value it finds there.</p>
+          
+          <p>When you create a class in CoffeeScript, you're really creating a constructor function. Each instance method in the class is actually a property of the constructor's prototype.</p>
+          
+          <h2 id="a-simple-class">A simple class</h2>
+          
+          <p>Let's take a look at an example class, <code>Bear</code>. A bear is very simple. It has one property, <code>name</code>, and one method, <code>attack</code>. A class delcared with the <code>class</code> keyword creates an empty constructor function. The class definition is followed by an object defining the properties of the constructor's prototype. Each key in the object becomes a property on the prototype. The special key <code>constructor</code> becomes the body of the constructor function itself.</p>
+          
+          <pre><code class="language-text">class Bear&#x000A;  constructor: (@name) -&gt;&#x000A;&#x000A;  attack: -&gt;&#x000A;    "#{@name} the bear attacks with his bare paws!"&#x000A;&#x000A;oswalt = new Bear "Oswalt"&#x000A;console.log oswalt.attack()&#x000A;# Oswalt the bear attacks with his bare paws!&#x000A;</code></pre>
+          
+          <p><code>Bear</code> defines a simple constructor which takes one argument, the bear's name, and assigns it to the <code>name</code> property of the instance. The <code>attack</code> method simply returns a string saying the bear is attacking. We instantiate a new <code>Bear</code> named "Oswalt" and log the results of his <code>attack</code> method. This outputs "Oswalt the bear attacks with his bare paws!" to the console. Let's take a look at how CoffeeScript translates this into JavaScript. (I've left out some closures and added whitespace for clarity.)</p>
+          
+          <pre><code class="language-text">var Bear, oswalt;&#x000A;&#x000A;function Bear(name) {&#x000A;  this.name = name;&#x000A;}&#x000A;&#x000A;Bear.prototype.attack = function() {&#x000A;  return "" + this.name + " the bear attacks with his bare paws!";&#x000A;};&#x000A;&#x000A;oswalt = new Bear("Oswalt");&#x000A;console.log(oswalt.attack());&#x000A;</code></pre>
+          
+          <p>As we can see, the <code>Bear</code> class is really just a function named <code>Bear</code>. It takes one argument and assigns it to the new instance's <code>name</code> property. The <code>attack</code> method is just a function assigned to the <code>attack</code> property of <code>Bear</code>'s prototype. We instantiate an object by calling <code>new Bear</code> and passing it the bear's name. When we attempt to access the <code>attack</code> property of the new object, JavaScript sees there there is no such property, and travels up the hidden link to the class's prototype, where it finds the method we want and executes it.</p>
+          
+          <h2 id="inheritance">Inheritance</h2>
+          
+          <p>CoffeeScript's class syntax is a bit cleaner than the compiled JavaScript, but ultimately not that different. Where CoffeeScript classes really shine is in abstracting away the clunky steps required to produce classical inhertiance via the prototypal model. Let's extend <code>Bear</code> to see how it works.</p>
+          
+          <pre><code class="language-coffeescript">class BearWithChainsawPaws extends Bear&#x000A;  attack: -&gt;&#x000A;    super + " BY THE WAY, HIS PAWS ARE CHAINSAWS."&#x000A;&#x000A;rodrigo = new BearWithChainsawHands "Rodrigo"&#x000A;console.log rodrigo.attack()&#x000A;# Rodrigo the bear attacks with his bare paws! BY THE WAY, HIS PAWS ARE CHAINSAWS.&#x000A;</code></pre>
+          
+          <p>This new <code>BearWithChainsawPaws</code> class is a child class of <code>Bear</code>. It overrides the <code>attack</code> method but does not change the constructor. Note that the new <code>attack</code> method uses <code>super</code> to call <code>Bear</code>'s version of <code>attack</code>. This is very useful, because there isn't a direct equivalent of <code>super</code> in JavaScript, as you can see in the compiled code (again modified for clarity):</p>
+          
+          <pre><code class="language-javascript">var Bear, BearWithChainsawHands, rodrigo;&#x000A;&#x000A;var __hasProp = Object.prototype.hasOwnProperty;&#x000A;&#x000A;var __extends = function(child, parent) {&#x000A;  for (var key in parent) {&#x000A;    if (__hasProp.call(parent, key)) {&#x000A;      child[key] = parent[key];&#x000A;    }&#x000A;  }&#x000A;&#x000A;  function ctor() { this.constructor = child; }&#x000A;&#x000A;  ctor.prototype = parent.prototype;&#x000A;  child.prototype = new ctor;&#x000A;  child.__super__ = parent.prototype;&#x000A;&#x000A;  return child;&#x000A;};&#x000A;&#x000A;function Bear(name) {&#x000A;  this.name = name;&#x000A;}&#x000A;&#x000A;Bear.prototype.attack = function() {&#x000A;  return "" + this.name + " the bear attacks with his bare paws!";&#x000A;};&#x000A;&#x000A;__extends(BearWithChainsawHands, Bear);&#x000A;&#x000A;function BearWithChainsawHands() {&#x000A;  BearWithChainsawHands.__super__.constructor.apply(this, arguments);&#x000A;}&#x000A;&#x000A;BearWithChainsawHands.prototype.attack = function() {&#x000A;  return BearWithChainsawHands.__super__.attack.apply(this, arguments) + " BY THE WAY, HIS PAWS ARE CHAINSAWS.";&#x000A;};&#x000A;&#x000A;rodrigo = new BearWithChainsawHands("Rodrigo");&#x000A;console.log(rodrigo.attack());&#x000A;</code></pre>
+          
+          <p>There's a lot happening here, so let's take it a bit at a time.</p>
+          
+          <p>The first thing to notice here is that CoffeeScript has generated some boilerplate above the classes themselves that wasn't there in the first example. <code>__hasProp</code> is just a shortcut for <code>Object.prototype.hasOwnProperty</code>. Since it's used in a loop in the following function, this is a bit more performant. It's not particularly important in understanding how inheritance works, however. The real meat is the next function.</p>
+          
+          <p><code>__extends</code> is a helper function that sets up one class to inherit from another. The <code>for...in</code> loop copies all the class-level methods from the parent to the child. In this particular case, our classes have only instance methods, but if we were to have defined a class property, say <code>Bear.awesome = true</code>, then the loop would copy <code>true</code> into <code>BearWithChainsawPaws.awesome</code>.</p>
+          
+          <p>The second half of <code>__extends</code> sets up the prototype link (which contains the instance properties and methods) from the child to the parent. At its simplest, prototypal inheritance is achieved by assigning an instance of the parent to the child's prototype. <code>__extends</code> uses a bit of indirection to both establish this link, and to correctly assign the <code>constructor</code> property for all instances of the child. This property points back at the constructor function itself, and is necessary for the <code>instanceof</code> operator to give the desired result. The intermediate <code>ctor</code> method is used to for this purpose.</p>
+          
+          <p>Lastly, a <code>__super__</code> property is added to the child class, which establishes a reference to the parent's prototype. Without this, achieving <code>super</code> would require manually calling the parent class by name, which is error prone and not particularly maintainable. Inside <code>BearWithChainsawHands</code>'s methods, we can see this reference to <code>__super__</code> being used to call <code>Bear</code>'s methods through the magic of <code>apply</code> – a method which invokes one object's method within the context of another object.</p>
+          
+          <h2 id="the-point">The point</h2>
+          
+          <p>While I do think CoffeeScript is pretty rad, the point of this post is to aid in understanding of what CoffeeScript is doing behind the scenes to provide its niceties. It uses good, clean JavaScript to abstract away what, to many, is an awkward approach, and in doing so, teaches a great deal about how JavaScript works.</p>
+          
+          <h2 id="further-reading">Further reading</h2>
+          
+          <p>This post covers a lot of ground in a short span, and many parts of it could be explained in more depth. Here are some links to the <a href="https://developer.mozilla.org/en/JavaScript">MDC docs</a> with more detail that should be helpful:</p>
+          
+          <ul>
+            <li><a href="https://developer.mozilla.org/en/JavaScript/Reference/Operators/Special/new">new</a></li>
+            <li><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/constructor">constructor</a></li>
+            <li><a href="https://developer.mozilla.org/en/JavaScript/Guide/Inheritance_constructor_prototype">prototype and inheritance</a></li>
+            <li><a href="https://developer.mozilla.org/en/JavaScript/Reference/Operators/Special/instanceof">instanceof</a></li>
+            <li><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/call">call</a> and <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/apply">apply</a></li>
+          </ul>
+          <footer>
+            <p>
+              This post was tagged with <a title="Writing tagged with coffeescript" itemprop="keywords" href="/posts/tags/coffeescript/">coffeescript</a> and <a title="Writing tagged with javascript" itemprop="keywords" href="/posts/tags/javascript/">javascript</a>.
+            </p>
+            <p>
+              Find more content by <a title="Browse writing by tags" href="/tags/">browsing by tags</a>.
+            </p>
+          </footer>
+        </article>
+      </div>
+    </div>
+    <footer class='site-footer'>
+      <div class='bucket'>
+        <p>Logo by <a href="http://stephanielucido.com/" title="Stephanie Lucido">Stephanie Lucido</a>.</p>
+        <small>
+          &copy; 2015 Jimmy Cuadra. All rights reserved.
+        </small>
+      </div>
+    </footer>
+    <script src="/javascripts/application-f844c8db.js" type="text/javascript"></script>
+    <script>
+    (function() {
+      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      po.src = 'https://apis.google.com/js/platform.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+    (function(d, t) {
+      var e = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      e.type = 'text/javascript'; e.async = true; e.src = '//platform.twitter.com/widgets.js';
+      s.parentNode.insertBefore(e, s);
+    })(document, 'script');
+    </script>
+  </body>
+</html>

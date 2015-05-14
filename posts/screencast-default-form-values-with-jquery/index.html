@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      Screencast: Default Form Values with jQuery |
+      Jimmy Cuadra
+    </title>
+    <link href="/stylesheets/application-58ac5912.css" rel="stylesheet" type="text/css" />
+    <link href='http://feeds.feedburner.com/jimmycuadra' rel='alternate' title='RSS' type='application/rss+xml'>
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-5500916-1');ga('send', 'pageview');</script>
+  </head>
+  <body>
+    <header class='site-header'>
+      <div class='bucket'>
+        <a class='title-link' href='/' title='Jimmy Cuadra'>
+          <img width="75" height="75" alt="Jimmy Cuadra" class="logo" src="/images/logo-3e3e6b15.png" />
+          <hgroup>
+            <h1 class='main-title'>I'm Jimmy Cuadra.</h1>
+            <p>I write about programming and open source software.</p>
+          </hgroup>
+          <div class='clear'></div>
+        </a>
+      </div>
+    </header>
+    <nav>
+      <div class='bucket'>
+        <ul>
+          <li><a title="Writing" href="/">Writing</a></li>
+          <li><a class="sub-nav" title="Writing by tags" href="/tags/">by tags</a></li>
+          <li><a title="Jimmy Cuadra's Résumé" href="/resume/">Résumé</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class='content'>
+      <div class='bucket'>
+        <article itemscope itemtype='http://schema.org/BlogPosting'>
+          <meta content='Jimmy Cuadra' itemprop='author'>
+          <header>
+            <h1 class='post-title' itemprop='headline'><a title="Screencast: Default Form Values with jQuery" href="/posts/screencast-default-form-values-with-jquery/">Screencast: Default Form Values with jQuery</a></h1>
+            <data itemprop='datePublished' value='2010-01-04'>January 04, 2010</data>
+          </header>
+          <div class='social'>
+            <div class='g-plus' data-action='share' data-annotation='bubble' data-href='/posts/screencast-default-form-values-with-jquery/'></div>
+            <a class='twitter-share-button' data-count='horizontal' data-text='Screencast: Default Form Values with jQuery' data-url='/posts/screencast-default-form-values-with-jquery/' data-via='jimmycuadra' href='https://twitter.com/share'>Tweet</a>
+          </div>
+          <object height='385' itemprop='video' itemscope itemtype='http://schema.org/VideoObject' width='640'>
+            <meta content='http://www.youtube.com/v/Vah7N-HF6Vw?fs=1&amp;amp;hl=en_US&amp;amp;rel=0' itemprop='embedURL'>
+            <meta content='640' itemprop='width'>
+            <meta content='385' itemprop='height'>
+            <param name='movie' value='http://www.youtube.com/v/Vah7N-HF6Vw?fs=1&amp;amp;hl=en_US&amp;amp;rel=0'>
+            <param name='allowFullScreen' value='true'>
+            <param name='allowscriptaccess' value='always'>
+              <embed allowcriptaccess='always' allowfullscreen='true' height='385' src='http://www.youtube.com/v/Vah7N-HF6Vw?fs=1&amp;amp;hl=en_US&amp;amp;rel=0' type='application/x-shockwave-flash' width='640'>
+            </param>
+          </object>
+          <p>A common effect for web forms is to show a default value in each input in gray text that disappears when the user clicks in it and returns when they click away without entering text. Learn how to do it using jQuery in this beginner level tutorial.</p>
+          
+          <p>Note that in the blur handler, I accidentally used <code>$(this)</code> instead of <code>$this</code> (line 31 in the screencast and line 33 in the code below). This actually makes the point that either can be used and things will still work. However, it is more efficient to use <code>$this</code>.</p>
+          
+          <pre><code class="language-html">&lt;!-- index.html --&gt;&#x000A;&#x000A;&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"&#x000A;  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;&#x000A;&lt;html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml"&gt;&#x000A;&lt;head&gt;&#x000A;  &lt;meta http-equiv="Content-type" content="text/html; charset=utf-8" /&gt;&#x000A;  &lt;title&gt;Jimmy Cuadra Screencasts&lt;/title&gt;&#x000A;  &lt;link href="reset.css" media="screen" rel="stylesheet" type="text/css" /&gt;&#x000A;  &lt;link href="screen.css" media="screen" rel="stylesheet" type="text/css" /&gt;&#x000A;  &lt;script src="jquery.min.js" type="text/javascript"&gt;&lt;/script&gt;&#x000A;  &lt;script src="application.js" type="text/javascript"&gt;&lt;/script&gt;&#x000A;&lt;/head&gt;&#x000A;&lt;body&gt;&#x000A;  &lt;div id="bucket"&gt;&#x000A;    &lt;h1&gt;Default Form Values with jQuery&lt;/h1&gt;&#x000A;&#x000A;    &lt;form&gt;&#x000A;      &lt;fieldset&gt;&#x000A;        &lt;p&gt;&lt;input type="text" value="First name" /&gt;&lt;/p&gt;&#x000A;&#x000A;        &lt;p&gt;&lt;input type="text" value="Last name" /&gt;&lt;/p&gt;&#x000A;&#x000A;        &lt;p&gt;&lt;input type="text" value="E-mail" /&gt;&lt;/p&gt;&#x000A;&#x000A;        &lt;p&gt;&lt;input type="text" value="Website" /&gt;&lt;/p&gt;&#x000A;&#x000A;        &lt;p&gt;&lt;textarea cols="50" rows="5"&gt;Enter your comments&lt;/textarea&gt;&lt;/p&gt;&#x000A;      &lt;/fieldset&gt;&#x000A;    &lt;/form&gt;&#x000A;  &lt;/div&gt;&#x000A;&lt;/body&gt;&#x000A;&lt;/html&gt;&#x000A;</code></pre>
+          
+          <pre><code class="language-javascript">// application.js&#x000A;&#x000A;$(function() {&#x000A;  // 1. select all form inputs and the textarea&#x000A;  $('form input').add('form textarea')&#x000A;  &#x000A;  // 2. add focus handler&#x000A;  .focus(function() {&#x000A;    // a. cache current element&#x000A;    var $this = $(this);&#x000A;    &#x000A;    // b. set the default value if it hasn't been set&#x000A;    if (!$this.data('default')) {&#x000A;      $this.data('default', $this.val());&#x000A;    }&#x000A;    &#x000A;    // c. blank out the field and change color to black&#x000A;    //    if the user hasn't entered text in it&#x000A;    if ($this.val() == $this.data('default')) {&#x000A;      $this.val('')&#x000A;      .css('color', '#000');&#x000A;    }&#x000A;  })&#x000A;  &#x000A;  // 3. add blur handler&#x000A;  .blur(function() {&#x000A;    // a. cache current element&#x000A;    var $this = $(this);&#x000A;    &#x000A;    // b. return field to default value and change color to gray&#x000A;    //    if the field is empty&#x000A;    if ($this.val() == '') {&#x000A;      $(this).val($this.data('default'))&#x000A;      .css('color', '#666');&#x000A;    }&#x000A;  })&#x000A;  &#x000A;  // 4. change text color to gray&#x000A;  .css('color', '#666')&#x000A;});&#x000A;</code></pre>
+          <footer>
+            <p>
+              This post was tagged with <a title="Writing tagged with javascript" itemprop="keywords" href="/posts/tags/javascript/">javascript</a>, <a title="Writing tagged with jquery" itemprop="keywords" href="/posts/tags/jquery/">jquery</a>, and <a title="Writing tagged with screencast" itemprop="keywords" href="/posts/tags/screencast/">screencast</a>.
+            </p>
+            <p>
+              Find more content by <a title="Browse writing by tags" href="/tags/">browsing by tags</a>.
+            </p>
+          </footer>
+        </article>
+      </div>
+    </div>
+    <footer class='site-footer'>
+      <div class='bucket'>
+        <p>Logo by <a href="http://stephanielucido.com/" title="Stephanie Lucido">Stephanie Lucido</a>.</p>
+        <small>
+          &copy; 2015 Jimmy Cuadra. All rights reserved.
+        </small>
+      </div>
+    </footer>
+    <script src="/javascripts/application-f844c8db.js" type="text/javascript"></script>
+    <script>
+    (function() {
+      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      po.src = 'https://apis.google.com/js/platform.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+    (function(d, t) {
+      var e = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      e.type = 'text/javascript'; e.async = true; e.src = '//platform.twitter.com/widgets.js';
+      s.parentNode.insertBefore(e, s);
+    })(document, 'script');
+    </script>
+  </body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      
+      Jimmy Cuadra
+    </title>
+    <link href="/stylesheets/application-58ac5912.css" rel="stylesheet" type="text/css" />
+    <link href='http://feeds.feedburner.com/jimmycuadra' rel='alternate' title='RSS' type='application/rss+xml'>
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-5500916-1');ga('send', 'pageview');</script>
+  </head>
+  <body>
+    <header class='site-header'>
+      <div class='bucket'>
+        <a class='title-link' href='/' title='Jimmy Cuadra'>
+          <img width="75" height="75" alt="Jimmy Cuadra" class="logo" src="/images/logo-3e3e6b15.png" />
+          <hgroup>
+            <h1 class='main-title'>I'm Jimmy Cuadra.</h1>
+            <p>I write about programming and open source software.</p>
+          </hgroup>
+          <div class='clear'></div>
+        </a>
+      </div>
+    </header>
+    <nav>
+      <div class='bucket'>
+        <ul>
+          <li><a title="Writing" href="/">Writing</a></li>
+          <li><a class="sub-nav" title="Writing by tags" href="/tags/">by tags</a></li>
+          <li><a title="Jimmy Cuadra's Résumé" href="/resume/">Résumé</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class='content'>
+      <div class='bucket'>
+        <article itemscope itemtype='http://schema.org/BlogPosting'>
+          <meta content='Jimmy Cuadra' itemprop='author'>
+          <header>
+            <h1 class='post-title' itemprop='headline'><a title="jQuery is not an architecture" href="/posts/jquery-is-not-an-architecture/">jQuery is not an architecture</a></h1>
+            <data itemprop='datePublished' value='2012-07-11'>July 11, 2012</data>
+          </header>
+          <div class='social'>
+            <div class='g-plus' data-action='share' data-annotation='bubble' data-href='/posts/jquery-is-not-an-architecture/'></div>
+            <a class='twitter-share-button' data-count='horizontal' data-text='jQuery is not an architecture' data-url='/posts/jquery-is-not-an-architecture/' data-via='jimmycuadra' href='https://twitter.com/share'>Tweet</a>
+          </div>
+          <p>There is no question about the enormous positive impact <a href="http://jquery.com/">jQuery</a> has had on front end web development. It removes all the pain of the terrible DOM API and provides utility functions for just about everything small applications need. But when your application starts to grow, you need to structure your code in a more organized way to make sure things are testable, maintainable, and that features are discoverable to both new members of your team and your future self, who may not be able to discern the business logic of your application from looking at a slew of selectors and anonymous function callbacks.</p>
+          
+          <p>Although jQuery has many facilities, its main purpose is as an abstraction layer to create a single, developer-friendly API that hides the ugliness of bad APIs and browser implementation quirks. Because most of its methods involve selecting, traversing, and manipulating DOM elements, the basic unit in jQuery is the selector. While this has the benefit of making DOM interaction simple and easy for beginners to learn, it has the unfortunate side effect of making people think that anything but very trivial amounts of JavaScript should be organized around jQuery selectors.</p>
+          
+          <p>In a very simple application or basic web page, e.g. a WordPress blog, tiny snippets of jQuery or a plugin dropped into the page may be appropriate. But if you're building something with an amount of JavaScript even slightly larger than that, things will get difficult to maintain quickly.</p>
+          
+          <p>jQuery is no substitute for good application architecture. It's just another utility library in your toolbelt. Think of jQuery simply as an abstraction of the DOM API and a way to think about Internet Explorer less often.</p>
+          
+          <p>To illustrate just how backwards the jQuery-selector-as-basic-unit approach is for a non-trivial application, think about how it compares to the structure of an object in an object-oriented paradigm. At the most basic level, objects consist of members and methods – stateful data and functions that perform actions to manipulate that data. Methods take arguments on which they operate. In selector-as-basis jQuery, you're effectively starting with an argument (the selector), and <em>passing it a method</em> in the form of anonymous functions. This is not to say that object-oriented software is the only correct approach to writing software. The problem is that jQuery tends to make the target of an action the focus and not the action itself.</p>
+          
+          <h2 id="ways-to-improve-architecture">Ways to improve architecture</h2>
+          
+          <p>There are a few simple ways to improve the architecture of your JavaScript code beyond what is shown in most jQuery literature.</p>
+          
+          <h3 id="namespaces">Namespaces</h3>
+          
+          <p>Use a single global object to namespace all your code. Use more objects attached to your global object to separate your modules by their high-level purpose. This protects you from name collisions and organizes the parts of your application in a discoverable way. When your application grows very large, this makes it easier for people less familiar with the system to find where a particular widget or behavior is defined.</p>
+          
+          <pre><code class="language-javascript">window.FOO = {&#x000A;  Widgets: {},&#x000A;  Utilities: {},&#x000A;};&#x000A;</code></pre>
+          
+          <h3 id="modules">Modules</h3>
+          
+          <p>Use function prototypes or the <a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript">module pattern</a> to create pseudo classes for your modules. All the intelligence about what your application does should be encapsulated inside these discoverable modules. Use clear, straight-forward method names. By extracting your event handlers and other functions into named methods, they can be unit tested in isolation for a high level of confidence that your system behaves the way you expect. It's also much clearer what the module does when looking at code you haven't seen in a while.</p>
+          
+          <pre><code class="language-javascript">FOO.Widgets.CommentBox = function (containerSelector) {&#x000A;  this.container = $(containerSelector);&#x000A;  this.container.on("submit", "form", this.addComment.bind(this));&#x000A;};&#x000A;&#x000A;FOO.Widgets.CommentBox.prototype.addComment = function (event) {&#x000A;  // More logic here...&#x000A;};&#x000A;&#x000A;// Many more methods...&#x000A;</code></pre>
+          
+          <h3 id="instantiate-your-modules">Instantiate your modules</h3>
+          
+          <p>Initialize your modules by constructing new objects, passing in the appropriate selectors as arguments. Assign the newly created object to a property on your global object. A good convention is to use properties beginning with capital letters for modules, and properties beginning with lowercase letters for instances of those modules. Using this approach, you can have multiple instances of the same widget on one page with explicit control over each individual instance. This is useful both for interaction between widgets and for development in the web inspector in your browser.</p>
+          
+          <p>Deferring initialization until a module is instantiated programmaticaly gives you great flexibility when testing. You can isolate the effect of your module to a particular subtree of the DOM, which can be cleared out in a teardown phase after each test.</p>
+          
+          <pre><code class="language-javascript">FOO.comments = new FOO.Widgets.CommentBox(".comment-box");&#x000A;</code></pre>
+          
+          <h2 id="just-the-beginning">Just the beginning</h2>
+          
+          <p>These are just a few very simple examples of ways to structure your code as your application starts to grow. For even better object-oriented abstractions, consider using a library like <a href="http://documentcloud.github.com/backbone/">Backbone</a>, which, although usually associated with Gmail-style single page applications, is also very useful for writing well-organized JavaScript that focuses on behavior and application logic instead of selectors tying it to the markup and heavy chains of callbacks.</p>
+          <footer>
+            <p>
+              This post was tagged with <a title="Writing tagged with javascript" itemprop="keywords" href="/posts/tags/javascript/">javascript</a>.
+            </p>
+            <p>
+              Find more content by <a title="Browse writing by tags" href="/tags/">browsing by tags</a>.
+            </p>
+          </footer>
+        </article>
+        <article itemscope itemtype='http://schema.org/BlogPosting'>
+          <meta content='Jimmy Cuadra' itemprop='author'>
+          <header>
+            <h1 class='post-title' itemprop='headline'><a title="Please don't use Cucumber" href="/posts/please-don-t-use-cucumber/">Please don't use Cucumber</a></h1>
+            <data itemprop='datePublished' value='2012-05-31'>May 31, 2012</data>
+          </header>
+          <div class='social'>
+            <div class='g-plus' data-action='share' data-annotation='bubble' data-href='/posts/please-don-t-use-cucumber/'></div>
+            <a class='twitter-share-button' data-count='horizontal' data-text="Please don't use Cucumber" data-url='/posts/please-don-t-use-cucumber/' data-via='jimmycuadra' href='https://twitter.com/share'>Tweet</a>
+          </div>
+          <p><a href="http://cukes.info/">Cucumber</a> is by far my least favorite thing in the Ruby ecosystem, and also the worst example of <a href="http://en.wikipedia.org/wiki/Cargo_cult_programming">cargo cult programming</a>. Cucumber has almost no practical benefit over acceptance testing in pure Ruby with <a href="https://github.com/jnicklas/capybara">Capybara</a>. I understand the philosophical goals behind behavior driven development, but in the real world, Cucumber is a solution looking for a problem.</p>
+          
+          <p>The fact that Cucumber has gained the popularity it has in the Ruby community is outright baffling to me. All the reasons to use it that people give are theoretical, and I have never seen them matter or be remotely applicable in the real world. Cucumber aims to bridge the gap between software developers and non-technical stakeholders, but the reality is that product managers don't really care about Gherkin. Their time is better spent brainstorming all the various use cases for a feature and communicating this either verbally or in free form text. Reading (and especially writing) Gherkin is a waste of their time, because Gherkin is not English. It's extremely inflexible Ruby disguised as English. The more naturally it reads, the more difficult it is to translate it into reusable code via step definitions.</p>
+          
+          <p>There are basically two extremes of Cucumber:</p>
+          
+          <ol>
+            <li>Writing Gherkin describing the feature at a very high level, and reusing few of the step definitions between features.</li>
+            <li>Reusing step definitions, resulting in a level of detail described in the Gherkin which is not useful for any of the stakeholders.</li>
+          </ol>
+          
+          <p>Everything in between is just a bad compromise of one or the other.</p>
+          
+          <p>Gherkin is really just glorified comments. If you simply write free form comments above Capybara scenarios, you can convey the same high level information about what the test is doing and what the acceptance criteria are, without any of the overhead, maintenance cost, and general technical debt of Cucumber. This doesn't allow for the real red-green-refactor cycle from the outside in of the BDD philosophy, but in my experience, developers tend to avoid the test-first approach with Cucumber simply because it's so painful to use. If you're not really following BDD practices, and your non-technical stakeholders are not reading or writing Gherkin, Cucumber is wasting your developers' time and bloating your test suite.</p>
+          
+          <p>The one advantage Cucumber offers over simply commenting Capybara scenarios is that, by tying the "English" directly to the implementation, it's impossible for the "comment" to rot. This is certainly a danger, as a misleading comment is worse than no comment at all. However, this benefit comes at an extremly heavy cost. I would argue that it should simply be the discipline of developers to make sure that any time a Capybara scenario is updated, the corresponding comment is read through and updated as necessary.</p>
+          
+          <p>Whenever someone writes a criticism of a particular piece of software, there is always a group of people who respond by saying, "It's just a tool. If it works for you, use it. If it doesn't, don't." While I agree in theory, this is where the effect of the cargo cult becomes real and damaging. Some guy somewhere came up with this idea that seemed great in theory, and everyone jumped on the bandwagon doing it because it sounded cool and it seemed like something they <em>should</em> do. After a while, people choose to use it just because it became the status quo. They don't see that all the reasons a tool like Cucumber seemed like a good idea, based on some blog post they read 3 years ago, are not in tune with the real, practical needs of their project or their organization. And once that choice has been made, everyone has to live with the increasing technical debt and slowed, painful development it creates.</p>
+          <footer>
+            <p>
+              This post was tagged with <a title="Writing tagged with testing" itemprop="keywords" href="/posts/tags/testing/">testing</a>.
+            </p>
+            <p>
+              Find more content by <a title="Browse writing by tags" href="/tags/">browsing by tags</a>.
+            </p>
+          </footer>
+        </article>
+        <article itemscope itemtype='http://schema.org/BlogPosting'>
+          <meta content='Jimmy Cuadra' itemprop='author'>
+          <header>
+            <h1 class='post-title' itemprop='headline'><a title="Constraints and compromises in ECMAScript 6" href="/posts/constraints-and-compromises-in-ecmascript-6/">Constraints and compromises in ECMAScript 6</a></h1>
+            <data itemprop='datePublished' value='2012-04-22'>April 22, 2012</data>
+          </header>
+          <div class='social'>
+            <div class='g-plus' data-action='share' data-annotation='bubble' data-href='/posts/constraints-and-compromises-in-ecmascript-6/'></div>
+            <a class='twitter-share-button' data-count='horizontal' data-text='Constraints and compromises in ECMAScript 6' data-url='/posts/constraints-and-compromises-in-ecmascript-6/' data-via='jimmycuadra' href='https://twitter.com/share'>Tweet</a>
+          </div>
+          <p>This past week I attended a talk by <a href="http://calculist.org/">Dave Herman</a>, an employee of Mozilla and member of ECMA TC39, who are in charge of the standard for JavaScript. Dave talked about a few of the features and improvements coming to JS in ECMAScript 6, including, what I think is the most exciting and desperately needed: the new module system.</p>
+          
+          <p>I won't describe how the new module system actually works in this post, as that information is already available elsewhere (in particular at the <a href="http://wiki.ecmascript.org/doku.php?id=harmony:modules">ES Wiki</a>). While this new module system looks great, I was concerned with the fact that it eschews the current community built around Node and its CommonJS module loading system. I asked Dave what the reasoning for this was. It boiled down to wanting to provide features for module loading which would not be possible using Node's current CommonJS system. Interoperability between client and server side JavaScript programs will eventually be achieved by converting existing code targeted for Node to the new module system.</p>
+          
+          <p>While this may be a painful migration due to the amount of existing code using CommonJS, it seems like the best choice, given that the amount of JavaScript code targeting Node is dwarfed by the amount targeting the browser. Node will also be able to begin the conversion process fairly soon, as it only needs to wait for the implementation of ECMAScript 6 modules in V8.</p>
+          
+          <p>Another feature Dave talked about was variable interpolation in strings via so-called <a href="http://wiki.ecmascript.org/doku.php?id=harmony:quasis">quasi-literals</a>. This feature is something very common in other high level languages, but to date JavaScript has relied on the concatenation of strings and variables with the <code>+</code> operator to achieve this. ES6, somewhat confusingly, uses the <code>`</code> (backtick) to surround these quasi-literals and interpolates variables with <code>${varname}</code> syntax. I was also curious about the reason for this awkward choice, given Ruby and CoffeeScript's precedence for using double-quoted strings with embedded expressions in <code>#{}</code>, but Dave had the answer. Backticks were chosen for backwards compatibility. If existing strings were to suddenly gain this ability, existing code on the web that happened to have literal occurrences of <code>${</code> in them would become syntax or reference errors. The most important constraint TC39 must embrace, unlike languages which compile to JavaScript, is that changes to the language must not break existing code on the web.</p>
+          
+          <p>Backticks, even though they are often used to execute shell commands in other languages, were chosen simply due to limited set of ASCII characters remaining for new syntax. Again, the syntax they chose here is not ideal, but given the constraints necessary for advancing JavaScript without breaking the web as it exists today, it's a pretty decent compromise.</p>
+          
+          <p>I'd like to thank Dave again for his talk. I'm looking forward to ES6!</p>
+          <footer>
+            <p>
+              This post was tagged with <a title="Writing tagged with javascript" itemprop="keywords" href="/posts/tags/javascript/">javascript</a>.
+            </p>
+            <p>
+              Find more content by <a title="Browse writing by tags" href="/tags/">browsing by tags</a>.
+            </p>
+          </footer>
+        </article>
+        <p class='pagination'>
+          <span><a rel="prev" href="/page/2/">← Previous</a></span>
+          <span>Page 3</span>
+          <span><a rel="next" href="/page/4/">Next →</a></span>
+        </p>
+      </div>
+    </div>
+    <footer class='site-footer'>
+      <div class='bucket'>
+        <p>Logo by <a href="http://stephanielucido.com/" title="Stephanie Lucido">Stephanie Lucido</a>.</p>
+        <small>
+          &copy; 2015 Jimmy Cuadra. All rights reserved.
+        </small>
+      </div>
+    </footer>
+    <script src="/javascripts/application-f844c8db.js" type="text/javascript"></script>
+    <script>
+    (function() {
+      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      po.src = 'https://apis.google.com/js/platform.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+    (function(d, t) {
+      var e = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      e.type = 'text/javascript'; e.async = true; e.src = '//platform.twitter.com/widgets.js';
+      s.parentNode.insertBefore(e, s);
+    })(document, 'script');
+    </script>
+  </body>
+</html>

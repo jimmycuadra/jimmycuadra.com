@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      ECMAScript 5: Tamper proofing objects |
+      Jimmy Cuadra
+    </title>
+    <link href="/stylesheets/application-58ac5912.css" rel="stylesheet" type="text/css" />
+    <link href='http://feeds.feedburner.com/jimmycuadra' rel='alternate' title='RSS' type='application/rss+xml'>
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-5500916-1');ga('send', 'pageview');</script>
+  </head>
+  <body>
+    <header class='site-header'>
+      <div class='bucket'>
+        <a class='title-link' href='/' title='Jimmy Cuadra'>
+          <img width="75" height="75" alt="Jimmy Cuadra" class="logo" src="/images/logo-3e3e6b15.png" />
+          <hgroup>
+            <h1 class='main-title'>I'm Jimmy Cuadra.</h1>
+            <p>I write about programming and open source software.</p>
+          </hgroup>
+          <div class='clear'></div>
+        </a>
+      </div>
+    </header>
+    <nav>
+      <div class='bucket'>
+        <ul>
+          <li><a title="Writing" href="/">Writing</a></li>
+          <li><a class="sub-nav" title="Writing by tags" href="/tags/">by tags</a></li>
+          <li><a title="Jimmy Cuadra's Résumé" href="/resume/">Résumé</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class='content'>
+      <div class='bucket'>
+        <article itemscope itemtype='http://schema.org/BlogPosting'>
+          <meta content='Jimmy Cuadra' itemprop='author'>
+          <header>
+            <h1 class='post-title' itemprop='headline'><a title="ECMAScript 5: Tamper proofing objects" href="/posts/ecmascript-5-tamper-proofing-objects/">ECMAScript 5: Tamper proofing objects</a></h1>
+            <data itemprop='datePublished' value='2011-06-19'>June 19, 2011</data>
+          </header>
+          <div class='social'>
+            <div class='g-plus' data-action='share' data-annotation='bubble' data-href='/posts/ecmascript-5-tamper-proofing-objects/'></div>
+            <a class='twitter-share-button' data-count='horizontal' data-text='ECMAScript 5: Tamper proofing objects' data-url='/posts/ecmascript-5-tamper-proofing-objects/' data-via='jimmycuadra' href='https://twitter.com/share'>Tweet</a>
+          </div>
+          <aside>This is the second in a series of three posts about ECMAScript 5. If you missed the [first part](/posts/ecmascript-5-object-creation-and-property-definition), be sure to check it out.</aside>
+          
+          <p>In the <a href="/posts/ecmascript-5-object-creation-and-property-definition">first part</a> of this series, we took a look at some of the new features offered by the latest edition of JavaScript, ECMAScript 5. In particular, we looked at new methods for object creation and property definition. In this article, we will look at a few ways of protecting objects against unwanted tampering.</p>
+          
+          <h2 id="preventing-extensions">Preventing extensions</h2>
+          
+          <p>The first and simplest method to discuss is <code>Object.preventExtensions</code>. By default, any object can have new properties added to it simply by assigning a new property a value. There may be cases where you want to to prevent this, and that's what <code>Object.preventExtensions</code> does:</p>
+          
+          <pre><code class="language-javascript">var o = {&#x000A;  foo: "bar"&#x000A;};&#x000A;&#x000A;// adding a new property normally:&#x000A;o.hey = "guys";&#x000A;&#x000A;// preventing further extensions:&#x000A;Object.preventExtensions(o);&#x000A;&#x000A;// silent error, or TypeError under strict mode:&#x000A;o.anotherProp = "This will fail!";&#x000A;&#x000A;// existing properties can still be changed:&#x000A;o.hey = "gals";&#x000A;</code></pre>
+          
+          <p>Note that <code>Object.preventExtensions</code> only prevents adding new properties to the object. It's still possible to change the values of existing properties, or even reconfigure or delete properties.</p>
+          
+          <h2 id="preventing-configuration">Preventing configuration</h2>
+          
+          <p>Recall from the <a href="/posts/ecmascript-5-object-creation-and-property-definition">first part</a> of this series that when a property is defined as configurable, it can be deleted from the object, and its attribute description record can be modified. If we want to prevent extensions to an object and also want to prevent configuration of its properties, we can use the <code>Object.seal</code> method. <code>Object.seal</code> does everything that <code>Object.preventExtensions</code> does, but also sets its properties to be <em>non-configurable</em>. This means that properties cannot be deleted, their enumerability cannot change, and they cannot be changed between data properties and accessor properties. <code>Object.seal</code> does not, however, change the state of a property's <em>writability</em>, so the value of existing data properties can continue to be changed if the property was <em>writable</em> when the object was sealed. To illustrate:</p>
+          
+          <pre><code class="language-javascript">var o = {&#x000A;  foo: "bar"&#x000A;};&#x000A;&#x000A;// adding a new property normally:&#x000A;o.hey = "guys";&#x000A;&#x000A;// deleting a property normally:&#x000A;delete o.hey;&#x000A;&#x000A;// sealing the object:&#x000A;Object.seal(o);&#x000A;&#x000A;// silent failure, or TypeError under strict mode:&#x000A;o.anotherProp = "This will fail!";&#x000A;&#x000A;// existing properties can still be changed if they were writable:&#x000A;o.foo = "baz";&#x000A;&#x000A;// silent failure, or TypeError under strict mode:&#x000A;delete o.foo;&#x000A;</code></pre>
+          
+          <h2 id="preventing-writability">Preventing writability</h2>
+          
+          <p>We can do everything <code>Object.seal</code> does, but also protect data properties from being overwritten by using the <code>Object.freeze</code> method.</p>
+          
+          <pre><code class="language-javascript">var o = {&#x000A;  foo: "bar"&#x000A;};&#x000A;&#x000A;// adding a new property normally:&#x000A;o.hey = "guys";&#x000A;&#x000A;// deleting a property normally:&#x000A;delete o.hey;&#x000A;&#x000A;// sealing the object:&#x000A;Object.freeze(o);&#x000A;&#x000A;// silent failures, or TypeErrors under strict mode:&#x000A;o.anotherProp = "This will fail!";&#x000A;o.foo = "baz";&#x000A;delete o.foo;&#x000A;</code></pre>
+          
+          <p>Keep in mind that this only works for data properties, as accessor properties (ones that use getter and setter functions) do not use the <em>writable</em> descriptor property. It's also important to note that these new methods do not prevent extensions, seal, or freeze the values of properties – only the properties themselves. If it is necessary to protect data at a deeper level, manual traversal is required.</p>
+          
+          <h2 id="determining-an-objects-current-state">Determining an object's current state</h2>
+          
+          <p>ECMAScript 5 also supplies us with convenient functions to check whether any of the previously discussed methods have been applied to an object:</p>
+          
+          <ul>
+            <li><code>Object.isExtensible(o)</code> – <code>true</code> if extensions have not been prevented</li>
+            <li><code>Object.isSealed(o)</code> – <code>true</code> if the object is effectively sealed</li>
+            <li><code>Object.isFrozen(o)</code> – <code>true</code> if the object is effectively frozen</li>
+          </ul>
+          
+          <p>For <code>Object.isSealed</code> and <code>Object.isFrozen</code>, I write that these methods check for "effective" sealing and freezing because they simply check that the state of the object matches what the built-in methods would have done. For example, an object can be frozen without ever passing it to <code>Object.freeze</code>:</p>
+          
+          <pre><code class="language-javascript">var o = { foo: "bar" };&#x000A;Object.preventExtensions(o);&#x000A;Object.defineProperty(o, "foo", {&#x000A;  writable: false,&#x000A;  configurable: false&#x000A;});&#x000A;&#x000A;// Object.isFrozen(o) === true&#x000A;</code></pre>
+          
+          <h2 id="a-chart-to-remember-all-this">A chart to remember all this</h2>
+          
+          <table>
+            <tr>
+              <th></th>
+              <th>Object.preventExtensions</th>
+              <th>Object.seal</th>
+              <th>Object.freeze</th>
+            </tr>
+            <tr>
+              <th>Prevents new properties?</th>
+              <td>Yes</td>
+              <td>Yes</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <th>Prevents configuration of existing properties?</th>
+              <td>No</td>
+              <td>Yes</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <th>Prevents assigning existing data properties?</th>
+              <td>No</td>
+              <td>No</td>
+              <td>Yes</td>
+            </tr>
+          </table>
+          
+          <p>In the third and final part of this series, we will look into the new Array methods that have been added with ECMAScript 5.</p>
+          <footer>
+            <p>
+              This post was tagged with <a title="Writing tagged with javascript" itemprop="keywords" href="/posts/tags/javascript/">javascript</a>.
+            </p>
+            <p>
+              Find more content by <a title="Browse writing by tags" href="/tags/">browsing by tags</a>.
+            </p>
+          </footer>
+        </article>
+      </div>
+    </div>
+    <footer class='site-footer'>
+      <div class='bucket'>
+        <p>Logo by <a href="http://stephanielucido.com/" title="Stephanie Lucido">Stephanie Lucido</a>.</p>
+        <small>
+          &copy; 2015 Jimmy Cuadra. All rights reserved.
+        </small>
+      </div>
+    </footer>
+    <script src="/javascripts/application-f844c8db.js" type="text/javascript"></script>
+    <script>
+    (function() {
+      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      po.src = 'https://apis.google.com/js/platform.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+    (function(d, t) {
+      var e = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      e.type = 'text/javascript'; e.async = true; e.src = '//platform.twitter.com/widgets.js';
+      s.parentNode.insertBefore(e, s);
+    })(document, 'script');
+    </script>
+  </body>
+</html>
