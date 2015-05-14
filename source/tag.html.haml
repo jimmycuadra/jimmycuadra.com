@@ -1,0 +1,6 @@
+.tags
+  %h1= "Articles tagged with <em>#{tagname}</em>"
+  %ul
+    - page_articles.each do |post|
+      %li= link_to post.title, post.url
+

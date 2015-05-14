@@ -1,0 +1,6 @@
+.tags
+  %h1 Find content by tag
+  %ul
+    - blog.tags.keys.each do |tag|
+      %li= link_to tag, tag_path(tag)
+

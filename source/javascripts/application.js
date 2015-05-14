@@ -1,0 +1,3 @@
+//= require hljs
+
+hljs.initHighlightingOnLoad();

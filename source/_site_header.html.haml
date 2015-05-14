@@ -1,0 +1,16 @@
+%header.site-header
+  .bucket
+    %a.title-link{ href: "/", title: "Jimmy Cuadra" }
+      = image_tag "logo.png", width: "75", height: "75", alt: "Jimmy Cuadra", class: "logo"
+      %hgroup
+        %h1.main-title I'm Jimmy Cuadra.
+        %p I write about programming and open source software.
+      .clear
+
+%nav
+  .bucket
+    %ul
+      %li= link_to "Writing", '/', title: "Writing"
+      %li= link_to "by tags", '/tags/', class: "sub-nav", title: "Writing by tags"
+      %li= link_to "Résumé", '/resume/', title: "Jimmy Cuadra's Résumé"
+
