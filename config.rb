@@ -7,6 +7,8 @@ config[:images_dir] = 'images'
 activate :blog do |blog|
   blog.default_extension = ".md"
   blog.layout = "post"
+  blog.paginate = true
+  blog.per_page = 3
   blog.permalink = "{title}.html"
   blog.prefix = "posts"
   blog.sources = "{title}.html"

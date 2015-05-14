@@ -1,2 +1,10 @@
-- blog.articles[0...5].each do |post|
+---
+pageable: true
+---
+- page_articles.each do |post|
   = partial "post", locals: { post: post }
+
+%p.pagination
+  %span= link_to '← Previous', prev_page, rel: 'prev' if prev_page
+  %span= "Page #{page_number}"
+  %span= link_to 'Next →', next_page, rel: 'next' if next_page
