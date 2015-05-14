@@ -6,15 +6,15 @@
   .social
     .g-plus{ data: { action: "share", annotation: "bubble", href: post.url } }
     %a.twitter-share-button{ href: "https://twitter.com/share", data: { url: post.url, text: post.title, count: "horizontal", via: "jimmycuadra" } } Tweet
-  - if post.metadata[:youtube_id]
+  - if post.metadata[:page]['youtube_id']
     %object{ width: "640", height: "385", itemprop: "video", itemscope: true, itemtype: "http://schema.org/VideoObject" }
-      %meta{ itemprop: "embedURL", content: "http://www.youtube.com/v/#{post.metadata[:youtube_id]}?fs=1&amp;hl=en_US&amp;rel=0" }
+      %meta{ itemprop: "embedURL", content: "http://www.youtube.com/v/#{post.metadata[:page]['youtube_id']}?fs=1&amp;hl=en_US&amp;rel=0" }
       %meta{ itemprop: "width", content: 640 }
       %meta{ itemprop: "height", content: 385 }
-      %param{ name: "movie", value: "http://www.youtube.com/v/#{post.metadata[:youtube_id]}?fs=1&amp;hl=en_US&amp;rel=0" }
+      %param{ name: "movie", value: "http://www.youtube.com/v/#{post.metadata[:page]['youtube_id']}?fs=1&amp;hl=en_US&amp;rel=0" }
       %param{ name: "allowFullScreen", value: "true" }
       %param{ name: "allowscriptaccess", value: "always" }
-        %embed{ src: "http://www.youtube.com/v/#{post.metadata[:youtube_id]}?fs=1&amp;hl=en_US&amp;rel=0", type: "application/x-shockwave-flash", allowcriptaccess: "always", allowfullscreen: "true", width: "640", height: "385" }
+        %embed{ src: "http://www.youtube.com/v/#{post.metadata[:page]['youtube_id']}?fs=1&amp;hl=en_US&amp;rel=0", type: "application/x-shockwave-flash", allowcriptaccess: "always", allowfullscreen: "true", width: "640", height: "385" }
   ~ post.body
   %footer
     - unless post.tags.empty?
