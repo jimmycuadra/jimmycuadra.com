@@ -1,0 +1,19 @@
+---
+title: "Can Google Chrome Frame really help?"
+date: "2009-09-25 00:32 PDT"
+tags: "browsers"
+---
+The web has been abuzz over the newly introduced [Google Chrome Frame](http://blog.chromium.org/2009/09/introducing-google-chrome-frame.html) plugin in the last few days. Web developers have been rejoicing this new innovation in the [campaign](http://www.bringdownie6.com/) to kill [Internet Explorer 6](http://ie6update.com/) (and 7), and Microsoft has predictably [cried about it](http://arstechnica.com/microsoft/news/2009/09/microsoft-google-chrome-frame-makes-ie-less-secure.ars).
+
+My initial reaction was jubilant as well, but after a bit of thought, I have to wonder how much difference Chrome Frame can actually make. As is commonly mentioned in the discussion on phasing out IE6, most of the people still using the browser fall into two categories:
+
+1. People who can't upgrade due to restrictions by an IT department (usually corporate settings where legacy software depends on IE6)
+2. People who don't know or care what a web browser is
+
+I've done my fair share of promoting modern browsers like Firefox, Safari, and Google Chrome over Internet Explorer whenever the subject arises. I've even made a few sites that include warning messages for old IE users that their browsers are outdated and may not perform well, urging them to upgrade to one of the aforementioned superior candidates. I'd be willing to bet that the number of times messages like that have actually prompted someone to switch from IE could be counted on one hand (or at least very few hands). The issue remains: people don't upgrade because they can't or because they just don't care.
+
+Let's consider the *can'ts* first. While Google Chrome Frame is ingenious, it's still just a plugin, and its success hinges entirely on the presumption that the plugin will be installed. If someone is restricted to using IE6 at work because of a corporate policy, what are the chances that such a corporation would also allow plugins to be installed without policy-level approval? Flash is really the only ubiquitous third-party plugin, and it took years for it to achieve that status. Chrome Frame only changes the situation for corporate users if they're able to even install the plugin, and that's assuming that said corporate users don't cross into the "don't care" category as well.
+
+The situation of the *don't cares* is a more frightening proposition. Those of us who develop for the web or have any degree of web savvy take for granted that the basic concepts of the Internet are understood by all. But the truth is, many people don't know the difference between a web browser, a search engine, and [even the Internet itself](http://almost.done21.com/2009/04/announcing-ie6-update-help-kill-internet-explorer-6/). Google has even documented this depressing fact with [video](http://www.youtube.com/watch?v=o4MwTvtyrUQ). Are we really to expect that someone who can't differentiate between Internet Explorer and the Yahoo search engine will install a plugin like Google Chrome Frame, let alone understand what it is?
+
+The bottom line is that in order for Google Chrome Frame to make any difference, it has to be installed, and the situations where it seems likely to be installed are only the situations where Internet Explorer wasn't being used in the first place. As a result, it doesn't seem like web developers will be able to stop supporting IE6 and 7 because they can't assume the plugin will be installed. It becomes the same battle as whether or not to support non-JavaScript versions of web applications, only much more of a concern because the number of people running IE without Google Chrome Frame is astronomically higher than the number of people running browsers without JavaScript. All this said, I hope that as the situation develops, my reasoning is proven wrong somehow and that Google Chrome Frame is able to speed up the death of Internet Explorer 6 and 7.

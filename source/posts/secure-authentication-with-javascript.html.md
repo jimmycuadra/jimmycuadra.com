@@ -1,0 +1,12 @@
+---
+title: "Secure authentication with JavaScript"
+date: "2009-06-18 07:07 PDT"
+tags: "javascript, security"
+---
+When creating a user authentication system, security is very important. Guides to building authentication systems for a web application often discuss storing user passwords as hashes of the real password in the database. This prevents the password from being stored in plain text, and as such the real passwords are protected from anyone who might gain access to the database. When a user registers a new account, the password is hashed by the application and then stored in the database. Whenever they subsequently log in, the password they use to log in is hashed and compared to the hash stored in the database. Since hashes are unique, if the two hashes match, the user has entered the correct password and is successfully authenticated.
+
+What is very often left out is that when using this method, the user's password is still being sent unencrypted across the Internet in order to reach the server, both when they register and every time they log in. Because the password hashing occurs only on the server side, the password is protected from a compromised database, but it is not protected from man in the middle attacks, in which a hacker snooping for packets sent across the Internet intercepts the data as it goes by.
+
+In order to protect against man in the middle attacks of this nature, the password needs to be encrypted in some way before being transmitted to the server. The easiest way to do this is to encrypt the entire process using SSL. This encrypts all data as it is transmitted and the user knows this because they can see the page is secured with SSL from their browser. Since SSL requires a certificate that costs money, this may not be an option for some developers, especially those on a budget or those using shared web hosting.
+
+Fortunately, there is an alternative that costs nothing at all and will work on any server setup. All that needs to be done is to use JavaScript to hash the password on the client side before the data is transmitted. This can be achieved by including any JavaScript hashing library and using JavaScript to run the password through this function using an onSubmit event handler. This simple procedure safeguards against an often overlooked security hole in authentication systems. Take some time to add it to yours – your users will thank you!

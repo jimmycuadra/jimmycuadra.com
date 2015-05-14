@@ -1,9 +1,8 @@
 ---
-title: Securing CoreOS with iptables
-date: 2015-01-30 00:00 PDT
-tags: coreos, devops
+title: "Securing CoreOS with iptables"
+date: "2015-01-30 00:44 PST"
+tags: "coreos, devops"
 ---
-
 I've been keeping a close eye on [CoreOS](https://coreos.com/) since it was originally announced, and in the last few months I've actually started using it for a few things. As a young project, CoreOS has lots of rough edges in terms of documentation and usability. One of the issues I ran into was how to secure a CoreOS machine's public network. By default, a fresh CoreOS installation has no firewall rules, allowing all inbound network traffic.
 
 In order to secure a CoreOS machine, I had to learn how to configure the firewall. I use the common [iptables](http://www.netfilter.org/projects/iptables/) utility for this purpose. While I was vaguely familiar with iptables, I'd never really had to learn it, so I delved in to get a more thorough understanding of it. There are plenty of resources to learn iptables on the web, so I won't go into that too much here. The issue specific to CoreOS is how to configure iptables when launching a new machine.

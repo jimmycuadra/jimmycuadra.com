@@ -1,9 +1,8 @@
 ---
-title: Option types and Ruby
-date: 2015-03-11 00:00 PDT
-tags: ruby, rust
+title: "Option types and Ruby"
+date: "2015-03-11 05:16 PDT"
+tags: "ruby, rust"
 ---
-
 I've been learning the [Rust](http://www.rust-lang.org/) programming language over the last several months. One of the great things about learning a new programming language is that it expands your understanding of programming in general by exposing you to new ideas. Sometimes new ideas can result in lightbulb moments for programming in languages you already know. One of the things learning Rust has made me realize is how much I wish Ruby had sum types.
 
 A sum type is a type that has a number of "variants." These variants are alternate constructors for the type that can be differentiated from each other to confer different meaning, while still being the enclosing type. In Rust, sum types are provided through `enum`. An enum type can be destructured into a value using pattern matching via Rust's `match` operator.

@@ -1,9 +1,8 @@
 ---
-title: etcd 2.0 static bootstrapping on CoreOS and Vagrant
-date: 2015-02-05 00:00 PDT
-tags: coreos, devops, vagrant, etcd
+title: "etcd 2.0 static bootstrapping on CoreOS and Vagrant"
+date: "2015-02-05 22:25 PST"
+tags: "coreos, devops, etcd, vagrant"
 ---
-
 ## The problem
 
 [CoreOS](https://coreos.com/) provides a pretty good setup for running a cluster of machines with [Vagrant](https://www.vagrantup.com/). You can find this setup at [coreos/coreos-vagrant](https://github.com/coreos/coreos-vagrant). Something I've found annoying, however, is that whenever you start a new cluster, you need to get a new discovery token from CoreOS's [hosted discovery service](https://coreos.com/docs/cluster-management/setup/cluster-discovery/). This is necessary for the [etcd](https://github.com/coreos/etcd) instances running on each machine to find each other and form a quorum. The discovery token is written to the machines on initial boot via the cloud-config file named `user-data`. If you destroy the machines and recreate them, you need to use a fresh discovery token. This didn't sit right with me, as I want to check everything into version control, and didn't want to have a lot of useless commits changing the discovery token every time I recreated the cluster.
