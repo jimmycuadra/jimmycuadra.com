@@ -1,0 +1,77 @@
+==================================================================
+https://keybase.io/jimmycuadra
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://www.jimmycuadra.com
+  * I am jimmycuadra (https://keybase.io/jimmycuadra) on keybase.
+  * I have a public key with fingerprint 11CF 93A8 3D33 3BD7 ECF9  C951 E228 F43A 9BF6 B55C
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "client": {
+            "name": "keybase.io node.js client",
+            "version": "0.8.18"
+        },
+        "key": {
+            "eldest_kid": "010173d830fbe18d39946447aac5320d4743855111b3d79d47a3b1b3ec3e36a8735a0a",
+            "fingerprint": "11cf93a83d333bd7ecf9c951e228f43a9bf6b55c",
+            "host": "keybase.io",
+            "key_id": "e228f43a9bf6b55c",
+            "kid": "010173d830fbe18d39946447aac5320d4743855111b3d79d47a3b1b3ec3e36a8735a0a",
+            "uid": "a6856b771af7e3969f94ad71b7fb0619",
+            "username": "jimmycuadra"
+        },
+        "service": {
+            "hostname": "www.jimmycuadra.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1440312546,
+    "expire_in": 157680000,
+    "prev": "cb4f32ba671bd91e40ca89b20d99023ec399122908e3fc45f166d3151272b89c",
+    "seqno": 5,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Comment: GPGTools - https://gpgtools.org
+
+owGtkntQVFUcxxdYCEh5FFoD8bqjjYPbct+PDScbMGF8IIzsiDhs93HucnH37rq7
+gCtPmVEiQIFBjIcGTVPhI9Ra0IqMRIfAxsSagpjIyITQnlhAKN3L0IzN9Gfnr3Pm
+fH7f3/f3Pad2uY8m0Ou7NdOGlj88u7wGJzlNxrBlvBDibIIbMhRCvEUCskvdyawV
+QAZoN3BzrBPoJVuMbBOAPtcZs8TooHzgcEo2WaFgPa1HaKhYp/JqNbAIwOky7ZYE
+9RaBEQoTaAwWOYDQAsYwOInjFMvyBIbCAk7hGE0QCIJwmEAxypnFOGUPeAxgJEtT
+GMHCrNJQlGQzcNgdkmoRQhBeZDCWxgQMwziBAsqRZwgEoCgt4hjLcCLJEQSvFObY
+nK5/DQMtOjUt2vsP/n/2nbcox5I0QXIUhbAiBTCGZEQGZwUK4SiRg0mEUUEncCwF
+nytZrW4+jxUcrJqrcpEv8UDNVh1mCSooKNA/BOp5m1VRsTtsLhtvsyhAjstlN6j1
+Lrd9sQBwpiUpEyfJQruS6MMviSgo75JUcQTHYQxBCZzUQWCvXXIAk6QSBEXSsLLU
+PiBf0eQ5XMRQjiWVUQQGATjMszTDKQExDIyqaTAMgqIMTANM5HFCREhSwBACQSmU
+oxk1byfYI9sgA6H4ZM2KpFMyy6wrzwGg4krvp7Qar0CNn6+3+lU1gQEh//zfrF9C
+NBUrq4lhOi06fHDwy07tuG6fdLUumhcunIKS0vnQmIuXTXf2tWWWdN5Llg5/FXzF
+eGmZ4Rv/p2uyQ3fy3z/WF7bjXkduk/86T9BE2UvTX5xLSLlWNxUWtW1u0rjzub1t
+xtn4MXdTb6W94O3NqBgRE5LYmFVw6jZ5u379BrD8x5btj5j3N+vbD1Sg5/nSgZn3
+Px0NXpNTOblpY+TWntbjwdOmx389dD/BCB836kpqPx57Yjy1nqagoV6+M/yngLRd
+D+LkYurV0/66w421jb7zL84lpiauOhvX9WfKZ++NNPQ3n1yVhr+co21fSH52o3fn
+0M2y6PrNWeN+a4t9ko+VaPusFRmejwR79y1Mvuv0Ed88+lb4QlCU3yb+yPyNbelT
+VUl1NfCWntD96789M3sDrr7e33356qPpJ4oSrrc+GbR9ojR+Gbri9YnuJMG3afrd
+hYxXoifvxBq7Oib6w4ocRbF3c6qe9+uvXicPVY4sXEsv920qX1jb9vPXv782c2Zr
+XSzb8+CTiLOFxty44fvhB2teeGfK+5nuE0zMzdHh1Qcclone1TOpAeeOmLc0HNW2
+/zbwwYcnr6QFxK+snacuyA0/0Jc2rNDdumg8/XnsXHJmhKV/z4g9xSof/MsDMs2x
+Qx3lZWCA0kdVNWeXnu+KREf7IkesrdlxXvbZMeMbVZ5s/x11+S1e6cc8TX8D
+=agZD
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/jimmycuadra
+
+==================================================================
