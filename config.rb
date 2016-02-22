@@ -24,8 +24,3 @@ configure :build do
   activate :minify_css
   activate :minify_javascript
 end
-
-activate :deploy do |deploy|
-  deploy.build_before = true
-  deploy.method = :git
-end
