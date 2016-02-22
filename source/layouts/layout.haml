@@ -6,7 +6,6 @@
       Jimmy Cuadra
     = stylesheet_link_tag "application"
     %link{ rel: "alternate", type: "application/rss+xml", title: "RSS", href: "http://feeds.feedburner.com/jimmycuadra" }
-    = partial "google_analytics"
   %body
     = partial "site_header"
     .content
@@ -14,4 +13,3 @@
         = yield
     = partial "site_footer"
     = javascript_include_tag "application"
-    = partial "social_scripts"
