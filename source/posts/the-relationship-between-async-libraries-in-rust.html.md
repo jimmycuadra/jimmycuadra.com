@@ -1,6 +1,6 @@
 ---
 title: "The relationship between async libraries in Rust"
-date: "2016-09-11 03:00 PST"
+date: "2016-09-11 00:00 PST"
 tags: "rust"
 ---
 After all the recent announcements and hype about these async libraries, I was still a little confused about what each of these crates does and how they relate to each other.
