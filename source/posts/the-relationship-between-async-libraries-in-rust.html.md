@@ -32,5 +32,5 @@ According to Carl Lerche's [Tokio announcement post](https://medium.com/@carller
 
 And last but not least, **Iron** is a higher level web development framework built on Hyper.
 It's one of the more popular frameworks of its kind currently, though development activity has been very quiet for several months now.
-It's not clear to me whether or not the primary authors are still working on the project, whether they have run out of time and need help maintaining it, whether it's intentionally abandoned, or whether they're simply waiting for all these lower level components to stabilize before revising Iron's own APIs to use they Futures/MIO/Tokio/Hyper stack.
+It's not clear to me whether or not the primary authors are still working on the project, whether they have run out of time and need help maintaining it, whether it's intentionally abandoned, or whether they're simply waiting for all these lower level components to stabilize before revising Iron's own APIs to use the Futures/MIO/Tokio/Hyper stack.
 Whether or not Iron becomes a framework that uses this stack, surely a web development framework using this stack will materialize sooner rather than later!
