@@ -17,9 +17,9 @@ $gray: #f5f5f5
 body
   background: $mediumblue
   color: $darkblue
-  font-family: "Lucida Grande", Arial, sans-serif
-  font-size: 14px
-  line-height: 20px
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+  font-size: 16px
+  line-height: 1.5
 
 a, a:active, a:visited, a:hover
   color: $purple
@@ -63,7 +63,7 @@ th
 .bucket
   padding: 20px 0
   margin: 0 auto
-  width: 860px
+  width: 800px
 
 .pull-right
   float: right
@@ -151,6 +151,8 @@ article
   margin-bottom: 72px
   &:last-of-type
     margin-bottom: 36px
+  header
+    margin-bottom: 24px
   header,
   .post-title
     line-height: 30px
@@ -188,9 +190,8 @@ article
     max-width: 40%
   footer
     +bubble
-    font-size: 12px
     p
-      line-height: 14px
+      line-height: 1
       margin-bottom: 12px
       &:last-child
         margin-bottom: 0
