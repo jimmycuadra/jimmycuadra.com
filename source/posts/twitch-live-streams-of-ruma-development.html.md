@@ -46,3 +46,16 @@ A: Rust is a systems programming language from Mozilla built with safety, concur
 Its novel approach to memory safety and its rich type system make it an excellent choice for writing fast, secure, and reliable programs.
 Learn more about Rust on [the Rust website](https://www.rust-lang.org/).
 If you're ready to start learning Rust, [the book](https://doc.rust-lang.org/book/) is where everyone starts, and it's a fantastic resource.
+
+**Q: What type of software is Rust good for?**
+
+Rust was designed largely for use cases where you would otherwise have used C or C++.
+This means that it's suitable for high performance, low-level software, including kernel modules or even full operating systems.
+Rust also includes a lot of niceties from higher-level programming languages that have become popular since C and C++ were first introduced, so it's also a totally reasonable choice for people coming from languages like Ruby, Python, and JavaScript.
+
+**Q: Can I do web development in Rust?**
+
+Yes, but the ecosystem of libraries and frameworks is still pretty young.
+The best resource for learning about Rust's suitability for web development is [Are We Web Yet?](https://www.arewewebyet.org/).
+Notably, asynchronous programming in Rust has been under heavy development, but is about to gain significant traction, as the long-desired `async`/`await` feature finally reaches Rust's stable release channel in November 2019.
+See [Are We Async Yet?](https://areweasyncyet.rs/) for details about this.
